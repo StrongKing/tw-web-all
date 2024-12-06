@@ -76,6 +76,9 @@ export default function useRequest(
         ) {
           message.error(result.msg || '网络错误');
         }
+        if (result.code === 401 && (window as any).dsGoToLogin) {
+          (window as any).dsGoToLogin();
+        }
         setData(result.data);
       })
       .catch((error) => {

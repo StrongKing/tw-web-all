@@ -37,6 +37,9 @@ export default async function request(url, options = {}) {
             }`,
           );
         }
+        if (data.code === 401 && window.dsGoToLogin) {
+          window.dsGoToLogin();
+        }
         return reject(data || {});
       })
       .catch((error) => {

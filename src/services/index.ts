@@ -40,15 +40,24 @@ export default {
       }
     }
     const appCode = getLogInfo();
-    return saber.request(api, {
-      data: _data,
-      ...otherOptions,
-      headers: {
-        Authorization: (window as any).token,
-        'page-log': `suo-web-all=${packageData.version}&appCode=${appCode}`,
-        'app-code': appCode,
-      },
-    });
+    return saber
+      .request(api, {
+        data: _data,
+        ...otherOptions,
+        headers: {
+          Authorization: (window as any).token,
+          'page-log': `suo-web-all=${packageData.version}&appCode=${appCode}`,
+          'app-code': appCode,
+        },
+      })
+      .then((res) => {
+        if (res.code === 401) {
+          if ((window as any).dsGoToLogin) {
+            (window as any).dsGoToLogin();
+          }
+        }
+        return res;
+      });
   },
 };
 

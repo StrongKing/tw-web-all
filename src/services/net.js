@@ -17,6 +17,10 @@ export default async function net(url, options = {}) {
     })
       .then((response) => {
         const { data } = response;
+        if (data.code === 401 && window.dsGoToLogin) {
+          window.dsGoToLogin();
+          return reject(data || {});
+        }
         return resolve(data);
       })
       .catch((error) => {
