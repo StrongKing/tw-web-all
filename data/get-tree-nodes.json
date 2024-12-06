@@ -1,0 +1,17 @@
+{
+  "data": {
+    "dataSource": [
+      {
+        "key": 1,
+        "label": "产品校园校区1222333",
+        "type": "tag-group",
+        "iconType": "root",
+        "isLeaf": true,
+        "params": null
+      }
+    ]
+  },
+  "success": true,
+  "code": 30512,
+  "errorMsg": null
+}

@@ -1,0 +1,50 @@
+.ssp-buttom-comfirm-modal {
+  .ant-modal-body {
+    padding: 16px 24px 24px !important;
+    .ant-modal-confirm-body {
+      > span:first-child {
+        display: none;
+      }
+    }
+  }
+
+  .ssp-button-comfirm {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    > span:first-child {
+      color: #333;
+      font-size: 14px;
+      font-weight: 700;
+      height: 32px;
+      border-bottom: 1px solid #dfe1e8;
+    }
+
+    .ssp-button-comfirm-title {
+      display: flex;
+      margin-top: 32px;
+
+      > img {
+        margin-top: 2px;
+        width: 14px;
+        height: 14px;
+      }
+
+      > span {
+        padding-left: 8px;
+        color: #000;
+        font-size: 14px;
+        font-weight: 400;
+      }
+    }
+
+    > span:nth-child(3) {
+      padding-top: 16px;
+      padding-left: 22px;
+      font-size: 12px;
+      font-weight: 400;
+      color: #999;
+    }
+  }
+}

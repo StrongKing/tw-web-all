@@ -1,0 +1,205 @@
+// compose manage component
+// @author Pluto <huarse@gmail.com>
+// @create 2020/06/21 20:58
+
+@import '../table/index.less';
+
+.ss-compose-manage-container {
+  height: 100%;
+  // overflow: hidden auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  // padding-bottom: 24px;
+  // padding-top: 24px;
+  .section-alert {
+    margin-bottom: 16px;
+    .cf-manage-alert-refresh-btn {
+      margin-left: 5px;
+    }
+  }
+
+  .ant-form-item-no-colon {
+    display: none;
+  }
+
+  // 表格无数据样式
+  .table-empty-style {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 32px 0;
+    img {
+      width: 128px;
+      height: 128px;
+    }
+    span {
+      font-size: 14px;
+      color: #999;
+    }
+  }
+  .table-list .cf-compose-manage-pagination {
+    padding-bottom: 24px;
+  }
+  .caption-left-side {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: -8px;
+    // @supports (display: flex) and (gap: 1px) {
+    //   gap: 8px 8px;
+    // }
+    > * {
+      margin-bottom: 8px;
+      margin-right: 8px;
+    }
+  }
+  .caption-right-side {
+    flex-shrink: 0;
+  }
+
+  .section-caption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    align-items: center;
+    margin: 16px 0;
+  }
+  .manage-tooltip {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    color: #000;
+    font-size: 14px;
+
+    .manage-tooltip-left {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .caption-filter-field {
+    flex: 0 0 auto;
+
+    .ant-form-item {
+      margin-right: 8px;
+    }
+  }
+
+  .caption-tooltip {
+    // margin-left: 24px;
+    font-size: 14px;
+    color: #666;
+  }
+
+  .cf-compose-manage-pagination {
+    // margin-top: 16px;
+    // margin-bottom: 24px;
+    margin: 16px 0;
+    display: flex;
+    // TODO 这里用了 antd 的内部 className 以完成小虫的样式要求
+    .ant-pagination-total-text {
+      flex: 1;
+    }
+  }
+  .ant-table-wrapper {
+    // padding-bottom: 50px;
+  }
+  .ant-btn-link {
+    padding: 0;
+    cursor: pointer;
+    padding-right: 12px;
+    // margin: 8px 0 0 0;
+  }
+  .ant-btn-link:last-child {
+    padding-right: 0;
+  }
+  .ant-input-affix-wrapper::before {
+    content: '';
+  }
+
+  .ant-alert {
+    align-items: normal;
+
+    .anticon {
+      margin-top: 4px;
+    }
+  }
+}
+.ss-compose-manage-query-filter {
+  & > .ant-row {
+    margin-left: -8px !important;
+    margin-right: -8px !important;
+    & > .ant-col {
+      padding-left: 8px !important;
+      padding-right: 8px !important;
+    }
+  }
+}
+
+.ss-query-filter {
+  padding: 24px 24px 4px !important;
+  background-color: #fff;
+  border: 1px solid #dfe1e8;
+  border-radius: 8px;
+  margin: 16px 0 !important;
+
+  .ant-form-item {
+    margin-bottom: 20px;
+  }
+
+  .ant-form-item-label > label {
+    padding-top: 0;
+    place-items: center;
+  }
+}
+.special-filter {
+  padding: 24px 24px 4px !important;
+  background-color: #fff;
+  border: 1px solid #dfe1e8;
+  border-radius: 8px;
+
+  .ant-form-item-has-success {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    flex-wrap: nowrap;
+  }
+  .ant-form-item-control {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+.filter-item-timerange {
+  .ant-picker-input {
+    input {
+      font-size: 12px;
+    }
+  }
+}
+
+.sortable-table {
+  tr.drop-over-downward td {
+    border-bottom: 2px dashed #1890ff;
+  }
+  tr.drop-over-upward td {
+    border-top: 2px dashed #1890ff;
+  }
+}
+
+.ss-compose-manage-container,
+.ss-biz-tree {
+  .ant-input-affix-wrapper {
+    height: 32px;
+  }
+}
+
+.cf-compose-tab {
+  .ant-tabs-top > .ant-tabs-nav::before,
+  .ant-tabs-bottom > .ant-tabs-nav::before,
+  .ant-tabs-top > div > .ant-tabs-nav::before,
+  .ant-tabs-bottom > div > .ant-tabs-nav::before {
+    width: 100%;
+  }
+}

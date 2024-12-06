@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#54adff"/>
+      <stop offset="1" stop-color="#1786ec"/>
+    </linearGradient>
+  </defs>
+  <g id="组_8543" data-name="组 8543" transform="translate(-341 -229)">
+    <rect id="矩形_1054" data-name="矩形 1054" width="16" height="16" transform="translate(341 229)" fill="none"/>
+    <path id="路径_10032" data-name="路径 10032" d="M128,155l6.672,3.795v-5.756l-6.672-4.6Zm8.006-1.951v5.746L142.678,155v-6.548ZM135.347,144l-6.762,3.129,6.754,4.652,6.76-4.658Z" transform="translate(213.662 85.604)" fill="url(#linear-gradient)"/>
+  </g>
+</svg>

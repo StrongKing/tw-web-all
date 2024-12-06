@@ -1,0 +1,291 @@
+{
+  "success": true,
+  "code": 30512,
+  "errorMsg": null,
+  "data": {
+    "dataSource": [
+      {
+        "key": "1722860828411465729",
+        "labelPathName": "杭州正坛科技有限公司（母婴）",
+        "label": "1110",
+        "iconType": "tag-group",
+        "type": "tag-label"
+      },
+      {
+        "key": "1722193804768124929",
+        "labelPathName": "杭州正坛科技有限公司（母婴）",
+        "label": "玩家等级1",
+        "iconType": "tag-group",
+        "type": "tag-label"
+      },
+      {
+        "key": "1692415901526446081",
+        "labelPathName": "杭州正坛科技有限公司（母婴）",
+        "label": "0818 互斥标签组",
+        "iconType": "tag-group",
+        "type": "tag-label"
+      },
+      {
+        "key": "1689542926416678914",
+        "labelPathName": "杭州正坛科技有限公司（母婴）",
+        "label": "810-01朋友圈标签",
+        "iconType": "tag-group",
+        "type": "tag-label"
+      },
+      {
+        "key": "1689518367851786241",
+        "labelPathName": "杭州正坛科技有限公司（母婴）",
+        "label": "810标签",
+        "iconType": "tag-group",
+        "type": "tag-label"
+      },
+      {
+        "key": "1681484380586422274",
+        "labelPathName": "杭州正坛科技有限公司（母婴）",
+        "label": "互斥1",
+        "iconType": "tag-group",
+        "type": "tag-label"
+      },
+      {
+        "key": "1647852040373714946",
+        "labelPathName": "杭州正坛科技有限公司（母婴）",
+        "label": "417标签",
+        "iconType": "tag-group",
+        "type": "tag-label"
+      },
+      {
+        "key": "1641633810654756866",
+        "labelPathName": "杭州正坛科技有限公司（母婴）",
+        "label": "测试业务分组标签组-01",
+        "iconType": "tag-group",
+        "type": "tag-group"
+      },
+      {
+        "key": "1628231448444993537",
+        "labelPathName": "杭州正坛科技有限公司（母婴）",
+        "label": "测试用-1",
+        "iconType": "tag-group",
+        "type": "tag-group"
+      },
+      {
+        "key": "1615246754012332034",
+        "labelPathName": "杭州正坛科技有限公司（母婴）",
+        "label": "测试标签117",
+        "iconType": "tag-group",
+        "type": "tag-label"
+      },
+      {
+        "key": "1608766179909763073",
+        "labelPathName": "杭州正坛科技有限公司（母婴）",
+        "label": "1230互斥标签组",
+        "iconType": "tag-group",
+        "type": "tag-label"
+      },
+      {
+        "key": "1605456242951688193",
+        "labelPathName": "杭州正坛科技有限公司（母婴）",
+        "label": "1221测试标签",
+        "iconType": "tag-group",
+        "type": "tag-label"
+      },
+      {
+        "key": "1597063046092374018",
+        "labelPathName": "杭州正坛科技有限公司（母婴）",
+        "label": "1128标签",
+        "iconType": "tag-group",
+        "type": "tag-label"
+      },
+      {
+        "key": "1594594608202035201",
+        "labelPathName": "杭州正坛科技有限公司（母婴）",
+        "label": "标签组1121",
+        "iconType": "tag-group",
+        "type": "tag-label"
+      },
+      {
+        "key": "1592062672180875265",
+        "labelPathName": "杭州正坛科技有限公司（母婴）",
+        "label": "标签组11",
+        "iconType": "tag-group",
+        "type": "tag-label"
+      },
+      {
+        "key": "1589456146179620866",
+        "labelPathName": "杭州正坛科技有限公司（母婴）",
+        "label": "标签组名称_1107",
+        "iconType": "tag-group",
+        "type": "tag-label"
+      },
+      {
+        "key": "1585202481492971521",
+        "labelPathName": "杭州正坛科技有限公司（母婴）",
+        "label": "互斥标签11",
+        "iconType": "tag-group",
+        "type": "tag-label"
+      },
+      {
+        "key": "1582573880314863617",
+        "labelPathName": "杭州正坛科技有限公司（母婴）",
+        "label": "1019003",
+        "iconType": "tag-group",
+        "type": "tag-label"
+      },
+      {
+        "key": "1562624250562412546",
+        "labelPathName": "杭州正坛科技有限公司（母婴）",
+        "label": "0825标签001",
+        "iconType": "tag-group",
+        "type": "tag-label"
+      },
+      {
+        "key": "1640590918146392065",
+        "labelPathName": "测试标签组03281",
+        "label": "测试标签组03281",
+        "iconType": "tag-group",
+        "type": "tag-group"
+      }
+    ],
+    "peopleList": [
+      {
+        "key": "1722860952726441986",
+        "labelPathName": "1110",
+        "label": "1110 分配",
+        "iconType": "tag-label",
+        "type": "user"
+      },
+      {
+        "key": "1723969172565049345",
+        "labelPathName": "1110",
+        "label": "1113标签",
+        "iconType": "tag-label",
+        "type": "user"
+      },
+      {
+        "key": "1722193108991811586",
+        "labelPathName": "测试cjy",
+        "label": "1108-1",
+        "iconType": "tag-label",
+        "type": "user"
+      },
+      {
+        "key": "1722193146635689985",
+        "labelPathName": "测试cjy",
+        "label": "1108-2",
+        "iconType": "tag-label",
+        "type": "user"
+      },
+      {
+        "key": "1722193181251280897",
+        "labelPathName": "测试cjy",
+        "label": "1108-3",
+        "iconType": "tag-label",
+        "type": "user"
+      },
+      {
+        "key": "1692416191143137282",
+        "labelPathName": "0818 互斥标签组",
+        "label": "0818 互斥不可修改",
+        "iconType": "tag-label",
+        "type": "user"
+      },
+      {
+        "key": "1692416283476545538",
+        "labelPathName": "0818 互斥标签组",
+        "label": "0818 互斥无限制",
+        "iconType": "tag-label",
+        "type": "user"
+      },
+      {
+        "key": "1692416365710069762",
+        "labelPathName": "0818 互斥标签组",
+        "label": "0818 系统可改",
+        "iconType": "tag-label",
+        "type": "user"
+      },
+      {
+        "key": "1701922320471810049",
+        "labelPathName": "0818 互斥标签组",
+        "label": "0913-1",
+        "iconType": "tag-label",
+        "type": "user"
+      },
+      {
+        "key": "1689543006599188482",
+        "labelPathName": "810-01朋友圈标签",
+        "label": "810-01-001朋友圈",
+        "iconType": "tag-label",
+        "type": "user"
+      },
+      {
+        "key": "1689548655269711873",
+        "labelPathName": "810-01朋友圈标签",
+        "label": "810-02-01朋友圈",
+        "iconType": "tag-label",
+        "type": "user"
+      },
+      {
+        "key": "1691341846999371778",
+        "labelPathName": "810-01朋友圈标签",
+        "label": "815标签",
+        "iconType": "tag-label",
+        "type": "user"
+      },
+      {
+        "key": "1689518458541027330",
+        "labelPathName": "810标签",
+        "label": "810朋友圈标签",
+        "iconType": "tag-label",
+        "type": "user"
+      },
+      {
+        "key": "1701918540476964866",
+        "labelPathName": "810标签",
+        "label": "0913",
+        "iconType": "tag-label",
+        "type": "user"
+      },
+      {
+        "key": "1681484457635786754",
+        "labelPathName": "互斥1",
+        "label": "互斥-01-01",
+        "iconType": "tag-label",
+        "type": "user"
+      },
+      {
+        "key": "1681129630110121985",
+        "labelPathName": "分组三",
+        "label": "分组三-01",
+        "iconType": "tag-label",
+        "type": "user"
+      },
+      {
+        "key": "1681129284361060353",
+        "labelPathName": "分组一",
+        "label": "分组-01-01",
+        "iconType": "tag-label",
+        "type": "user"
+      },
+      {
+        "key": "1679769624342073346",
+        "labelPathName": "导入游戏标签组",
+        "label": "Matr1 x FIRE",
+        "iconType": "tag-label",
+        "type": "user"
+      },
+      {
+        "key": "1679770125771116546",
+        "labelPathName": "导入游戏标签组",
+        "label": "Farming Simulator 14",
+        "iconType": "tag-label",
+        "type": "user"
+      },
+      {
+        "key": "1679770401349472257",
+        "labelPathName": "导入游戏标签组",
+        "label": "口袋学院物语1",
+        "iconType": "tag-label",
+        "type": "user"
+      }
+    ]
+  }
+}

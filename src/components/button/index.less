@@ -1,0 +1,150 @@
+.upload-container {
+  :global(.ant-upload-list) {
+    display: none;
+  }
+}
+
+.buttonList {
+  button:not(:last-child):after {
+    content: '|';
+    position: relative;
+    left: 5px;
+    color: #dfe1e8;
+  }
+  .cfListButton {
+    display: inline-block;
+  }
+
+  :global {
+    .ant-btn-link {
+      padding: 0;
+    }
+  }
+}
+.setting-sub {
+  display: inline-block;
+  font-weight: 400;
+  color: var(--ant-primary-color, #2c7ef8);
+}
+
+.cf-button-modal-dialog {
+  :global {
+    table {
+      width: 100% !important;
+    }
+  }
+}
+
+.cf-button-modal-dialog-bind {
+  width: 1200px !important;
+  .ant-modal-body {
+    height: 600px;
+    .ss-compose-manage-container {
+      height: 100% !important;
+      overflow: hidden !important;
+      padding: 0 !important;
+    }
+    .ant-table-wrapper {
+      height: calc(100% - 133px);
+      overflow: auto;
+    }
+  }
+}
+.cf-button-modal-dialog-rule {
+  width: 500px;
+  overflow: auto;
+  .ant-modal-body {
+    padding: 24px 24px;
+    max-height: 472px;
+    overflow: scroll;
+    .vertical {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+.sub-button-modal-dialog {
+  .ant-modal-body {
+    padding: 24px 24px;
+    max-height: 472px;
+    overflow: scroll;
+    .vertical {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  .ant-checkbox-group {
+    > * {
+      margin-bottom: 8px;
+    }
+  }
+}
+
+.qr-button-modal-dialog {
+  .ant-modal-body {
+    padding: 24px 24px;
+    height: 378px + 48px;
+  }
+}
+
+.bind-btn {
+  width: 56px;
+  height: 22px;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--ant-primary-color, #2c7ef8);
+  line-height: 22px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+.device-rule-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+  &:last-child {
+    margin-bottom: 0px;
+  }
+}
+.device-week {
+  height: 20px;
+  font-size: 14px;
+
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
+
+  margin-right: 6px;
+}
+.device-rule-type {
+  width: auto;
+  background: #d9ecff;
+  font-size: 13px;
+  color: var(--ant-primary-color, #2c7ef8);
+  padding: 1px 6px;
+  border-radius: 4px;
+  margin-right: 6px;
+}
+.device-show-all {
+  height: 20px;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--ant-primary-color, #2c7ef8);
+  line-height: 20px;
+  cursor: pointer;
+}
+.device-rule-list {
+  display: flex;
+  margin-bottom: 6px;
+  min-width: 1000px;
+  align-items: center;
+
+  .device-rule-item {
+    margin-bottom: 0 !important;
+  }
+  &:last-child {
+    margin-bottom: 0px;
+  }
+}
+
+.device-time {
+  margin-right: 6px;
+}

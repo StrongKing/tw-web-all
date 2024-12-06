@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <g id="组_8919" data-name="组 8919" transform="translate(-73 -320)">
+    <rect id="矩形_1061" data-name="矩形 1061" width="16" height="16" transform="translate(73 320)" fill="none"/>
+    <g id="组_8917" data-name="组 8917" transform="translate(73.647 320.7)">
+      <g id="组_8918" data-name="组 8918" transform="translate(0.054 0.001)">
+        <path id="路径_10146" data-name="路径 10146" d="M13.317,0a1.338,1.338,0,0,1,.7,2.478L9.356,5.352v7.956a1.288,1.288,0,0,1-2,1.074L6.241,13.64a2.008,2.008,0,0,1-.891-1.67V5.352L.69,2.478A1.338,1.338,0,0,1,1.39,0H13.317Z" transform="translate(-0.054 -0.001)" fill="#2c7ef8"/>
+        <rect id="矩形_1058" data-name="矩形 1058" width="3.785" height="1.893" rx="0.946" transform="translate(10.223 6.082)" fill="#2c7ef8"/>
+        <rect id="矩形_1059" data-name="矩形 1059" width="3.785" height="1.893" rx="0.946" transform="translate(10.223 8.921)" fill="#2c7ef8"/>
+        <rect id="矩形_1060" data-name="矩形 1060" width="3.785" height="1.893" rx="0.946" transform="translate(10.223 11.76)" fill="#2c7ef8"/>
+      </g>
+    </g>
+  </g>
+</svg>

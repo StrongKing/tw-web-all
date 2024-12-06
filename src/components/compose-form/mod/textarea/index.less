@@ -1,0 +1,19 @@
+.ssp-textarea {
+  word-break: break-all;
+  height: 126px;
+  border-radius: 2px;
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  &:after {
+    position: relative;
+    top: 4px;
+    left: -12px;
+    font-size: 14px;
+    color: #999;
+  }
+}
+.ant-form-item.ant-form-item-has-error {
+  .ssp-textarea {
+    border-color: #ff4d4f;
+  }
+}
