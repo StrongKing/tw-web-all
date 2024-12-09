@@ -22,10 +22,6 @@ export {
 export { default as Confirm } from './components/Confirm';
 export { default as ActionButton } from './components/button';
 export { default as ExpandCollapse } from './components/expand-collapse';
-export { default as SelectFormUser } from './components/compose-form/mod/select-user';
-export { default as SelectFormUserResult } from './components/compose-form/mod/select-user/result';
-export { default as SelectFormTag } from './components/compose-form/mod/select-tag';
-export { default as SelectUser } from 'suo-base-select-user';
 export { default as Empty } from './components/empty';
 export {
   RangePicker_ as BaseRangePicker,

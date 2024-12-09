@@ -114,18 +114,6 @@ export const downloadButtonHOC =
       if ([9998, 9997].includes(e.code)) {
         try {
           let smsApi = smsApiUrl;
-          if (!smsApi) {
-            if (!(window as any)?.urlCollect?.url?.auth) {
-              const urlCollect = await request('/rhyysshl/pc/conf.json', {
-                method: 'GET',
-              });
-              smsApi = `${urlCollect?.url?.auth}/oauth/sms/bizSend`;
-            } else {
-              smsApi = `${
-                (window as any)?.urlCollect?.url?.auth
-              }/oauth/sms/bizSend`;
-            }
-          }
 
           // eslint-disable-next-line no-undef
           FormConfirm({

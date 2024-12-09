@@ -11,8 +11,6 @@ import ComposeForm from '@/components/compose-form';
 import FormConfirm from '@/components/FormConfirm';
 import EventEmitter from '@/components/compose-form/events';
 import Card from '@/components/expand-collapse';
-import SelectFormUser from '@/components/compose-form/mod/select-user';
-import SelectUserResult from '@/components/compose-form/mod/select-user/result';
 import { getRangeMap } from '@/common/dateRange';
 import Empty from '@/components/empty';
 import {

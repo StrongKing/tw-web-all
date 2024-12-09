@@ -12,8 +12,6 @@ import { compose, withProps } from 'recompose';
 import Select from '@/components/select';
 import TreeSelect from '@/components/tree-select';
 import MobilePhone from './mobile-phone';
-import SelectUser from './select-user';
-import SelectTag from './select-tag';
 import InputPostfix from './input';
 import InputNumber from './inputNumber';
 import {
@@ -23,7 +21,6 @@ import {
   TimeRangePicker_,
   RangePickerDisabled,
 } from './datePick';
-import Avatar from './avatar';
 import ConfirmSubmit from './confirmSubmit';
 import RadioGroup from '../../radio-group';
 import CheckboxGroup from '../../checkbox-group';
@@ -85,8 +82,6 @@ export default {
   'checkbox-group': CheckboxGroup,
   radio: RadioGroup,
   mobilePhone: MobilePhone,
-  selectUser: SelectUser,
-  selectTag: SelectTag,
   avatar: Avatar,
   linkText: LinkText,
   phoneSmsCode: PhoneSmsCode,

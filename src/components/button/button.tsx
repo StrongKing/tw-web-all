@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { PropTypes } from './interface';
 import Button from './default';
-import { Spin, Empty } from '@/components/blank';
+import { Spin } from '@/components/blank';
 
 const comsMap = {
   default: Button,
@@ -18,7 +18,6 @@ const comsMap = {
   'checkbox-group': React.lazy(() => import('../checkbox-group')),
   a: React.lazy(() => import('./anchor')),
   anchor: React.lazy(() => import('./anchor')),
-  selectUser: React.lazy(() => import('./select-user')),
   // batch: React.lazy(() => import('./batch')),
   upload: React.lazy(() => import('./upload')),
   delconfirm: React.lazy(() => import('./comfirm')),

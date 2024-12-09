@@ -4,9 +4,7 @@
 
 import React, { useState, useEffect, ReactNode } from 'react';
 import { Request } from '../interface';
-import { Form } from 'antd';
 import CascaderSelect from '../../components/compose-form/mod/cascaderSelect';
-import SelectUser from '../../components/compose-form/mod/select-user';
 import CustomSelect from '../../components/compose-form/mod/custom-select';
 import useRequest from '@/common/use-request';
 import ProForm, {
@@ -28,8 +26,7 @@ export interface NsFilterProps {
     | 'dateRangePicker'
     | 'cascader-select'
     | 'dateTimeRangePicker'
-    | 'customSelect'
-    | 'selectUser';
+    | 'customSelect';
   name: string;
   label?: string | React.ReactNode;
   defaultValue?: any;
@@ -121,20 +118,6 @@ export default function FilterItem({
     );
   }
 
-  if (type === 'selectUser') {
-    return (
-      <ProForm.Item
-        name={name}
-        label={label}
-        labelCol={{ flex: labelWidth }}
-        style={{
-          display: collapsed && index >= defaultColsNumber - 1 ? 'none' : '',
-        }}
-      >
-        <SelectUser {...props} />
-      </ProForm.Item>
-    );
-  }
   if (type === 'customSelect') {
     return (
       <ProForm.Item

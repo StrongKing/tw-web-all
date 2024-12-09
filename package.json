@@ -65,9 +65,7 @@
     "recompose": "^0.30.0",
     "redux": "^4.0.5",
     "runes": "^0.4.3",
-    "ss-images-upload": "0.0.19",
     "store2": "^2.13.2",
-    "suo-base-select-user": "0.0.19-beta.44",
     "typescript": "^4.2.3",
     "wangeditor": "^4.7.15"
   },

@@ -4,8 +4,6 @@ import { ModalProps } from 'antd/lib/modal';
 import { Request } from '@/components/interface';
 import { CFFormProps } from '@/components/compose-form';
 import { PropTypes as BatchProps } from '@/components/import-and-export/interface';
-// import { SelectUserFuncArgProps } from 'ss-select-user-v4.0/lib/components/select-user/interface';
-import { PropTypes as SelectClassProps } from '@/components/select-class-modal';
 import { PropTypes as UploadPropTypes } from '@/components/upload';
 import { TableCellProps } from '../table';
 
@@ -172,12 +170,6 @@ export type FormButtonProps = BasePropTypes & {
   requestParamsFormatter?: (val?: TableCellProps) => any;
 };
 
-export type SelectClassButtonProps = Omit<
-  SelectUserButtonProps,
-  'selectUserProps'
-> &
-  SelectClassProps;
-
 export type UploadButtonProps = RequestButtonProps & {
   uploadProps: Omit<UploadPropTypes, 'request'>;
   request: UploadPropTypes['request'];
@@ -190,7 +182,6 @@ export type PropTypes =
   | FormButtonProps
   | LinkButtonProps
   | SelectUserButtonProps
-  | SelectClassButtonProps
   | AnchorButtonProps
   | BatchButtonProps
   | UploadButtonProps;

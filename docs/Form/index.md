@@ -20,8 +20,6 @@ import { groupBy } from 'lodash';
 import ComposeForm from '@/components/compose-form';
 import EventEmitter from '@/components/compose-form/events';
 import Card from '@/components/expand-collapse';
-import SelectFormUser from '@/components/compose-form/mod/select-user';
-import SelectUserResult from '@/components/compose-form/mod/select-user/result';
 import { getRangeMap } from '@/common/dateRange';
 import Empty from '@/components/empty';
 import {
@@ -350,9 +348,7 @@ export default () => {
         },
       ],
     },
-    comsMap: {
-      selectUser: SelectUserResult,
-    },
+    comsMap: {},
     request: {
       url: 'https://baidu.com',
     },
@@ -526,28 +522,6 @@ export default () => {
         {...props2}
         labelCol={{ span: 5 }}
         wrapperCol={{ span: 19 }}
-      />
-      <SelectFormUser
-        value={[
-          {
-            childDelete: true,
-            contactType: 20,
-            id: 'etoG84CgAA5TS9eU8xii9_3qec0mqoxQ',
-            key: 'etoG84CgAA5TS9eU8xii9_3qec0mqoxQ',
-            labelPathName: '私域人群包',
-            name: '0011031人群包',
-            type: 'WECHAT_TAG',
-          },
-        ]}
-        placeholder="33"
-        // maxTagCount={true}
-        //  wrapperKey="customerManagerInfoList"
-
-        onChange={(v) => console.log(v, 'xxx') & setList(v)}
-        // value={list}
-        colorType={2}
-        wrapperKey="weChatTagInfoList"
-        selectUserProps={selectUserProps2}
       />
 
       <div style={{ padding: '20px' }}>
