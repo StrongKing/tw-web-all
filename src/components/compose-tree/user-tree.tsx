@@ -1,7 +1,5 @@
 import React from 'react';
-import { Tree } from 'antd';
-import { TreeProps } from 'antd/lib/tree';
-import { useDispatch } from 'react-redux';
+import { Tree, type TreeProps } from 'antd';
 import useTreeData from './hooks/use-tree-data';
 import { TreeDataSource, UserType, SelfNameMap } from './interface';
 import './index.less';

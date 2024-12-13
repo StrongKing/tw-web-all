@@ -82,7 +82,6 @@ export default {
   'checkbox-group': CheckboxGroup,
   radio: RadioGroup,
   mobilePhone: MobilePhone,
-  avatar: Avatar,
   linkText: LinkText,
   phoneSmsCode: PhoneSmsCode,
 };
