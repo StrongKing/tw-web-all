@@ -53,7 +53,7 @@ export interface ColumnItemProps {
   width?: number;
   fixed?: any;
   className?: string;
-  children?: ColumnItemProps[]
+  children?: ColumnItemProps[];
 }
 
 export interface PropTypes
@@ -77,4 +77,5 @@ export interface PropTypes
   primaryKey?: string | number | ((records?: any) => string);
   otherKey?: string;
   total?: number;
+  defaultExpandAllRows?: boolean;
 }
