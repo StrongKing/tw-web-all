@@ -22,6 +22,7 @@ const cellRenderer = ({
   onEmit,
   otherKey,
   primaryKey = 'id',
+  defaultExpandAllRows,
 }: PropTypes &
   ColumnItemProps & {
     tableDataSource: any[];
@@ -55,6 +56,7 @@ const cellRenderer = ({
             index,
             record,
             name,
+            defaultExpandAllRows,
           }}
         />
       </Suspense>
@@ -120,7 +122,7 @@ export default function CFTable({
         primaryKey,
         otherKey,
         tableDataSource: dataSource,
-        children
+        children,
       });
     }
     let _fixed = fixed;
@@ -163,7 +165,9 @@ export default function CFTable({
         width={width || ''}
         render={cell || render}
         className={classNames('cf-table-cell', className)}
-      >{children.map(renderColumn)}</Table.Column>
+      >
+        {children.map(renderColumn)}
+      </Table.Column>
     );
   };
 
