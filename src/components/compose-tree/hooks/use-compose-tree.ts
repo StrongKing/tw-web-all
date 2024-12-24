@@ -426,7 +426,7 @@ export default ({
               console.log(
                 `请求结果没有命中需要匹配的 key - ${idToMatch}，重定向到根节点。`,
               );
-              message.info('树中没有找到指定路径，为您跳转到根节点。');
+              // message.info('树中没有找到指定路径，为您跳转到根节点。');
               const firstNode = get(cachedDataSource.current, [0], {});
               goToModule(firstNode, firstNode.id, true);
               return;
