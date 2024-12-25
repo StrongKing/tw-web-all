@@ -70,6 +70,7 @@ export default function useRequest(
         }
         if (
           result.code !== 0 &&
+          result.code != '200' &&
           (typeof request === 'string' ||
             !Array.isArray(request.hideMsgCodes) ||
             !request.hideMsgCodes.includes(result.code))
