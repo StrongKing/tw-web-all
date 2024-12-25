@@ -208,9 +208,9 @@ export default () => {
                   url: `/web/wechat/label/syncSpecifyLabel111`,
                   method: 'POST',
                 },
-                dialogProps: {
-                  title: '企微标签手工同步',
-                },
+                dialogPropsFormatter: ({ record }) => ({
+                  title: record.name + '-企微标签手工同步123',
+                }),
                 formItemLayout: {
                   labelCol: {
                     xs: { span: 19 },

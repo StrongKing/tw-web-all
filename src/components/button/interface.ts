@@ -167,6 +167,7 @@ export type FormButtonProps = BasePropTypes & {
   showFormAlert?: boolean;
   tableProps?: TableCellProps;
   initValuesFormatter?: (val?: TableCellProps) => any;
+  dialogPropsFormatter?: (val?: TableCellProps) => any;
   requestParamsFormatter?: (val?: TableCellProps) => any;
 };
 

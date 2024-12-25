@@ -524,22 +524,6 @@ export default () => {
         wrapperCol={{ span: 19 }}
       />
 
-      <div style={{ padding: '20px' }}>
-        {wrapWith && (
-          <SelectFormUser
-            onChange={(v) => setList(v)}
-            ref={formRef}
-            value={list}
-            wrapWith={wrapWith}
-            mode="sidebar"
-            sidebarWrapClassName="xx"
-            wrapperKey="customerTagInfoList"
-            selectUserProps={selectUserProps2}
-            confirmTitle="确认要删除选中标签吗？"
-          />
-        )}
-      </div>
-
       <Modal
         title="延期生效"
         footer={null}

@@ -43,12 +43,18 @@ export default function DialogForm({
   showFormAlert = false,
   tableProps,
   initValuesFormatter,
+  dialogPropsFormatter,
   onBeforeClick = () => Promise.resolve(true),
   ...others
 }: FormButtonProps) {
   const initValues = useMemo(
     () => (initValuesFormatter ? initValuesFormatter(tableProps) : undefined),
     [initValuesFormatter, tableProps],
+  );
+  const modalProps = useMemo(
+    () =>
+      dialogPropsFormatter ? dialogPropsFormatter(tableProps) : dialogProps,
+    [dialogProps, dialogPropsFormatter],
   );
   const [actions, setActions] = useState([]);
   const [dlgVis, setDlgVis] = useState(false);
@@ -130,7 +136,7 @@ export default function DialogForm({
                 visible={dlgVis}
                 onCancel={hideDlg}
                 footer={actionFormItems}
-                {...dialogProps}
+                {...modalProps}
                 className={classNames(
                   'cf-button-form-modal',
                   className,
