@@ -128,6 +128,7 @@ function ComposeTree({
 export default ({
   request,
   extendModuleMap,
+  firstLoadAll = false,
   ...others
 }: RouteComponentProps<{
   treePath: string;
@@ -136,6 +137,7 @@ export default ({
   const composeTreeContext: IComposeTreeContext = useComposeTree({
     request: { getTreeNodes: request.getTreeNodes },
     extendModuleMap,
+    firstLoadAll,
   });
   return (
     <ComposeTreeContext.Provider value={composeTreeContext}>

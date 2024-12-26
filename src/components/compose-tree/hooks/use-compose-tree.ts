@@ -45,6 +45,7 @@ function generateTreeNodesWithUid(
 export default ({
   request,
   extendModuleMap,
+  firstLoadAll = false,
 }: RouteComponentProps<{
   treePath: string;
 }> & {
@@ -54,6 +55,7 @@ export default ({
   extendModuleMap: {
     [key: string]: string;
   };
+  firstLoadAll: boolean;
 }): IComposeTreeContext => {
   const match = useRouteMatch();
   const history = useHistory();
@@ -103,7 +105,6 @@ export default ({
   // 如果没有指定下级 module，则默认选中第一个 tree 根节点
   useEffect(() => {
     unMounted.current = false;
-
     // tslint:disable-next-line: no-floating-promises
     _fetchTreeNodes(null, get(_paths, 0)).then(() => {
       // console.log('获取初始 tree 数据完成');
@@ -114,9 +115,11 @@ export default ({
         return;
       }
       // tslint:disable-next-line: no-floating-promises
-      loadTreeByPath(_paths, cachedDataSource.current, '0', true).then(() => {
-        setDataSource(cachedDataSource.current);
-      });
+      if (!firstLoadAll) {
+        loadTreeByPath(_paths, cachedDataSource.current, '0', true).then(() => {
+          setDataSource(cachedDataSource.current);
+        });
+      }
     });
     return () => {
       unMounted.current = true;
@@ -199,6 +202,8 @@ export default ({
     const { children } = node;
     if (children) {
       return children;
+    } else if (firstLoadAll) {
+      return [];
     }
     const result = await _fetchTreeNodes(node, idToMatch);
     return result;
@@ -308,6 +313,8 @@ export default ({
     node: Partial<ExtendedEventNode>,
     idToMatch?: string,
   ): Promise<TreeDataSource> {
+    console.trace();
+
     return new Promise<TreeDataSource>((resolve, reject) => {
       const { id = '', params: nodeParams, pos } = node || {};
       // console.log(typeof id, 'idid', id === 'null');

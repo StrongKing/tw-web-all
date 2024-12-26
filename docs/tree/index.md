@@ -16,6 +16,7 @@ const store = configStore();
 export default ({ title }: { title: string }) => {
   const TreeComponent = () => (
     <ComposeTree
+      firstLoadAll
       request={{
         getTreeNodes: {
           url: '/data/get-tree-nodes.json',

@@ -47,10 +47,6 @@ export default function DialogForm({
   onBeforeClick = () => Promise.resolve(true),
   ...others
 }: FormButtonProps) {
-  const initValues = useMemo(
-    () => (initValuesFormatter ? initValuesFormatter(tableProps) : undefined),
-    [initValuesFormatter, tableProps],
-  );
   const modalProps = useMemo(
     () =>
       dialogPropsFormatter ? dialogPropsFormatter(tableProps) : dialogProps,
@@ -58,6 +54,10 @@ export default function DialogForm({
   );
   const [actions, setActions] = useState([]);
   const [dlgVis, setDlgVis] = useState(false);
+  const initValues = useMemo(
+    () => (initValuesFormatter ? initValuesFormatter(tableProps) : undefined),
+    [initValuesFormatter, tableProps, dlgVis],
+  );
   const { dataSource, onFinish, title, alertProps, ...otherFormProps } =
     formProps;
   const hideDlg = useCallback(() => {

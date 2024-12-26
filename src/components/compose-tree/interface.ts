@@ -142,6 +142,7 @@ export default interface PropTypes extends Omit<TreeProps, 'dataSource'> {
   onSelect?: AntDTreeProps['onSelect'];
   selfNameMap?: SelfNameMap;
   extendModuleMap: { [key: string]: string };
+  firstLoadAll: boolean;
 }
 
 export { PropTypes };

@@ -378,6 +378,7 @@ const AAA = () => {
       },
     ],
   };
-  return <ComposeManage {...props} />;
+  // return <ComposeManage {...props} />;
+  return 22222;
 };
 export default AAA;
