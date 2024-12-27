@@ -4,7 +4,7 @@
       {
         "key": 1,
         "label": "产品校园校区1222333",
-        "type": "tag-group",
+        "type": "tag-group1",
         "iconType": "root",
         "isLeaf": true,
         "params": null,
@@ -12,7 +12,7 @@
           {
             "key": 2,
             "label": "111产品校园校区1222333222",
-            "type": "tag-group",
+            "type": "tag-group1",
             "iconType": "root",
             "isLeaf": true,
             "params": null,
@@ -28,7 +28,7 @@
               {
                 "key": 5,
                 "label": "2222啊积分哈会计法555",
-                "type": "tag-group",
+                "type": "tag-group1",
                 "iconType": "root",
                 "isLeaf": true,
                 "params": null

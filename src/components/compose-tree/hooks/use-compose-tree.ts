@@ -46,6 +46,7 @@ export default ({
   request,
   extendModuleMap,
   firstLoadAll = false,
+  typeKey = 'type',
 }: RouteComponentProps<{
   treePath: string;
 }> & {
@@ -56,6 +57,7 @@ export default ({
     [key: string]: string;
   };
   firstLoadAll: boolean;
+  typeKey?: string;
 }): IComposeTreeContext => {
   const match = useRouteMatch();
   const history = useHistory();
@@ -261,13 +263,10 @@ export default ({
     setExpandedKeys([...expandedKeys.current, ...keyList]);
   }
 
-  function goToModule(
-    targetNode: Pick<ExtendedEventNode, 'type' | 'params'>,
-    nodePath: string,
-    isReplace = false,
-  ) {
+  function goToModule(targetNode: any, nodePath: string, isReplace = false) {
     if (unmounted.current) return;
-    const { type, params } = targetNode;
+    const { params: nodeParams } = targetNode;
+    const type: string = targetNode[typeKey];
     const moduleType = getModuleType(type);
     if (!moduleType) {
       console.error(`ComposeTree：没有找到 type(${type}) 对应的 module`);
@@ -275,7 +274,7 @@ export default ({
     }
 
     // debugger;
-    setActiveParams(params || {});
+    setActiveParams(nodeParams || {});
 
     history[isReplace ? 'replace' : 'push'](
       `${generatePath(pathPrefixWithParam, {

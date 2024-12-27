@@ -129,6 +129,7 @@ export default ({
   request,
   extendModuleMap,
   firstLoadAll = false,
+  typeKey = 'type',
   ...others
 }: RouteComponentProps<{
   treePath: string;
@@ -138,6 +139,7 @@ export default ({
     request: { getTreeNodes: request.getTreeNodes },
     extendModuleMap,
     firstLoadAll,
+    typeKey,
   });
   return (
     <ComposeTreeContext.Provider value={composeTreeContext}>

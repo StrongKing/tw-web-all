@@ -143,6 +143,7 @@ export default interface PropTypes extends Omit<TreeProps, 'dataSource'> {
   selfNameMap?: SelfNameMap;
   extendModuleMap: { [key: string]: string };
   firstLoadAll: boolean;
+  typeKey?: string;
 }
 
 export { PropTypes };

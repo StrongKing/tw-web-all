@@ -37,9 +37,16 @@ export default ({ title }: { title: string }) => {
         },
         {
           path: 'tag-group',
-          Com: () => <TreeTableDemo />,
+          Com: () => <TreeTableDemo text="1111" />,
+        },
+        {
+          path: 'tag-group1',
+          Com: () => <TreeTableDemo text="2222" />,
         },
       ]}
+      extendModuleMap={{
+        'tag-group1': 'tag-group1',
+      }}
       renderSearchExtra={({ labelPathName }) => (
         <div
           style={{

@@ -1,7 +1,7 @@
 import React from 'react';
 import ComposeManage from '@/components/compose-manage';
 
-const AAA = () => {
+const AAA = ({ text }) => {
   const columns = [
     {
       help: null,
@@ -379,6 +379,6 @@ const AAA = () => {
     ],
   };
   // return <ComposeManage {...props} />;
-  return 22222;
+  return text;
 };
 export default AAA;
