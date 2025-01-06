@@ -119,11 +119,9 @@ export default ({
           const queue: any[] = [...cachedDataSource.current];
           while (queue.length > 0) {
             const el: any = queue.shift();
-            if (el?.isLeaf) {
+            if (el?.children?.length > 0) {
               allKeys.push(el.key);
-              if (el?.children?.length > 0) {
-                queue.push(...el.children);
-              }
+              queue.push(...el.children);
             }
           }
           setExpandedKeys(allKeys);
@@ -336,8 +334,6 @@ export default ({
     node: Partial<ExtendedEventNode>,
     idToMatch?: string,
   ): Promise<TreeDataSource> {
-    console.trace();
-
     return new Promise<TreeDataSource>((resolve, reject) => {
       const { id = '', params: nodeParams, pos } = node || {};
       // console.log(typeof id, 'idid', id === 'null');
