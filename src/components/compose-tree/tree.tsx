@@ -13,6 +13,7 @@ import { ComposeTreeContext } from './hooks/use-compose-tree';
 import UserTree from './user-tree';
 import useTreeData from './hooks/use-tree-data';
 import {
+  IComposeTreeContext,
   TreeProps as PropTypes,
   SelectedDataNode,
   TreeNodeKey,
@@ -53,6 +54,7 @@ function CFTree({
   rootIconType,
   selfNameMap,
   renderSearchExtra,
+  firstLoadAll,
   ...others
 }: PropTypes) {
   const {
@@ -62,7 +64,8 @@ function CFTree({
     setIsSearch,
     setExpandedKeys,
     loadData,
-  } = useContext(ComposeTreeContext);
+    firstLoaded,
+  } = useContext<IComposeTreeContext>(ComposeTreeContext);
   const [selectedKeys, setSelectedKeys] = useState([]);
   // 渲染树的数据
   const [searchResult, setSearchResult] = useState([]);
@@ -337,7 +340,7 @@ function CFTree({
                   nameMap[treeData[0].iconType]}
               </div>
             ) : null}
-            {permissionCode !== 30512 && (
+            {permissionCode !== 30512 && (!firstLoadAll || firstLoaded) && (
               <Tree
                 className={searchText ? 'removeIndent000' : ''}
                 onExpand={handleExpand}

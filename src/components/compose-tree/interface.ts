@@ -81,6 +81,7 @@ export interface IComposeTreeContext {
   setIsSearch: any;
   code: any;
   isInTree: boolean;
+  firstLoaded: boolean;
 }
 
 export type UserType = 'customer' | 'employee';
@@ -118,6 +119,7 @@ export interface TreeProps extends Omit<AntDTreeProps, 'onSelect'> {
   // 搜索树对应的nameMao，如果不设置，则默认使用tree组件里的nameMap。
   selfNameMap?: SelfNameMap;
   renderSearchExtra?: Function;
+  firstLoadAll?: boolean;
 }
 
 export default interface PropTypes extends Omit<TreeProps, 'dataSource'> {
@@ -143,6 +145,7 @@ export default interface PropTypes extends Omit<TreeProps, 'dataSource'> {
   selfNameMap?: SelfNameMap;
   extendModuleMap: { [key: string]: string };
   firstLoadAll: boolean;
+  expandAllTree?: boolean;
   typeKey?: string;
 }
 

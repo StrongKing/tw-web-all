@@ -129,6 +129,7 @@ export default ({
   request,
   extendModuleMap,
   firstLoadAll = false,
+  expandAllTree = true,
   typeKey = 'type',
   ...others
 }: RouteComponentProps<{
@@ -140,10 +141,11 @@ export default ({
     extendModuleMap,
     firstLoadAll,
     typeKey,
+    expandAllTree,
   });
   return (
     <ComposeTreeContext.Provider value={composeTreeContext}>
-      <ComposeTree {...others} request={request} />
+      <ComposeTree {...others} request={request} firstLoadAll={firstLoadAll} />
     </ComposeTreeContext.Provider>
   );
 };

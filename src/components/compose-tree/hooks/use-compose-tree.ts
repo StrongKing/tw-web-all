@@ -46,6 +46,7 @@ export default ({
   request,
   extendModuleMap,
   firstLoadAll = false,
+  expandAllTree = true,
   typeKey = 'type',
 }: RouteComponentProps<{
   treePath: string;
@@ -57,6 +58,7 @@ export default ({
     [key: string]: string;
   };
   firstLoadAll: boolean;
+  expandAllTree: boolean;
   typeKey?: string;
 }): IComposeTreeContext => {
   const match = useRouteMatch();
@@ -67,6 +69,7 @@ export default ({
   const { path, params } = match;
 
   const [dataSource, setDataSource] = useState([]);
+  const [firstLoaded, setFirstLoaded] = useState(false);
   const [code, setDataCode] = useState(0);
   // 命中这一级的路由 path，要去掉星号
   const pathPrefix = path.replace(/[/*]+$/, '');
@@ -107,22 +110,43 @@ export default ({
   // 如果没有指定下级 module，则默认选中第一个 tree 根节点
   useEffect(() => {
     unMounted.current = false;
+    setFirstLoaded(false);
     // tslint:disable-next-line: no-floating-promises
-    _fetchTreeNodes(null, get(_paths, 0)).then(() => {
-      // console.log('获取初始 tree 数据完成');
-      // 如果没有指定路径，默认选择第一个
-      if (!treePath) {
-        const firstNode = get(cachedDataSource.current, [0], {});
-        goToModule(firstNode, firstNode.id, true);
-        return;
-      }
-      // tslint:disable-next-line: no-floating-promises
-      if (!firstLoadAll) {
-        loadTreeByPath(_paths, cachedDataSource.current, '0', true).then(() => {
-          setDataSource(cachedDataSource.current);
-        });
-      }
-    });
+    _fetchTreeNodes(null, get(_paths, 0))
+      .then(() => {
+        if (firstLoadAll && expandAllTree) {
+          const allKeys: string[] = [];
+          const queue: any[] = [...cachedDataSource.current];
+          while (queue.length > 0) {
+            const el: any = queue.shift();
+            if (el?.isLeaf) {
+              allKeys.push(el.key);
+              if (el?.children?.length > 0) {
+                queue.push(...el.children);
+              }
+            }
+          }
+          setExpandedKeys(allKeys);
+        }
+        // console.log('获取初始 tree 数据完成');
+        // 如果没有指定路径，默认选择第一个
+        if (!treePath) {
+          const firstNode = get(cachedDataSource.current, [0], {});
+          goToModule(firstNode, firstNode.id, true);
+          return;
+        }
+        // tslint:disable-next-line: no-floating-promises
+        if (!firstLoadAll) {
+          loadTreeByPath(_paths, cachedDataSource.current, '0', true).then(
+            () => {
+              setDataSource(cachedDataSource.current);
+            },
+          );
+        }
+      })
+      .finally(() => {
+        setFirstLoaded(true);
+      });
     return () => {
       unMounted.current = true;
     };
@@ -477,6 +501,7 @@ export default ({
     nowExpandedNode,
     generateUrlByTreePaths,
     isInTree: true,
+    firstLoaded,
   };
 };
 
