@@ -233,7 +233,7 @@ function CFForm({
         showError: false,
       });
       // button form 的场景不需要复杂的报错提示
-      if (response?.success == 200 || response?.success == 0) {
+      if (response?.code == 200 || response?.code == 0) {
         // 更新缓存值
         initialValuesRef.current = form.getFieldsValue();
         // disableSubmitIfPossible();
