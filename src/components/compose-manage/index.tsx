@@ -129,10 +129,6 @@ const ComposeManage = forwardRef(
     const formRef = useRef<ProFormInstance>(); // 搜索框表单实力
     const manageRef = useRef<HTMLDivElement>(null);
 
-    useImperativeHandle(ref, () => ({
-      handleReset,
-    }));
-
     // 请求
     const getSearch = (val: any = {}) => {
       let search = { ...val };
@@ -533,6 +529,16 @@ const ComposeManage = forwardRef(
       () => (filterLabelWidth === 'auto' ? '' : `0 0 ${filterLabelWidth}px`),
       [filterLabelWidth],
     );
+
+    const updateDataSorce = (dataSorce: any[] = []) => {
+      setTableSource(dataSorce);
+      setTotal(dataSorce.length);
+    };
+
+    useImperativeHandle(ref, () => ({
+      handleReset,
+      updateDataSorce,
+    }));
 
     return (
       <div className="ss-compose-manage-container" ref={manageRef}>

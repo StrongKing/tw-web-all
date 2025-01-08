@@ -21,7 +21,16 @@ const staticDataSource = new Array(30)
 
 // console.log(isCurrentUser());
 export default () => {
-  const props = {
+  const tableRef = useRef();
+  const onClick = () => {
+    tableRef.current.updateDataSorce(
+      new Array(30)
+        .fill(1)
+        .map((el, i) => ({ name: `货吗名称${i}${Math.random()}` })),
+    );
+  };
+  const props111 = {
+    ref: tableRef,
     alertProps: {
       message:
         '注：请根据业务情况，设置聊天机器人，聊天机器人将在配置时间范围内，自动解答客户问题。',
@@ -312,7 +321,8 @@ export default () => {
 
   return (
     <div>
-      <ComposeManage {...props} />
+      <button onClick={onClick}>更新</button>
+      <ComposeManage {...props111} />
     </div>
   );
 };
