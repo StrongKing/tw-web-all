@@ -12,6 +12,7 @@ import React, {
   useRef,
   useContext,
   useLayoutEffect,
+  ForwardedRef,
 } from 'react';
 import { FormInstance } from 'antd/lib/form';
 import { ConfigProvider, Tooltip } from 'antd';
@@ -69,13 +70,14 @@ const ComposeManage = forwardRef(
       captionRight,
       defaultCollapsed = true,
     }: PropTypes,
-    ref: FormInstance,
+    ref: ForwardedRef<any>,
   ) => {
     const [collapsed, setCollapsed] = useState(defaultCollapsed);
     // 定义data数据
     const [pageData, setPageData] = useState([]);
     // 定义Table的数据源
     const [tableSource, setTableSource] = useState(staticDataSource);
+    const staticDataSourceCache = useRef(staticDataSource);
     const [sortTable, setSortTable] = useState(null);
     // 定义pageSize
     const [pageSize, setPageSize] = useState(
@@ -272,8 +274,8 @@ const ComposeManage = forwardRef(
       }
 
       if (!dataRequest && typeof staticFilter === 'function') {
-        const newData = staticDataSource.filter((el: any, i: number) =>
-          staticFilter(newSearch, el, i),
+        const newData = staticDataSourceCache.current.filter(
+          (el: any, i: number) => staticFilter(newSearch, el, i),
         );
         setTableSource([...newData]);
         setTotal(newData.length);
@@ -533,6 +535,7 @@ const ComposeManage = forwardRef(
     const updateDataSorce = (dataSorce: any[] = []) => {
       setTableSource(dataSorce);
       setTotal(dataSorce.length);
+      staticDataSourceCache.current = dataSorce;
     };
 
     useImperativeHandle(ref, () => ({
