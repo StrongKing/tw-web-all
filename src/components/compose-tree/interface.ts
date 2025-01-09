@@ -120,6 +120,7 @@ export interface TreeProps extends Omit<AntDTreeProps, 'onSelect'> {
   selfNameMap?: SelfNameMap;
   renderSearchExtra?: Function;
   firstLoadAll?: boolean;
+  groupTypeList?: string[];
 }
 
 export default interface PropTypes extends Omit<TreeProps, 'dataSource'> {
@@ -147,6 +148,13 @@ export default interface PropTypes extends Omit<TreeProps, 'dataSource'> {
   firstLoadAll: boolean;
   expandAllTree?: boolean;
   typeKey?: string;
+  groupTypeList?: string[];
+  requestDataFormatter?: (
+    data: {
+      dataSource: TreeDataSource;
+    },
+    treeContext: { treePath: string[] },
+  ) => TreeDataSource;
 }
 
 export { PropTypes };

@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable no-unused-expressions */
 import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import {
@@ -48,6 +49,8 @@ export default ({
   firstLoadAll = false,
   expandAllTree = true,
   typeKey = 'type',
+  groupTypeList = [],
+  requestDataFormatter = (data) => data.dataSource,
 }: RouteComponentProps<{
   treePath: string;
 }> & {
@@ -60,6 +63,13 @@ export default ({
   firstLoadAll: boolean;
   expandAllTree: boolean;
   typeKey?: string;
+  groupTypeList?: string[];
+  requestDataFormatter?: (
+    data: {
+      dataSource: TreeDataSource;
+    },
+    treeContext: { treePath: string[] },
+  ) => TreeDataSource;
 }): IComposeTreeContext => {
   const match = useRouteMatch();
   const history = useHistory();
@@ -127,10 +137,36 @@ export default ({
           setExpandedKeys(allKeys);
         }
         // console.log('获取初始 tree 数据完成');
-        // 如果没有指定路径，默认选择第一个
+        // 如果没有指定路径，深度优先搜索 type不在 groupTypeList 中的第一个
         if (!treePath) {
-          const firstNode = get(cachedDataSource.current, [0], {});
-          goToModule(firstNode, firstNode.id, true);
+          const queue: any[] = [[...cachedDataSource.current]];
+          const nodeList = [];
+          let level = 0;
+          while (level > -1 && queue.length > 0) {
+            const el: any = queue[level].shift();
+            if (!groupTypeList.includes(el.type)) {
+              nodeList.push(el);
+              break;
+            }
+            if (el?.children?.length > 0) {
+              nodeList.push(el);
+              queue.push([...el.children]);
+              level++;
+            } else {
+              while (level > -1 && queue[level].length === 0) {
+                nodeList.pop();
+                queue.pop();
+                level--;
+              }
+            }
+          }
+          if (nodeList.length > 0) {
+            goToModule(
+              nodeList[nodeList.length - 1],
+              nodeList.map((el) => el.id).join(SPLITTER),
+              true,
+            );
+          }
           return;
         }
         // tslint:disable-next-line: no-floating-promises
@@ -404,7 +440,7 @@ export default ({
               // return;
             }
             const nextChildren = generateTreeNodesWithUid(
-              data.dataSource,
+              requestDataFormatter(data, { treePath: _paths }),
               cached,
             );
             _updateTreeChildren(position, nextChildren);

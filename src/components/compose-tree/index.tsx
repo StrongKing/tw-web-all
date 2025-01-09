@@ -21,6 +21,7 @@ function ComposeTree({
   treeColWidth = '260px',
   request,
   renderSearchExtra,
+  groupTypeList = [],
   ...others
 }: PropTypes) {
   const { goToModule, code, dataSource, getRoutePath } =
@@ -43,22 +44,24 @@ function ComposeTree({
     if (!type) {
       console.error('树节点缺乏 type 属性', event.node);
     }
-    // 拼接路径
-    const position = pos.split('-').slice(1);
-    let traverser = currentDataSource;
-    // console.log(traverser, 'traverser', position);
-    // 将下标路径转换为 key 的路径，放入 url
-    try {
-      const treePath = position
-        .map((pos: string) => {
-          const { id, children } = traverser[+pos];
-          traverser = children;
-          return id;
-        })
-        .join(SPLITTER);
-      goToModule(event.node, treePath);
-    } catch (error) {
-      console.log(error);
+    if (!groupTypeList.includes(type)) {
+      // 拼接路径
+      const position = pos.split('-').slice(1);
+      let traverser = currentDataSource;
+      // console.log(traverser, 'traverser', position);
+      // 将下标路径转换为 key 的路径，放入 url
+      try {
+        const treePath = position
+          .map((pos: string) => {
+            const { id, children } = traverser[+pos];
+            traverser = children;
+            return id;
+          })
+          .join(SPLITTER);
+        goToModule(event.node, treePath);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -109,6 +112,7 @@ function ComposeTree({
           onSelect={handleSelect}
           onUserSelect={onUserSelect}
           renderSearchExtra={renderSearchExtra}
+          groupTypeList={groupTypeList}
         />
       </div>
       <div className="content-col">
@@ -131,6 +135,8 @@ export default ({
   firstLoadAll = false,
   expandAllTree = true,
   typeKey = 'type',
+  groupTypeList,
+  requestDataFormatter,
   ...others
 }: RouteComponentProps<{
   treePath: string;
@@ -142,10 +148,17 @@ export default ({
     firstLoadAll,
     typeKey,
     expandAllTree,
+    groupTypeList,
+    requestDataFormatter,
   });
   return (
     <ComposeTreeContext.Provider value={composeTreeContext}>
-      <ComposeTree {...others} request={request} firstLoadAll={firstLoadAll} />
+      <ComposeTree
+        {...others}
+        groupTypeList={groupTypeList}
+        request={request}
+        firstLoadAll={firstLoadAll}
+      />
     </ComposeTreeContext.Provider>
   );
 };

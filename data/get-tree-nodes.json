@@ -4,32 +4,28 @@
       {
         "key": 1,
         "label": "产品校园校区1222333",
-        "type": "tag-group1",
-        "iconType": "root",
-        "isLeaf": true,
+        "type": "tag-group122",
+        "isLeaf": false,
         "params": null,
         "children": [
           {
             "key": 2,
             "label": "111产品校园校区1222333222",
-            "type": "tag-group1",
-            "iconType": "root",
-            "isLeaf": true,
+            "type": "tag-group122",
+            "isLeaf": false,
             "params": null,
             "children": [
               {
                 "key": 4,
                 "label": "444",
                 "type": "tag-group",
-                "iconType": "root",
                 "isLeaf": true,
                 "params": null
               },
               {
                 "key": 5,
                 "label": "2222啊积分哈会计法555",
-                "type": "tag-group1",
-                "iconType": "root",
+                "type": "tag-group",
                 "isLeaf": true,
                 "params": null
               }

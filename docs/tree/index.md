@@ -30,6 +30,11 @@ export default ({ title }: { title: string }) => {
         },
       }}
       // showSearch={false}
+      groupTypeList={['tag-group122']}
+      requestDataFormatter={(data, { treePath }) => {
+        console.log(treePath);
+        return data.dataSource;
+      }}
       routerConfig={[
         {
           path: 'base-period1', // 校区设置

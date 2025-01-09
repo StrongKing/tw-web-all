@@ -55,6 +55,7 @@ function CFTree({
   selfNameMap,
   renderSearchExtra,
   firstLoadAll,
+  groupTypeList = [],
   ...others
 }: PropTypes) {
   const {
@@ -210,9 +211,8 @@ function CFTree({
     event: SelectedDataNode,
     peopleListBool: boolean,
   ) => {
-    // debugger;
     // 点击展开收起
-    const { key } = event.node;
+    const { key, type } = event.node;
     const matchedExpandIndex = expandedKeys.indexOf(key);
     // 禁止反选
     // if (event.selected) {
@@ -226,7 +226,18 @@ function CFTree({
         ...expandedKeys.slice(matchedExpandIndex + 1),
       ]);
     } else {
-      setExpandedKeys(Array.from(new Set([...expandedKeys, key])));
+      const newKeys = expandedKeys ? [...expandedKeys] : [];
+      if (type && groupTypeList.includes(type)) {
+        const index = newKeys.indexOf(key);
+        if (index > -1) {
+          newKeys.splice(index, 1);
+        } else {
+          newKeys.push(key);
+        }
+        setExpandedKeys(newKeys);
+      } else {
+        setExpandedKeys(Array.from(new Set([...newKeys, key])));
+      }
     }
     // 禁止反选
     if (!event.selected) {
