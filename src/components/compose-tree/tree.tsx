@@ -52,6 +52,7 @@ function CFTree({
   showSearch = true,
   userType = 'employee',
   rootIconType,
+  renderExtra,
   selfNameMap,
   renderSearchExtra,
   firstLoadAll,
@@ -78,7 +79,12 @@ function CFTree({
     [searchText, searchResult, dataSource],
   );
   const treeWrapper = useRef<HTMLDivElement>();
-  const [treeData] = useTreeData(partialDataSource, searchText, rootIconType);
+  const [treeData] = useTreeData(
+    partialDataSource,
+    searchText,
+    rootIconType,
+    renderExtra,
+  );
   // const [height, setHeight] = useState(0);
   const [minWidth, setMinWidth] = useState(0);
 
