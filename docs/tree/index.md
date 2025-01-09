@@ -29,6 +29,8 @@ export default ({ title }: { title: string }) => {
           params: { foo: '123' },
         },
       }}
+      {/* renderExtra={()=>{return <span>建��</span>
+      }} */}
       // showSearch={false}
       groupTypeList={['tag-group122']}
       requestDataFormatter={(data, { treePath }) => {

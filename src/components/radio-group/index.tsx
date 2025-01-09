@@ -35,7 +35,7 @@ export default function RadioGroup({
   );
 
   useEffect(() => {
-    if (!value) {
+    if (!value && value != 0) {
       handleOnChange(dataSource?.[0].value);
     }
   }, []);

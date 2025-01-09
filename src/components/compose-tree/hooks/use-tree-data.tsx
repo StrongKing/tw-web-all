@@ -86,15 +86,15 @@ export default (
                   >
                     {$title}
                   </div>
-                  {position ? (
+                  <div className="position">{extraEl}</div>
+                  {/* {position ? (
                     <div className="position">({position})</div>
-                  ) : null}
+                  ) : null} */}
                 </div>
                 <p className="orgName">
                   {orgName}
                   {(deptNames || []).join(', ')}
                 </p>
-                {extraEl}
               </div>
             </div>
             // </Tooltip>
