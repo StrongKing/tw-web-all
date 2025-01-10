@@ -3,6 +3,7 @@ import React, { useCallback, useMemo, Suspense } from 'react';
 import { Table, Tooltip } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
+import { VList } from 'virtuallist-antd';
 import Spin from '../loading';
 import defaultComsMap, { UnSupport } from './coms-map';
 import { TableCellProps, PropTypes, ColumnItemProps } from './interface';
@@ -79,6 +80,7 @@ export default function CFTable({
   onEmit,
   scroll,
   size = 'small',
+  virtuallistParams = null,
   fixFirstColumn = true,
   fixLastColumn = true,
   ...others
@@ -210,9 +212,25 @@ export default function CFTable({
       return { x: 800 };
     }
   }, [columns]);
+
+  const VcComponent = useMemo(() => {
+    if (virtuallistParams) {
+      return VList({
+        height: virtuallistParams?.height,
+      });
+    }
+  }, [virtuallistParams]);
+
+  const finalScroll = scroll || _scroll;
+
   return (
     <Table
-      scroll={scroll || _scroll}
+      components={virtuallistParams ? VcComponent : undefined}
+      scroll={
+        virtuallistParams
+          ? { x: finalScroll?.x, y: virtuallistParams.height }
+          : finalScroll
+      }
       dataSource={dataSource}
       loadingComponent={renderLoading}
       rowKey={primaryKey}

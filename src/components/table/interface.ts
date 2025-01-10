@@ -72,6 +72,10 @@ export interface PropTypes
   fixLastColumn?: boolean;
   /** 参考 antd 中 Table 组件的 pagination 属性，如果传 false，表示不分页 */
   pagination?: any | TablePaginationConfig;
+  // 开启虚拟列表  height 跟scroll.y 保持一样
+  virtuallistParams?: {
+    height: number;
+  } | null;
   rowSelection?: any;
   checkable?: boolean;
   primaryKey?: string | number | ((records?: any) => string);
