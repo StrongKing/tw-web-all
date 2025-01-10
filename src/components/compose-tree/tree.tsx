@@ -297,8 +297,8 @@ function CFTree({
   // console.log(treeData, 'treeData');
   return (
     <div className="ss-biz-tree">
-      <div className="biz-search-main">
-        {showSearch ? (
+      {showSearch ? (
+        <div className="biz-search-main">
           <Search
             // className="biz-tree-search"
             // shape="simple"
@@ -306,8 +306,8 @@ function CFTree({
             {...searchProps}
             onChange={handleSearch}
           />
-        ) : null}
-      </div>
+        </div>
+      ) : null}
 
       <div className="biz-tree-main" ref={treeWrapper}>
         <div style={{ width: minWidth }}>
