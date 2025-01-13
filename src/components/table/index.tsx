@@ -9,11 +9,6 @@ import defaultComsMap, { UnSupport } from './coms-map';
 import { TableCellProps, PropTypes, ColumnItemProps } from './interface';
 import './index.less';
 
-// import React, { Suspense } from 'react';
-// import { PropTypes } from './interface';
-// import Button from './default';
-// import { Spin, Empty } from '@/components/blank';
-
 const cellRenderer = ({
   comsMap,
   uiType,
@@ -21,12 +16,11 @@ const cellRenderer = ({
   name,
   props = {},
   onEmit,
-  otherKey,
   primaryKey = 'id',
   defaultExpandAllRows,
 }: PropTypes &
   ColumnItemProps & {
-    tableDataSource: any[];
+    tableDataSource: any[] | undefined;
     onEmit: (
       eventName: string,
       index?: number,
@@ -45,7 +39,6 @@ const cellRenderer = ({
           value={value}
           tableProps={{
             primaryKey,
-            otherKey,
             onEmit: (eventName: any, ...args: any) => {
               onEmit(`${name}.${eventName}`, index, record, ...args);
             },
@@ -75,14 +68,12 @@ export default function CFTable({
   onSelectAll,
   onSelect,
   primaryKey,
-  otherKey,
   onPageChange,
   onEmit,
   scroll,
   size = 'small',
   virtuallistParams = null,
   fixFirstColumn = true,
-  fixLastColumn = true,
   ...others
 }: PropTypes & {
   onPageChange: (current: any, size: any) => void;
@@ -95,7 +86,6 @@ export default function CFTable({
   ) => void;
   onSelect: (record: any, selected: boolean, selectedRows: any[]) => void;
 }) {
-  // console.log(dataSource, 'dataSource');
   const renderColumn = (
     {
       name,
@@ -112,7 +102,6 @@ export default function CFTable({
       ...others
     }: ColumnItemProps,
     colIndex: number,
-    primaryKey: any,
   ) => {
     if (typeof cell !== 'function' && typeof render !== 'function') {
       cell = cellRenderer({
@@ -122,7 +111,6 @@ export default function CFTable({
         props,
         onEmit,
         primaryKey,
-        otherKey,
         tableDataSource: dataSource,
         children,
       });

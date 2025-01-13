@@ -19,9 +19,9 @@ export default () => {
   const formRef = useRef(null);
 
   window.token =
-    "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2luZm8iOiIlN0IlMjJhdmF0YXIlMjIlM0ElMjJodHRwcyUzQSUyRiUyRndld29yay5xcGljLmNuJTJGd3dwaWMzYXolMkY3ODg2NzNfeHpJZ1VCcTBTU1c1bWZYXzE3MTY1Njc0NzglMkYwJTIyJTJDJTIyY29ycElkJTIyJTNBJTIyd3BvRzg0Q2dBQWpWZThBU21zbFd1eTFla3ZzSVFXUHclMjIlMkMlMjJpbmR1c3RyeVR5cGUlMjIlM0ElMjJteXR4bCUyMiUyQyUyMmxvZ2luVHlwZSUyMiUzQSUyMm5vcm1hbCUyMiUyQyUyMm1lbWJlcklkJTIyJTNBMTU2OTU2NDYwMjkwNDI2MDYxMCUyQyUyMm1lbWJlck5hbWUlMjIlM0ElMjIlRTklQTklQUMlRTYlOUQlQjAlMjIlMkMlMjJtb2JpbGUlMjIlM0ElMjIxODc1ODI4NzAwMSUyMiUyQyUyMm9yZ0lkJTIyJTNBMzAwMTAwMTAwMTAwMDAwNiUyQyUyMm9yZ05hbWUlMjIlM0ElMjIlRTYlOUQlQUQlRTUlQjclOUUlRTYlQUQlQTMlRTUlOUQlOUIlRTclQTclOTElRTYlOEElODAlRTYlOUMlODklRTklOTklOTAlRTUlODUlQUMlRTUlOEYlQjglRUYlQkMlODglRTYlQUYlOEQlRTUlQTklQjQlRUYlQkMlODklMjIlMkMlMjJvcmdUeXBlJTIyJTNBJTIyZ2VuZXJhbCUyMiUyQyUyMnJlZ2lvbkNvZGUlMjIlM0ElMjIzMzAxMDIwMDAwMDAwMDAwMDAlMjIlMkMlMjJzaG9ydE5hbWUlMjIlM0ElMjIlRTYlQUQlQTMlRTUlOUQlOUIlRTclQTclOTElRTYlOEElODAlMjIlMkMlMjJ1c2VySWQlMjIlM0ExNTY5NTY0NjAyOTA0MjYwNjEwJTJDJTIydXNlck5hbWUlMjIlM0ElMjIlRTklQTklQUMlRTYlOUQlQjAlMjIlMkMlMjJ1c2VyVHlwZSUyMiUzQSUyMmVtcGxveWVlJTIyJTdEIiwidXNlcl9uYW1lIjoiMzAwMTAwMTAwMTAwMDAwNjsxNTY5NTY0NjAyOTA0MjYwNjEwO2VtcGxveWVlO25vcm1hbCIsIm9yZ19pZCI6MzAwMTAwMTAwMTAwMDAwNiwic2NvcGUiOlsid3JpdGUiXSwiZXhwIjoxNzMzOTczNTQ1LCJqdGkiOiI2ODlkZmIwYS0wMDAyLTRiYzMtOWEzYy0yMTQ3YmM5M2Q3YWYiLCJjbGllbnRfaWQiOiJzaXQifQ.HUjaxxw5_31ZvX2POx5F0MqU8025Ejd1y8S27RoqRoGjyGS1u55H6VDgsD-zlx6qR6pVY9eRePREyVbCXRPsscic6sx1v2E1n697S-0oi9w-Bm3HUkFCyr4JdoiDGBM5T1BCBm2ihOMYFRkQEYo_jBM2fmc63td4lEmHZzRF4vE";
+    'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2luZm8iOiIlN0IlMjJhdmF0YXIlMjIlM0ElMjJodHRwcyUzQSUyRiUyRndld29yay5xcGljLmNuJTJGd3dwaWMlMkYyMDEwNjRfeXc2dERUZldRQU9leUVlXzE2ODU0MDYxNTQlMkYwJTIyJTJDJTIyY29ycElkJTIyJTNBJTIyd3BvRzg0Q2dBQWpWZThBU21zbFd1eTFla3ZzSVFXUHclMjIlMkMlMjJpbmR1c3RyeVR5cGUlMjIlM0ElMjJteXR4bCUyMiUyQyUyMmxvZ2luVHlwZSUyMiUzQSUyMm5vcm1hbCUyMiUyQyUyMm1lbWJlcklkJTIyJTNBMTU2MTk2Nzg0NjcyMzI4NTAyNiUyQyUyMm1lbWJlck5hbWUlMjIlM0ElMjIlRTYlOUQlOEUlRTUlQkIlQkElRTUlQkQlQUMlMjIlMkMlMjJtb2JpbGUlMjIlM0ElMjIxMzY1NzA4NjQ1MSUyMiUyQyUyMm9yZ0lkJTIyJTNBMzAwMTAwMTAwMTAwMDAwNiUyQyUyMm9yZ05hbWUlMjIlM0ElMjIlRTYlOUQlQUQlRTUlQjclOUUlRTYlQUQlQTMlRTUlOUQlOUIlRTclQTclOTElRTYlOEElODAlRTYlOUMlODklRTklOTklOTAlRTUlODUlQUMlRTUlOEYlQjglRUYlQkMlODglRTYlQUYlOEQlRTUlQTklQjQlRUYlQkMlODklMjIlMkMlMjJvcmdUeXBlJTIyJTNBJTIyZ2VuZXJhbCUyMiUyQyUyMnJlZ2lvbkNvZGUlMjIlM0ElMjIzMzAxMDIwMDAwMDAwMDAwMDAlMjIlMkMlMjJzaG9ydE5hbWUlMjIlM0ElMjIlRTYlQUQlQTMlRTUlOUQlOUIlRTclQTclOTElRTYlOEElODAlMjIlMkMlMjJ1c2VySWQlMjIlM0ExNTYxOTY3ODQ2NzIzMjg1MDI2JTJDJTIydXNlck5hbWUlMjIlM0ElMjIlRTYlOUQlOEUlRTUlQkIlQkElRTUlQkQlQUMlMjIlMkMlMjJ1c2VyVHlwZSUyMiUzQSUyMmVtcGxveWVlJTIyJTdEIiwidXNlcl9uYW1lIjoiMzAwMTAwMTAwMTAwMDAwNjsxNTYxOTY3ODQ2NzIzMjg1MDI2O2VtcGxveWVlO25vcm1hbCIsIm9yZ19pZCI6MzAwMTAwMTAwMTAwMDAwNiwic2NvcGUiOlsid3JpdGUiXSwiZXhwIjoxNzM5MzQyNDI2LCJqdGkiOiJjNDYyY2MxNC0xODJkLTRmNDYtOTIyNS0xN2ZlYWFkN2RiYzAiLCJjbGllbnRfaWQiOiJzaXQifQ.b-9gsWzrUDGYB-ZzB44TGFZO0IvZVALp26JncEyXmEG5idIagTrqSobIYRvgKERhyD49-F5KiVdKSB_0OWwyXyY5HiC8a8RLII24RPTUkjdr3zwf_yPIRXiIL9zMTbQ0BUo8YIVeRHJjQBc8-Pzorut92A8VQny0FGucPOfV-i8';
 
-  const getData = value => value;
+  const getData = (value) => value;
   const url = {
     crm: 'https://gateway.sit.suosihulian.com/crm',
     hsk: 'https://front.sit.suosihulian.com/gateway/hsk',
@@ -75,7 +75,6 @@ export default () => {
     filterClassName: 'special-filter',
     tableProps: {
       primaryKey: 'id',
-      otherKey: 'id',
       columns: [
         { label: '话术标题', name: 'title', help: null, uiType: '' },
         { label: '类型', name: 'newsTypeDesc', help: null, uiType: '' },
@@ -246,7 +245,6 @@ export default () => {
     },
     tableProps: {
       primaryKey: 'id',
-      otherKey: 'id',
       columns: [
         { label: '客户昵称', name: 'alias', help: null, uiType: null },
         { label: 'unionId', name: 'unionId', help: null, uiType: null },
@@ -333,7 +331,7 @@ export default () => {
           },
         }),
         successCodes: [200],
-        dataFormatter: res => res?.data?.sendList,
+        dataFormatter: (res) => res?.data?.sendList,
         filename: '咚咚群发记录',
       },
       {
@@ -707,7 +705,7 @@ export default () => {
       closable: false,
     },
 
-    searchDataFormatter: data => {
+    searchDataFormatter: (data) => {
       const newData = { ...data };
 
       if (newData?.aaa) {
@@ -904,7 +902,6 @@ export default () => {
     },
     tableProps: {
       primaryKey: 'id',
-      otherKey: 'id',
       columns: columns,
       isPagination: true,
       rowSelection: {
@@ -960,7 +957,7 @@ export default () => {
               label: '输入框2',
             },
           ],
-          dataFormatBeforeSubmit: formValue => {
+          dataFormatBeforeSubmit: (formValue) => {
             return {
               ...formValue,
               ...formValue.syncCorpSelect,
@@ -1037,17 +1034,11 @@ export default () => {
         333
       </button>
       {visible && (
-        <Modal
-          visible={visible}
-          {...modalProps11}
-        >
+        <Modal visible={visible} {...modalProps11}>
           <ComposeManage {...props11} />
         </Modal>
       )}
-      <ComposeManage
-        ref={formRef}
-        {...props}
-      />
+      <ComposeManage ref={formRef} {...props} />
     </div>
   );
   // return <App />
@@ -1055,7 +1046,7 @@ export default () => {
     label: '业务分组',
     name: 'brgId',
     code: '1679092295713853442',
-    onChange: v => {
+    onChange: (v) => {
       console.log(v);
     },
     dataSource: [

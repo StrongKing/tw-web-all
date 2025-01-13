@@ -24,12 +24,9 @@ const withTableButtonFeatures = mapProps(
     // onError,
     ...others
   }: PropTypes) => {
-    // eslint-disable-next-line @typescript-eslint/unbound-method
-
-    const { primaryKey, onTableEmit, index, record, otherKey } = tableProps;
+    const { primaryKey, onTableEmit, index, record } = tableProps;
 
     const primaryValue = record[primaryKey];
-    const otherValue = record[otherKey];
 
     // 替换文案中的占位符
     const replacePlaceholder = (originText = '') => {
@@ -39,9 +36,6 @@ const withTableButtonFeatures = mapProps(
 
       return originText.replace(/\$\{([\w.]+)\}/g, (matched, $1) => {
         switch ($1) {
-          case otherKey:
-            return otherValue;
-          // ${id} 替换为主键值
           case 'id':
             return primaryValue;
           // ${value} 替换为单元格的值
@@ -50,8 +44,6 @@ const withTableButtonFeatures = mapProps(
           // ${value} 替换为单元格的值
           case 'index':
             return index;
-          // case otherKey:
-          //   return otherValue;
           default:
             return get(tableProps, $1, matched);
         }
@@ -136,13 +128,11 @@ const withTableButtonFeatures = mapProps(
           // 注入的请求参数
           const data = {
             // 主键
-            [idName]: otherValue || primaryValue,
-            // [otherKey]: otherValue,
+            [idName]: primaryValue,
             // 行内容
             rowData: record,
-            // ceshi: 'xx',
             // 兼容单个操作和批量操作走同一接口的场景
-            idList: [otherValue || primaryValue],
+            idList: [primaryValue],
             ...(params || {}),
             ...(requestParamsFormatter
               ? requestParamsFormatter(tableProps)

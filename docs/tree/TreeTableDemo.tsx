@@ -254,7 +254,6 @@ const AAA = ({ text }) => {
     },
     tableProps: {
       primaryKey: 'id',
-      otherKey: 'id',
       columns,
       isPagination: true,
       rowSelection: {
