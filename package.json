@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "dingshi-web-all",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "scripts": {
     "start": "cross-env BUILD_ENV=dev && dumi dev",
     "docs:build": "cross-env BUILD_ENV=production && dumi build",
@@ -67,6 +67,7 @@
     "runes": "^0.4.3",
     "store2": "^2.13.2",
     "typescript": "^4.2.3",
+    "virtuallist-antd": "0.7.5-beta.2",
     "wangeditor": "^4.7.15"
   },
   "devDependencies": {

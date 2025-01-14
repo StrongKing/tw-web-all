@@ -107,7 +107,6 @@ export default () => {
     staticDataSource,
     tableProps: {
       primaryKey: 'id',
-      otherKey: 'id',
       columns: [
         {
           help: null,
