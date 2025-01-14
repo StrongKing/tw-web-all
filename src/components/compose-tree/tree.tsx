@@ -57,6 +57,7 @@ function CFTree({
   renderSearchExtra,
   firstLoadAll,
   groupTypeList = [],
+  typeKey = 'type',
   ...others
 }: PropTypes) {
   const {
@@ -218,7 +219,8 @@ function CFTree({
     peopleListBool: boolean,
   ) => {
     // 点击展开收起
-    const { key, type } = event.node;
+    const { key } = event.node;
+    const type = event?.node?.[typeKey];
     const matchedExpandIndex = expandedKeys.indexOf(key);
     // 禁止反选
     // if (event.selected) {
@@ -335,6 +337,7 @@ function CFTree({
                 onUserSelect={onUserSelect}
                 handleSelect={handleSelect}
                 renderExtra={renderSearchExtra}
+                typeKey={typeKey}
               />
             ) : null}
 

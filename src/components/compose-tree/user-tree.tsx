@@ -12,6 +12,7 @@ export interface PropTypes {
   onUserSelect: any;
   handleSelect: any;
   renderExtra?: Function;
+  typeKey?: string;
 }
 export default ({
   dataSource,
@@ -21,6 +22,7 @@ export default ({
   onUserSelect,
   handleSelect,
   renderExtra,
+  typeKey = 'type',
 }: PropTypes) => {
   const [treeData] = useTreeData(
     dataSource,
@@ -42,7 +44,8 @@ export default ({
   }
   // const dispatch = useDispatch();
   const handleUserSelect: TreeProps['onSelect'] = (keys, arg) => {
-    const { orgId, id, type } = arg.node;
+    const { orgId, id } = arg.node;
+    const type = arg?.node?.[typeKey];
     if (onUserSelect) {
       onUserSelect(id, userType, orgId);
     }

@@ -121,6 +121,7 @@ export interface TreeProps extends Omit<AntDTreeProps, 'onSelect'> {
   renderSearchExtra?: Function;
   firstLoadAll?: boolean;
   groupTypeList?: string[];
+  typeKey?: string;
 }
 
 export default interface PropTypes extends Omit<TreeProps, 'dataSource'> {

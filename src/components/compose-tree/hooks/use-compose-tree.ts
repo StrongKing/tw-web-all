@@ -144,7 +144,7 @@ export default ({
           let level = 0;
           while (level > -1 && queue.length > 0) {
             const el: any = queue[level].shift();
-            if (!groupTypeList.includes(el.type)) {
+            if (!groupTypeList.includes(el[typeKey])) {
               nodeList.push(el);
               break;
             }

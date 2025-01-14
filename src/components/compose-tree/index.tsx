@@ -22,6 +22,7 @@ function ComposeTree({
   request,
   renderSearchExtra,
   groupTypeList = [],
+  typeKey = 'type',
   ...others
 }: PropTypes) {
   const { goToModule, code, dataSource, getRoutePath } =
@@ -36,9 +37,9 @@ function ComposeTree({
     // 禁止反选
     if (nextSelectedKeys.length === 0) return;
     onSelect && onSelect(nextSelectedKeys, event);
-    const {
-      node: { type, pos },
-    } = event;
+    const { node } = event;
+    const { pos } = node;
+    const type = node[typeKey];
     // console.log(event, 'event');
     // setSelectedTreeNode({ key: selectedKeys[0], node: event.node});
     if (!type) {
@@ -113,6 +114,7 @@ function ComposeTree({
           onUserSelect={onUserSelect}
           renderSearchExtra={renderSearchExtra}
           groupTypeList={groupTypeList}
+          typeKey={typeKey}
         />
       </div>
       <div className="content-col">
@@ -158,6 +160,7 @@ export default ({
         groupTypeList={groupTypeList}
         request={request}
         firstLoadAll={firstLoadAll}
+        typeKey={typeKey}
       />
     </ComposeTreeContext.Provider>
   );
