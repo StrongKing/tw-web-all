@@ -34,11 +34,11 @@ export default function RadioGroup({
     [onChange],
   );
 
-  useEffect(() => {
-    if (!value && value != 0) {
-      handleOnChange(dataSource?.[0].value);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!value && value != 0) {
+  //     handleOnChange(dataSource?.[0].value);
+  //   }
+  // }, []);
 
   const $radios = useMemo(() => {
     return dataSource.map(({ value, label, text }) => (
