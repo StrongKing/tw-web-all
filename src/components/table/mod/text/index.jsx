@@ -87,8 +87,17 @@ export default function TableCellText({
     }
     return valueFormatter(record, value);
   }, [valueFormatter, record, value]);
+  const ellipsis = useMemo(
+    () =>
+      rows === 1 && showValue
+        ? typeof showValue === 'string'
+          ? 'center'
+          : 'right'
+        : '',
+    [showValue, rows],
+  );
   useEffect(() => {
-    if (showValue && rows === 1) {
+    if (showValue && rows === 1 && ellipsis === 'center') {
       const curValue = showValue.toString();
       const needWidth = getStrlen(curValue);
       const textWidth = textRef?.current?.clientWidth;
@@ -109,7 +118,7 @@ export default function TableCellText({
     } else {
       setShowOverFlow(false);
     }
-  }, [showValue]);
+  }, [showValue, ellipsis]);
 
   let content = null;
   if (showValue instanceof Array) {
@@ -136,6 +145,7 @@ export default function TableCellText({
   const textClass = classNames(
     rows === 1 ? 'table-cell-text' : 'table-cell-text-rows',
     {
+      'table-cell-text-right-ellipsis': ellipsis === 'right',
       'clickable-text-content':
         clickable ||
         (unClickableExpress ? !unClickableExpress(record, name) : false),

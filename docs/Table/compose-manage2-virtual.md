@@ -175,6 +175,19 @@ export default () => {
           uiType: null,
           // width: 200,
           props: {
+            // valueFormatter: (record, value) => (
+            //   <span>
+            //     <span
+            //       style={{
+            //         display: 'inline-block',
+            //         width: 10,
+            //         height: 10,
+            //         backgroundColor: 'red',
+            //       }}
+            //     ></span>
+            //     {`${value}-fmt`}
+            //   </span>
+            // ),
             valueFormatter: (record, value) => `${value}-fmt`,
           },
         },
