@@ -336,6 +336,7 @@ export default ({
 
     history[isReplace ? 'replace' : 'push'](
       `${generatePath(pathPrefixWithParam, {
+        ...params,
         treePath: nodePath,
       })}/${moduleType}`,
     );

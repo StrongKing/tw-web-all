@@ -7,14 +7,13 @@ import { withConfirmHOC, spreadButtonPropsHOC } from './mod/hoc';
 export default compose(
   withConfirmHOC,
   withHandlers({
-    onClick: ({
-      onBeforeClick,
-      onClick,
-    }: PropTypes) => (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-      onBeforeClick().then(() => {
-        onClick && onClick(e);
-      });
-    }
+    onClick:
+      ({ onBeforeClick, onClick, tableProps }: PropTypes) =>
+      (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+        onBeforeClick().then(() => {
+          onClick && onClick(e, tableProps);
+        });
+      },
   }),
   spreadButtonPropsHOC,
 )(Button);

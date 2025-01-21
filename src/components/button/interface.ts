@@ -76,6 +76,7 @@ export type BasePropTypes = {
   // 额外的信息
   to?: any;
   additions?: any;
+  tableProps?: any;
 } & Pick<ButtonProps, 'onClick'>;
 
 export type EventButtonProps = BasePropTypes & {

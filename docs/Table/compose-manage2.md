@@ -108,200 +108,37 @@ export default () => {
     tableProps: {
       primaryKey: 'id',
       columns: [
-        {
-          help: null,
-          label: '活码名称',
-          name: 'name',
-          uiType: null,
-          width: 150,
-          props: {
-            rows: 3,
-            valueFormatter: (record, value) => `${value}-fmt`,
-          },
-        },
-        {
-          help: null,
-          label: '二维码',
-          name: 'qrCode',
-          // width: 100,
-          uiType: 'picture',
-        },
-        {
-          help: null,
-          label: '分组',
-          name: 'groupName',
-          uiType: null,
-          width: 150,
-          props: {
-            rows: 3,
-          },
-        },
-        {
-          help: null,
-          label: '包含员工与部门',
-          name: 'staffDeptName',
-          uiType: null,
-          width: 150,
-          props: {
-            rows: 3,
-          },
-        },
-        {
-          help: null,
-          label: '客户标签',
-          name: 'labelName',
-          // width: 100,
-          uiType: null,
-          width: 150,
-          props: {
-            rows: 3,
-          },
-        },
-        {
-          help: null,
-          label: '加人验证',
-          width: 90,
-          name: 'skipVerify',
-          uiType: null,
-        },
-        {
-          help: null,
-          label: '创建人',
-          width: 100,
-          name: 'createUserName',
-          uiType: null,
-        },
-        {
-          help: null,
-          label: '备注',
-          // width: 100,
-          name: 'remark',
-          uiType: null,
-        },
-        {
-          help: null,
-          label: '最后一次修改时间',
-          name: 'gmtModify',
-          uiType: null,
-          width: 200,
-        },
+        { name: 'sn', label: '序号', width: 80 },
+        { name: 'supplier', label: '供货方', width: 120 },
+        { name: 'number', label: '编号', width: 140 },
+        { name: 'name', label: '名称', width: 140 },
+        { name: 'spec', label: '规格', width: 100 },
+        { name: 'unit', label: '单位', width: 100 },
+        { name: 'dosage', label: '用量', width: 100 },
+        { name: 'lossRate', label: '损耗率(%)', width: 140 },
+        { name: 'includeTaxPrice', label: '含税单价(元)', width: 140 },
+        { name: 'excludeTaxPrice', label: '除税单价(元)', width: 140 },
+        { name: 'tax', label: '税率(%)', width: 140 },
+        { name: 'totalIncludeTaxPrice', label: '含税合价(元)', width: 140 },
+        { name: 'totalExcludeTaxPrice', label: '除税合价(元)', width: 140 },
+        { name: 'isDistribution', label: '配送', width: 100 },
+        { name: 'isDeviceMaterial', label: '设备性材料', width: 140 },
+        { name: 'materialType', label: '材料类型', width: 140 },
+        { name: 'weight', label: '单重(kg)', width: 120 },
+        { name: 'packageFactor', label: '包装系数(%)', width: 140 },
+        { name: 'transportType', label: '运输类型', width: 140 },
         {
           name: 'operation',
           uiType: 'buttonList',
           label: '操作',
           fixed: 'right',
-          width: 208,
           props: {
             dataSource: [
               {
-                text: '查看',
-                uiType: 'link',
-                to: '/sop-tool/employee/detail/${id}',
-              },
-
-              {
-                text: '编辑',
-                uiType: 'link',
-                to: '/sop-tool/employee/add/${id}',
-              },
-              {
-                text: '活码统计',
-                uiType: 'link',
-                to: '/sop-statistics/qwprivate/livecode?dateType=3&codeIdList=${id}',
-              },
-              {
-                uiType: 'form',
-                text: '企微标签手工同步',
-                request: {
-                  url: `/web/wechat/label/syncSpecifyLabel111`,
-                  method: 'POST',
-                },
-                dialogPropsFormatter: ({ record }) => ({
-                  title: record.name + '-企微标签手工同步123',
-                }),
-                formItemLayout: {
-                  labelCol: {
-                    xs: { span: 19 },
-                    sm: { span: 5 },
-                  },
-                  wrapperCol: {
-                    xs: { span: 19 },
-                    sm: { span: 19 },
-                  },
-                },
-                showFormAlert: true,
-                initValuesFormatter: ({ record }) => record,
-                requestParamsFormatter: ({ record }) => {
-                  return { a: 1 };
-                },
-                onBeforeClick: (...args) => {
-                  console.log(args);
-                  return Promise.resolve(true);
-                },
-                formProps: {
-                  alertProps: {
-                    message:
-                      '客户标签客户标签客户标签客户标签客户标签客户标签客户标签客户标签客户标签客户标签客户标签客户标签客户标签客户标签客户标签',
-                  },
-                  dataSource: [
-                    {
-                      label: '客户标签',
-                      name: 'name',
-                      uiType: 'input',
-                    },
-                    // {
-                    //   label: '客户标签',
-                    //   name: 'tagList',
-                    //   props: {
-                    //     wrapperKey: 'weChatTagInfoList',
-                    //     selectUserProps: {
-                    //       showTabList: ['weChatTagContacts'],
-                    //       userOrigin: '',
-                    //       unCheckableNodeType: ['ORG'],
-                    //       isSaveSelectSignature: false,
-                    //       multiple: true,
-                    //       requestParams: {
-                    //         selectTypeList: ['tag'],
-                    //         tagTypeList: [0],
-                    //         labelPermission: 1,
-                    //       },
-                    //       selectType: 'dept',
-                    //       onlyLeafCheckable: true,
-                    //       dialogProps: {
-                    //         title: '可见范围',
-                    //       },
-                    //     },
-                    //   },
-                    //   rules: [
-                    //     { required: true, message: '请选择客户标签' },
-                    //     {
-                    //       validator: (rule, value, callback) => {
-                    //         if (Array.isArray(value) && value.length > 20) {
-                    //           callback('客户标签不能超过20个');
-                    //         } else {
-                    //           callback();
-                    //         }
-                    //       },
-                    //     },
-                    //   ],
-                    //   uiType: 'selectUser',
-                    // },
-                  ],
-                  dataFormatBeforeSubmit: async (formValues) => {
-                    return {
-                      // tagList: formValues.tagList.map((el) => ({
-                      //   wechatTagId: el.id,
-                      //   wechatTagName: el.name,
-                      // })),
-                    };
-                  },
-                  onFinish: () => {
-                    BaseInfo({
-                      title: '正在同步中，请稍后刷新查看',
-                      okText: '知道了',
-                      loading: true,
-                    });
-                  },
+                type: 'default',
+                text: '点击',
+                onClick: (e, tp) => {
+                  console.log(e, tp);
                 },
               },
             ],
