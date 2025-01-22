@@ -205,6 +205,7 @@ export default function CFTable({
     if (virtuallistParams) {
       return VList({
         height: virtuallistParams?.height,
+        resetTopWhenDataChange: false,
       });
     }
   }, [virtuallistParams]);

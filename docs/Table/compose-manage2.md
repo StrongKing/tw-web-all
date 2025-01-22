@@ -15,20 +15,20 @@ import net from '@/services/net';
 import './index.less';
 import { isCurrentUser, isIncludeCurrentUser } from '@/utils';
 
-const staticDataSource = new Array(30)
-  .fill(1)
-  .map((el, i) => ({ name: `货吗名称货吗名称货吗名称货吗名称货吗名称${i}` }));
+const staticDataSource = new Array(50).fill(1).map((el, i) => ({
+  id: `${i + 1}`,
+  name: `货吗名称${i + 1}`,
+  groupName: 'groupName分组',
+}));
 
 // console.log(isCurrentUser());
 export default () => {
   const tableRef = useRef();
   const onClick = () => {
     tableRef.current.updateDataSorce(
-      new Array(30)
-        .fill(1)
-        .map((el, i) => ({
-          name: `货吗名称货吗名称货吗名称货吗名称货吗名称货吗名称${i}${Math.random()}`,
-        })),
+      new Array(30).fill(1).map((el, i) => ({
+        name: `货吗名称货吗名称货吗名称货吗名称货吗名称货吗名称${i}${Math.random()}`,
+      })),
     );
   };
   const props111 = {
@@ -109,7 +109,7 @@ export default () => {
     staticDataSource,
     tableProps: {
       primaryKey: 'id',
-      virtuallistParams: { height: 578 },
+      // virtuallistParams: { height: 578 },
       columns: [
         { name: 'sn', label: '序号', width: 80 },
         { name: 'supplier', label: '供货方', width: 120 },
@@ -148,7 +148,7 @@ export default () => {
           },
         },
       ],
-      isPagination: true,
+      isPagination: false,
       rowSelection: {
         type: 'radio',
       },
