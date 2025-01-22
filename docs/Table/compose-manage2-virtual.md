@@ -15,7 +15,7 @@ import net from '@/services/net';
 import './index.less';
 import { isCurrentUser, isIncludeCurrentUser } from '@/utils';
 
-const staticDataSource = new Array(10).fill(1).map((el, i) => ({
+const staticDataSource = new Array(100).fill(1).map((el, i) => ({
   id: `${i + 1}`,
   name: `货吗名称${i + 1}`,
   groupName: 'groupName分组',
