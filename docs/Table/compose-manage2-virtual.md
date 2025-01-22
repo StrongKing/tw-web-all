@@ -35,6 +35,7 @@ const staticDataSource = new Array(10).fill(1).map((el, i) => ({
 // console.log(isCurrentUser());
 export default () => {
   const tableRef = useRef();
+  const [selectedId, setSelectedId] = useState('');
   const onClick = () => {
     tableRef.current.updateDataSource(
       new Array(30)
@@ -149,9 +150,7 @@ export default () => {
       //   };
       // },
       rowClassName: (record, index) =>
-        index % 2 === 0 || (record.id && /\d+-9$/.test(record.id))
-          ? 'custom-rowwww'
-          : '',
+        record.id === selectedId ? 'custom-rowwww' : '',
       rowSelection: {
         type: 'radio',
         onSelect: (...args) => {
@@ -160,6 +159,13 @@ export default () => {
         onSelectAll: (...args) => {
           console.log('onSelectAll', args);
         },
+      },
+      onRow: (record) => {
+        return {
+          onClick: () => {
+            setSelectedId(record.id);
+          },
+        };
       },
       columns: [
         {
