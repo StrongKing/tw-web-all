@@ -17,7 +17,7 @@ import { isCurrentUser, isIncludeCurrentUser } from '@/utils';
 
 const staticDataSource = new Array(30)
   .fill(1)
-  .map((el, i) => ({ name: `货吗名称${i}` }));
+  .map((el, i) => ({ name: `货吗名称货吗名称货吗名称货吗名称货吗名称${i}` }));
 
 // console.log(isCurrentUser());
 export default () => {
@@ -26,7 +26,9 @@ export default () => {
     tableRef.current.updateDataSorce(
       new Array(30)
         .fill(1)
-        .map((el, i) => ({ name: `货吗名称${i}${Math.random()}` })),
+        .map((el, i) => ({
+          name: `货吗名称货吗名称货吗名称货吗名称货吗名称货吗名称${i}${Math.random()}`,
+        })),
     );
   };
   const props111 = {
@@ -107,6 +109,7 @@ export default () => {
     staticDataSource,
     tableProps: {
       primaryKey: 'id',
+      virtuallistParams: { height: 578 },
       columns: [
         { name: 'sn', label: '序号', width: 80 },
         { name: 'supplier', label: '供货方', width: 120 },
@@ -122,11 +125,11 @@ export default () => {
         { name: 'totalIncludeTaxPrice', label: '含税合价(元)', width: 140 },
         { name: 'totalExcludeTaxPrice', label: '除税合价(元)', width: 140 },
         { name: 'isDistribution', label: '配送', width: 100 },
-        { name: 'isDeviceMaterial', label: '设备性材料', width: 140 },
-        { name: 'materialType', label: '材料类型', width: 140 },
-        { name: 'weight', label: '单重(kg)', width: 120 },
-        { name: 'packageFactor', label: '包装系数(%)', width: 140 },
-        { name: 'transportType', label: '运输类型', width: 140 },
+        { name: 'isDeviceMaterial', label: '设备性材料' },
+        // { name: 'materialType', label: '材料类型', width: 140 },
+        // { name: 'weight', label: '单重(kg)', width: 120 },
+        // { name: 'packageFactor', label: '包装系数(%)', width: 140 },
+        // { name: 'transportType', label: '运输类型', width: 140 },
         {
           name: 'operation',
           uiType: 'buttonList',
@@ -147,7 +150,7 @@ export default () => {
       ],
       isPagination: true,
       rowSelection: {
-        type: 'checkbox',
+        type: 'radio',
       },
       onSelectChange: (...args) => {
         console.log;
