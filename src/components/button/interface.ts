@@ -70,6 +70,7 @@ export type BasePropTypes = {
     zIndex?: number;
     icon?: ReactNode;
   };
+  confirmBeforeClickFormatter?: (tableProps: any) => Object;
   onBeforeClick?: (arg0: BeforeClickOption) => Promise<boolean>;
   onEmit?: (eventName: string, onEmit?: any) => void;
   buttonProps?: ButtonProps;
