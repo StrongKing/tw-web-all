@@ -100,7 +100,7 @@ function ComposeTree({
     renderTree ||
     ((treeComp: ReactNode, routerComp: ReactNode) => {
       return (
-        <div className="cf-compose-tree">
+        <>
           <div
             className="tree-col"
             style={{
@@ -110,7 +110,7 @@ function ComposeTree({
             {treeComp}
           </div>
           <div className="content-col">{routerComp}</div>
-        </div>
+        </>
       );
     });
 
