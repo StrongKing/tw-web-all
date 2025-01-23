@@ -208,10 +208,9 @@ export default function CFTable({
         resetTopWhenDataChange: false,
       });
     }
-  }, [virtuallistParams]);
+  }, []);
 
   const finalScroll = scroll || _scroll;
-
   return (
     <Table
       components={virtuallistParams ? VcComponent : undefined}
