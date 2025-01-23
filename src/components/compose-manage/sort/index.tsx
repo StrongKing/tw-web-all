@@ -239,6 +239,7 @@ export default function Sort({
         title="调整顺序"
         visible={vis}
         footer={null}
+        centered
         // onOk={handleOk}
         onCancel={hideDlg}
         width="640px"

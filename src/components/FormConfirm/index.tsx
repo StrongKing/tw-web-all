@@ -140,6 +140,7 @@ const ConfirmForm = ({
               destroy();
               onCancel && onCancel();
             }}
+            centered
             footer={actionFormItems}
             {...dialogProps}
             className={classNames(
