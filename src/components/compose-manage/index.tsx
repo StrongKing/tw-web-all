@@ -170,9 +170,9 @@ const ComposeManage = forwardRef(
             0,
         );
         onRequestSuccess && onRequestSuccess(data);
-        // 兼容边界条件：如果删除了某一页的唯一一行，则将分页切回上一页
+        // 兼容边界条件：如果删除了某一页的唯一一行，则将分页切回上一页 (第一页)
         if (pageNo > 1 && nextDataSource?.length === 0) {
-          setPageNo(pageNo - 1);
+          setPageNo(1);
           setT(Date.now());
         }
       },
