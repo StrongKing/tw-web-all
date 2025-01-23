@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { ReactNode, useContext } from 'react';
 import { RouteComponentProps, Switch, Route } from 'react-router-dom';
 import Tree from './tree';
 import {
@@ -23,6 +23,7 @@ function ComposeTree({
   renderSearchExtra,
   groupTypeList = [],
   typeKey = 'type',
+  renderTree,
   ...others
 }: PropTypes) {
   const { goToModule, code, dataSource, getRoutePath } =
@@ -95,16 +96,28 @@ function ComposeTree({
     },
     [],
   );
+  const renderTreeFn =
+    renderTree ||
+    ((treeComp: ReactNode, routerComp: ReactNode) => {
+      return (
+        <div className="cf-compose-tree">
+          <div
+            className="tree-col"
+            style={{
+              width: treeColWidth,
+            }}
+          >
+            {treeComp}
+          </div>
+          <div className="content-col">{routerComp}</div>
+        </div>
+      );
+    });
 
   // console.log(dataSource, 'dataSource', code);
   return (
     <div className="cf-compose-tree">
-      <div
-        className="tree-col"
-        style={{
-          width: treeColWidth,
-        }}
-      >
+      {renderTreeFn(
         <Tree
           {...others}
           request={request}
@@ -115,9 +128,7 @@ function ComposeTree({
           renderSearchExtra={renderSearchExtra}
           groupTypeList={groupTypeList}
           typeKey={typeKey}
-        />
-      </div>
-      <div className="content-col">
+        />,
         <Switch>
           {$routes}
           <Route
@@ -125,8 +136,8 @@ function ComposeTree({
               code === 30512 ? Permission : code === 9000 ? EmptyData : Spin
             }
           />
-        </Switch>
-      </div>
+        </Switch>,
+      )}
     </div>
   );
 }
