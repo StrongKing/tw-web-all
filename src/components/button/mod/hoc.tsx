@@ -12,7 +12,13 @@ export const withConfirmHOC = withHandlers({
     };
   },
   onBeforeClick:
-    ({ confirmBeforeClick, onBeforeClick, ...others }: PropTypes) =>
+    ({
+      confirmBeforeClick,
+      confirmBeforeClickFormatter,
+      onBeforeClick,
+      tableProps,
+      ...others
+    }: PropTypes) =>
     async (arg) => {
       if (!confirmBeforeClick) {
         if (onBeforeClick) {
@@ -22,11 +28,19 @@ export const withConfirmHOC = withHandlers({
       }
 
       return new Promise((resolve, reject) => {
+        const fmtRes =
+          typeof confirmBeforeClickFormatter === 'function'
+            ? confirmBeforeClickFormatter(tableProps)
+            : {};
+        const config = {
+          ...(confirmBeforeClick || {}),
+          ...(typeof fmtRes === 'object' ? fmtRes : {}),
+        };
         const {
           title = '确定要删除吗？',
           content,
           modalTitle = '提示',
-        } = confirmBeforeClick || {};
+        } = config;
         Modal.confirm({
           okText: '确认',
           cancelText: '取消',
