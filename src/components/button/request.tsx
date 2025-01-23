@@ -70,7 +70,12 @@ const withRequest =
       hideLoading = true,
     ) => {
       if (!loadingRef.current) return;
-      if (result && (result.code === 0 || successCodes.includes(result.code))) {
+      if (
+        result &&
+        (result.code === 0 ||
+          result.code === 200 ||
+          successCodes.includes(result.code))
+      ) {
         hideLoading && setLoading(false);
         if (innerRequest) {
           queryDownloadByfieldName(result.data);
