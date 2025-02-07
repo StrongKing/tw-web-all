@@ -59,6 +59,7 @@ export default ({ title }: { title: string }) => {
         'tag-label': '标签1',
         'tag-group': '标签组1',
       }}
+      maxShowNum={10}
       renderSearchExtra={({ labelPathName }) => (
         <div
           style={{

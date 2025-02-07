@@ -59,6 +59,7 @@ function CFTree({
   renderSearchExtra,
   firstLoadAll,
   groupTypeList = [],
+  maxShowNum = 20,
   typeKey = 'type',
   ...others
 }: PropTypes) {
@@ -316,6 +317,7 @@ function CFTree({
                 dataSource={userList}
                 searchText={searchText}
                 userType={userType}
+                maxShowNum={maxShowNum}
                 selfNameMap={finalNameMap}
                 onUserSelect={onUserSelect}
                 handleSelect={handleSelect}
@@ -343,15 +345,9 @@ function CFTree({
               />
             )}
 
-            {searchText && treeData.length > 19 ? (
+            {searchText && treeData.length > maxShowNum - 1 ? (
               <div className="treeFooter">
-                仅展示前20个搜索结果，请输入更精确的搜索内容获取
-              </div>
-            ) : null}
-
-            {!searchText && treeData.length > 19 ? (
-              <div className="treeFooter">
-                仅展示前20条数据，请输入更精确的搜索内容获取
+                仅展示前{maxShowNum}个搜索结果，请输入更精确的搜索内容获取
               </div>
             ) : null}
           </Spin>
