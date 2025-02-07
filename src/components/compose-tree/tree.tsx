@@ -6,6 +6,7 @@ import React, {
   useRef,
   useContext,
 } from 'react';
+import { EventDataNode } from 'antd/lib/tree';
 import { Spin, Input, Tree } from 'antd';
 import { debounce } from 'lodash';
 import net from '@/services/index';
@@ -17,12 +18,13 @@ import {
   TreeProps as PropTypes,
   SelectedDataNode,
   TreeNodeKey,
+  SelfNameMap,
 } from './interface';
 import { getUid } from './utils';
 
 import './index.less';
 
-export const nameMap = {
+export const nameMap: SelfNameMap = {
   org: '组织',
   dept: '部门',
   group: '分组',
@@ -97,14 +99,6 @@ function CFTree({
       setIsSearch(false);
     }
   }, [searchText]);
-  // useEffect(() => {
-  //   updateHeight();
-  // }, [treeWrapper.current?.offsetHeight]);
-  // const updateHeight = useCallback(() => {
-  //   if (treeWrapper.current?.offsetHeight !== height) {
-  //     setHeight(treeWrapper.current?.offsetHeight);
-  //   }
-  // }, [height, treeWrapper, setHeight]);
 
   useEffect(() => {
     updateMinWidth();
@@ -129,14 +123,6 @@ function CFTree({
     userList.length,
     treeData.length,
   ]);
-
-  // useEffect(() => {
-  //   window.addEventListener('resize', updateHeight);
-  //   return () => {
-  //     window.removeEventListener('resize', updateHeight);
-  //   };
-  // }, [updateHeight, window]);
-
   // 搜索
   const search = useCallback(
     (value: string, requestId: number) => {
@@ -158,10 +144,7 @@ function CFTree({
           },
           showError: true,
         })
-        .then(({ data, ...others }) => {
-          // 丢掉旧请求
-          const { code } = others;
-          // localStorage.setItem('request-code', code);
+        .then(({ data }) => {
           if (requestIds.current.search !== requestId) {
             return;
           }
@@ -208,7 +191,6 @@ function CFTree({
       setSearchText(value);
       setSearchResult([]);
       setLoading(false);
-      // setUseList([]);
       return;
     }
     debounced.current(value, requestId);
@@ -251,7 +233,6 @@ function CFTree({
     if (!event.selected) {
       return;
     }
-    // console.log(partialDataSource, 'partialDataSource');
     onSelect(
       nextSelectedKeys,
       event,
@@ -260,7 +241,14 @@ function CFTree({
     // }, 0);
   };
 
-  const handleExpand = (nextExpandedKeys, event) => {
+  const handleExpand = (
+    nextExpandedKeys: any[],
+    event: {
+      node: EventDataNode;
+      expanded: boolean;
+      nativeEvent: MouseEvent;
+    },
+  ) => {
     if (event.expanded) {
       loadData(event.node);
     } else {
@@ -295,19 +283,14 @@ function CFTree({
     setSelectedKeys(activeKey ? [activeKey] : []);
   }, [treePaths, dataSource, searchText]);
 
-  // console.log(permissionCode, 'permissionCode1');
-  // console.log(treeData, 'treeData');
+  const finalNameMap = { ...nameMap, ...selfNameMap };
+  const title = finalNameMap[treeData[0]?.iconType];
+
   return (
     <div className="ss-biz-tree">
       {showSearch ? (
         <div className="biz-search-main">
-          <Search
-            // className="biz-tree-search"
-            // shape="simple"
-            allowClear
-            {...searchProps}
-            onChange={handleSearch}
-          />
+          <Search allowClear {...searchProps} onChange={handleSearch} />
         </div>
       ) : null}
 
@@ -323,17 +306,17 @@ function CFTree({
             {
               // 如果没有搜索结果，则提示文案
               permissionCode !== 30512 &&
-              searchText &&
-              userList.length + treeData.length === 0 ? (
-                <p className="emptyText">搜索结果为空，请调整搜索内容</p>
-              ) : null
+                searchText &&
+                userList.length + treeData.length === 0 && (
+                  <p className="emptyText">搜索结果为空，请调整搜索内容</p>
+                )
             }
             {permissionCode !== 30512 && searchText && userList.length > 0 ? (
               <UserTree
                 dataSource={userList}
                 searchText={searchText}
                 userType={userType}
-                selfNameMap={nameMap}
+                selfNameMap={finalNameMap}
                 onUserSelect={onUserSelect}
                 handleSelect={handleSelect}
                 renderExtra={renderSearchExtra}
@@ -341,25 +324,9 @@ function CFTree({
               />
             ) : null}
 
-            {/* {searchText && userList.length > 0 ? (
-              <UserTree
-                dataSource={userList}
-                searchText={searchText}
-                userType={userType}
-                selfNameMap={selfNameMap}
-              />
-            ) : null} */}
-
-            {permissionCode !== 30512 &&
-            searchText &&
-            treeData.length > 0 &&
-            ((selfNameMap && selfNameMap[treeData[0]?.iconType]) ||
-              nameMap[treeData[0]?.iconType]) ? (
-              <div className="treeTitle">
-                {(selfNameMap && selfNameMap[treeData[0]?.iconType]) ||
-                  nameMap[treeData[0].iconType]}
-              </div>
-            ) : null}
+            {permissionCode !== 30512 && searchText && treeData.length > 0 && (
+              <div className="treeTitle">{title}</div>
+            )}
             {permissionCode !== 30512 && (!firstLoadAll || firstLoaded) && (
               <Tree
                 className={searchText ? 'removeIndent000' : ''}
@@ -375,18 +342,6 @@ function CFTree({
                 checkable={false}
               />
             )}
-
-            {/* {searchText &&
-            treeData.length > 0 &&
-            ((selfNameMap && selfNameMap[treeData[0]?.iconType]) ||
-              nameMap[treeData[0]?.iconType]) ? (
-              <div className="treeTitle" style={{ border: '1px solid red' }}>
-                {(selfNameMap && selfNameMap[treeData[0]?.iconType]) ||
-                  nameMap[treeData[0].iconType]}
-              </div>
-            ) : null} */}
-
-            {/* {searchWrap} */}
 
             {searchText && treeData.length > 19 ? (
               <div className="treeFooter">

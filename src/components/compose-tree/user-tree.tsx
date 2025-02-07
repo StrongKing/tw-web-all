@@ -8,7 +8,7 @@ export interface PropTypes {
   dataSource: TreeDataSource;
   searchText: string;
   userType: UserType;
-  selfNameMap: SelfNameMap;
+  selfNameMap?: SelfNameMap;
   onUserSelect: any;
   handleSelect: any;
   renderExtra?: Function;
@@ -30,19 +30,6 @@ export default ({
     undefined,
     renderExtra,
   );
-  // console.log(
-  //   treeData,
-  //   'treeData2222',
-  //   selfNameMap,
-  //   (selfNameMap && selfNameMap[treeData[0]?.iconType]) || '人员',
-  // );
-  // console.log(useDispatch(), 'useDispatch');
-  try {
-    // console.log(useDispatch(), 'useDispatch');
-  } catch (error) {
-    console.log(error);
-  }
-  // const dispatch = useDispatch();
   const handleUserSelect: TreeProps['onSelect'] = (keys, arg) => {
     const { orgId, id } = arg.node;
     const type = arg?.node?.[typeKey];
@@ -52,18 +39,7 @@ export default ({
     if (type) {
       handleSelect(keys, arg, true);
     }
-
-    // dispatch({
-    //   type: 'personnel/show',
-    //   payload: {
-    //     userId: id,
-    //     type: userType,
-    //     params: { orgId },
-    //   },
-    // });
   };
-  // 展示自己的头部
-  // console.log(treeData, 'treeDatatreeData');
   return (
     <>
       <div className="_treeTitle">

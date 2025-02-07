@@ -35,14 +35,7 @@ export type SelectedDataNode = {
 export type TreeDataSource = ExtendedNode[];
 
 // 自定义的nameMap
-export type SelfNameMap = {
-  org?: string;
-  dept?: string;
-  group?: string;
-  tag?: string;
-  permission?: string;
-  user?: string;
-};
+export type SelfNameMap = Record<string, string>;
 
 export interface IComposeTreeContext {
   // tree 节点选中的 id
@@ -116,9 +109,14 @@ export interface TreeProps extends Omit<AntDTreeProps, 'onSelect'> {
   dataSource: TreeDataSource;
   // 根节点的 icon 类型，如果不设置，则默认使用节点的 iconType 属性。
   rootIconType?: IconType;
+  // 权限
+  permissionCode?: string | number;
+  // 点击用户节点的回调
+  onUserSelect?: (id: string, type: UserType, orgId: string) => void;
   // 搜索树对应的nameMao，如果不设置，则默认使用tree组件里的nameMap。
   selfNameMap?: SelfNameMap;
   renderSearchExtra?: Function;
+  renderExtra?: Function;
   firstLoadAll?: boolean;
   groupTypeList?: string[];
   typeKey?: string;

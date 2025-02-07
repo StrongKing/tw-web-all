@@ -55,6 +55,10 @@ export default ({ title }: { title: string }) => {
       extendModuleMap={{
         'tag-group1': 'tag-group1',
       }}
+      selfNameMap={{
+        'tag-label': '标签1',
+        'tag-group': '标签组1',
+      }}
       renderSearchExtra={({ labelPathName }) => (
         <div
           style={{

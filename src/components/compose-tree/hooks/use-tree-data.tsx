@@ -20,7 +20,7 @@ export default (
   rootIconType?: IconType,
   renderExtra?: Function,
 ) => {
-  const [treeData, setTreeData] = useState([]);
+  const [treeData, setTreeData] = useState<any>([]);
 
   const getNodeIcon = useCallback(
     (iconType: IconType) => {
