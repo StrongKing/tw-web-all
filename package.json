@@ -1,14 +1,14 @@
 {
   "private": false,
-  "name": "dingshi-web-all",
-  "version": "1.1.3",
+  "name": "ds-web-all",
+  "version": "1.0.0",
   "scripts": {
     "start": "cross-env BUILD_ENV=dev && dumi dev",
     "docs:build": "cross-env BUILD_ENV=production && dumi build",
     "docs:deploy": "gh-pages -d docs-dist",
     "build": "cross-env BUILD_ENV=sit && father-build",
     "deploy": "npm run docs:build && npm run docs:deploy",
-    "release": "npm run build && npm version patch && npm publish && git push && open https://npmmirror.com/sync/dingshi-web-all/versions",
+    "release": "npm run build && npm version patch && npm publish && git push && open https://npmmirror.com/sync/ds-web-all/versions",
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
     "test": "umi-test",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src && npm run lint:style && npm run lint:prettier",
@@ -19,7 +19,7 @@
     "tslint": "npm run tslint:fix",
     "tslint:fix": "tslint --fix 'src/**/*.ts*'",
     "test:coverage": "umi-test --coverage",
-    "beta": "npm run build && npm version prerelease --preid=beta && npm publish --tag=beta && git push && open https://npmmirror.com/sync/dingshi-web-all/versions"
+    "beta": "npm run build && npm version prerelease --preid=beta && npm publish --tag=beta && git push && open https://npmmirror.com/sync/ds-web-all/versions"
   },
   "main": "lib/index.js",
   "module": "es/index.js",
