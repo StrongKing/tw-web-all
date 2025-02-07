@@ -541,6 +541,7 @@ const ComposeManage = forwardRef(
     useImperativeHandle(ref, () => ({
       handleReset,
       updateDataSorce,
+      handleSearch,
     }));
 
     return (
