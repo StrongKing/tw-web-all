@@ -9,6 +9,7 @@ export interface PropTypes {
   searchText: string;
   userType: UserType;
   selfNameMap?: SelfNameMap;
+  maxShowNum?: number;
   onUserSelect: any;
   handleSelect: any;
   renderExtra?: Function;
@@ -23,6 +24,7 @@ export default ({
   handleSelect,
   renderExtra,
   typeKey = 'type',
+  maxShowNum = 20,
 }: PropTypes) => {
   const [treeData] = useTreeData(
     dataSource,
@@ -52,9 +54,9 @@ export default ({
         selectedKeys={[]}
         onSelect={handleUserSelect}
       />
-      {treeData.length > 19 ? (
+      {treeData.length > maxShowNum - 1 ? (
         <div className="treeFooter">
-          仅展示前20个搜索结果，请输入更精确的搜索内容获取
+          仅展示前{maxShowNum}个搜索结果，请输入更精确的搜索内容获取
         </div>
       ) : null}
     </>
