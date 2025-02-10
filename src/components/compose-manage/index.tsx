@@ -575,83 +575,109 @@ const ComposeManage = forwardRef(
           // </div>
         )}
 
-        <section className="section-caption">
-          <div className="caption-left-side">
-            {buttonList.map((btnProps, index) => {
-              let {
-                uiType,
-                request,
-                isBatch,
-                buttonProps = {},
-                onSuccess,
-                qrBeforeClick = false,
-                confirmBeforeClick,
-                ...others
-              } = btnProps;
-              if (
-                index === 0 &&
-                (!btnProps.type || buttonProps.type === 'default')
-              ) {
-                buttonProps.type = 'primary';
-              } else if (index > 0 && buttonProps.type === 'primary') {
-                delete buttonProps.type;
-              }
-              if (request) {
-                buttonProps = {
-                  ...(buttonProps || {}),
-                  disabled: isBatch
-                    ? !selectedRowKeys.length
-                    : buttonProps?.disabled,
-                };
-                request = {
-                  ...(request || {}),
-                  params: ['download', 'downloadFe'].includes(uiType)
-                    ? {
-                        //uiType为download 接口追加搜索字段值
-
-                        ...(request?.params || {}),
-                        ...(request?.method.toUpperCase() === 'GET' ||
-                        request?.isUnfold
-                          ? search || {}
-                          : { search }),
-                        idList: selectedRowKeys,
-                      }
-                    : {
-                        ...(request?.params || {}),
-                        idList: selectedRowKeys,
-                        // rowList: selectedRowList || [],
-                      },
-                } as Request;
-
-                // confirm 的占位
-                let nextConfirmBeforeClick = confirmBeforeClick;
-                if (confirmBeforeClick) {
-                  const {
-                    renderClassName,
-                    renderContent,
-                    className,
-                    content,
-                    ...otherConfirmClick
-                  } = confirmBeforeClick;
-
-                  nextConfirmBeforeClick = {
-                    className:
-                      typeof renderContent === 'function'
-                        ? renderClassName(request?.params)
-                        : className,
-                    content:
-                      typeof renderContent === 'function'
-                        ? renderContent(request?.params)
-                        : content,
-                    ...otherConfirmClick,
-                  };
+        {buttonList.length > 0 && (
+          <section className="section-caption">
+            <div className="caption-left-side">
+              {buttonList.map((btnProps, index) => {
+                let {
+                  uiType,
+                  request,
+                  isBatch,
+                  buttonProps = {},
+                  onSuccess,
+                  qrBeforeClick = false,
+                  confirmBeforeClick,
+                  ...others
+                } = btnProps;
+                if (
+                  index === 0 &&
+                  (!btnProps.type || buttonProps.type === 'default')
+                ) {
+                  buttonProps.type = 'primary';
+                } else if (index > 0 && buttonProps.type === 'primary') {
+                  delete buttonProps.type;
                 }
+                if (request) {
+                  buttonProps = {
+                    ...(buttonProps || {}),
+                    disabled: isBatch
+                      ? !selectedRowKeys.length
+                      : buttonProps?.disabled,
+                  };
+                  request = {
+                    ...(request || {}),
+                    params: ['download', 'downloadFe'].includes(uiType)
+                      ? {
+                          //uiType为download 接口追加搜索字段值
 
+                          ...(request?.params || {}),
+                          ...(request?.method.toUpperCase() === 'GET' ||
+                          request?.isUnfold
+                            ? search || {}
+                            : { search }),
+                          idList: selectedRowKeys,
+                        }
+                      : {
+                          ...(request?.params || {}),
+                          idList: selectedRowKeys,
+                          // rowList: selectedRowList || [],
+                        },
+                  } as Request;
+
+                  // confirm 的占位
+                  let nextConfirmBeforeClick = confirmBeforeClick;
+                  if (confirmBeforeClick) {
+                    const {
+                      renderClassName,
+                      renderContent,
+                      className,
+                      content,
+                      ...otherConfirmClick
+                    } = confirmBeforeClick;
+
+                    nextConfirmBeforeClick = {
+                      className:
+                        typeof renderContent === 'function'
+                          ? renderClassName(request?.params)
+                          : className,
+                      content:
+                        typeof renderContent === 'function'
+                          ? renderContent(request?.params)
+                          : content,
+                      ...otherConfirmClick,
+                    };
+                  }
+
+                  return (
+                    <ActionButton
+                      uiType={uiType}
+                      key={index}
+                      request={request}
+                      onSuccess={(...args: any) => {
+                        if (isBatch) {
+                          selectedRowKeysRef.current = [];
+                          selectedRowsRef.current = [];
+                          setSelectedRowKeys([]);
+                        }
+                        onSuccess && onSuccess(...args);
+                        handleRequestButtonSuccess();
+                      }}
+                      qrBeforeClick={qrBeforeClick}
+                      isBatch={isBatch}
+                      buttonProps={buttonProps}
+                      selectedRowKeys={selectedRowKeys}
+                      confirmBeforeClick={nextConfirmBeforeClick}
+                      {...others}
+                    />
+                  );
+                }
                 return (
                   <ActionButton
-                    uiType={uiType}
                     key={index}
-                    request={request}
+                    {...btnProps}
+                    qrBeforeClick={qrBeforeClick}
+                    isBatch={isBatch}
+                    selectedRowKeys={selectedRowKeys}
                     onSuccess={(...args: any) => {
                       if (isBatch) {
                         selectedRowKeysRef.current = [];
@@ -661,48 +687,24 @@ const ComposeManage = forwardRef(
                       onSuccess && onSuccess(...args);
                       handleRequestButtonSuccess();
                     }}
-                    qrBeforeClick={qrBeforeClick}
-                    isBatch={isBatch}
-                    buttonProps={buttonProps}
-                    selectedRowKeys={selectedRowKeys}
-                    confirmBeforeClick={nextConfirmBeforeClick}
-                    {...others}
                   />
                 );
-              }
-              return (
-                <ActionButton
-                  key={index}
-                  {...btnProps}
-                  qrBeforeClick={qrBeforeClick}
-                  isBatch={isBatch}
-                  selectedRowKeys={selectedRowKeys}
-                  onSuccess={(...args: any) => {
-                    if (isBatch) {
-                      selectedRowKeysRef.current = [];
-                      selectedRowsRef.current = [];
-                      setSelectedRowKeys([]);
-                    }
-                    onSuccess && onSuccess(...args);
-                    handleRequestButtonSuccess();
-                  }}
+              })}
+              {sortProps ? (
+                <Sort
+                  {...sortProps}
+                  primaryKey={primaryKey}
+                  dataSource={sortTable || tableSource}
+                  tableProps={tableProps}
+                  onRefresh={handleRequestButtonSuccess}
                 />
-              );
-            })}
-            {sortProps ? (
-              <Sort
-                {...sortProps}
-                primaryKey={primaryKey}
-                dataSource={sortTable || tableSource}
-                tableProps={tableProps}
-                onRefresh={handleRequestButtonSuccess}
-              />
-            ) : null}
-          </div>
-          {captionRight && (
-            <div className="caption-right-side">{captionRight}</div>
-          )}
-        </section>
+              ) : null}
+            </div>
+            {captionRight && (
+              <div className="caption-right-side">{captionRight}</div>
+            )}
+          </section>
+        )}
         {tooltip ? (
           <div className="manage-tooltip">
             {tableTitle()}

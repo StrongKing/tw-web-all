@@ -3,7 +3,7 @@ import { ButtonProps } from 'antd/lib/button';
 import { ModalProps } from 'antd/lib/modal';
 import { Request } from '@/components/interface';
 import { CFFormProps } from '@/components/compose-form';
-import { PropTypes as BatchProps } from '@/components/import-and-export/interface';
+import { PropTypes as TablePropTypes } from '@/components/compose-manage/interface';
 import { PropTypes as UploadPropTypes } from '@/components/upload';
 import { TableCellProps } from '../table';
 
@@ -84,6 +84,11 @@ export type EventButtonProps = BasePropTypes & {
   eventName: string;
 };
 
+export type ModalButtonProps = Omit<BasePropTypes, 'to' | 'onEmit'> & {
+  dialogProps: ModalProps;
+  manageProps: TablePropTypes;
+};
+
 export type AnchorButtonProps = BasePropTypes & {
   // 针对需要拼接参数的场景，优先级低于 href
   request?: { url: string; params: any };
@@ -126,7 +131,7 @@ export type LinkButtonProps = BasePropTypes & {
 
 export type BatchButtonProps = BasePropTypes & {
   // 导入导出配置
-  batchProps: BatchProps;
+  // batchProps: BatchProps;
   // 弹层配置
   dialogProps: ModalProps;
   // 打开弹层回调

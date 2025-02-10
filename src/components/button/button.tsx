@@ -25,6 +25,8 @@ const comsMap = {
   countdown: React.lazy(() => import('./countdown')),
   // 前端导出
   downloadFe: React.lazy(() => import('./downloadFe')),
+  // 弹框表格
+  table: React.lazy(() => import('./table')),
 };
 
 export default ({ uiType = 'default', ...others }: PropTypes) => {
