@@ -10,21 +10,20 @@ const comsMap = {
   download: React.lazy(() => import('./download')),
   sync: React.lazy(() => import('./sync')),
   form: React.lazy(() => import('./form')),
-  'drawer-modal': React.lazy(() => import('./test')),
   'business-card': React.lazy(() => import('./business-card')),
   request: React.lazy(() => import('./request')),
-  'confirm-modal': React.lazy(() => import('./confirmModal')),
   link: React.lazy(() => import('./link')),
   'checkbox-group': React.lazy(() => import('../checkbox-group')),
   a: React.lazy(() => import('./anchor')),
   anchor: React.lazy(() => import('./anchor')),
   // batch: React.lazy(() => import('./batch')),
   upload: React.lazy(() => import('./upload')),
-  delconfirm: React.lazy(() => import('./comfirm')),
   'select-search': React.lazy(() => import('./select-search')),
   countdown: React.lazy(() => import('./countdown')),
   // 前端导出
   downloadFe: React.lazy(() => import('./downloadFe')),
+  // 弹框表格
+  table: React.lazy(() => import('./table')),
 };
 
 export default ({ uiType = 'default', ...others }: PropTypes) => {

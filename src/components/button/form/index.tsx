@@ -3,13 +3,12 @@ import React, { useState, useCallback, useEffect, useMemo } from 'react';
 import { Alert, Modal } from 'antd';
 import classNames from 'classnames';
 import { FormButtonProps } from '../interface';
-// import net from '@/services';
 import Form from '@/components/compose-form';
 import Button from '../default';
 import './index.less';
-// const defaultRequestFunction = (...args: any[]) => net.request(...args);
+
 export default function DialogForm({
-  className = null,
+  className,
   onOpen,
   onCancel,
   onOk,
@@ -67,7 +66,7 @@ export default function DialogForm({
 
   const showDlg = useCallback(() => {
     setDlgVis(true);
-    onOpen && onOpen(others);
+    onOpen && onOpen();
   }, [onOpen]);
 
   const handleFinish = (

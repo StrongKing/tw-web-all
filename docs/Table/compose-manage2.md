@@ -31,6 +31,53 @@ export default () => {
       })),
     );
   };
+
+  const props222 = {
+    searchDataFormatter: (data) => {
+      const newData = { ...data };
+
+      if (newData?.aaa) {
+        const aaa = newData?.aaa.map(({ id }) => id);
+        newData.aaa = aaa;
+      }
+      if (newData?.groupIds) {
+        const groupIds = newData?.groupIds.map(({ id }) => id);
+        newData.groupIds = groupIds;
+      }
+
+      return newData;
+    },
+    staticFilter: (searchParams, el) => el.name.includes(searchParams.keyword),
+    staticDataSource,
+    tableProps: {
+      primaryKey: 'id',
+      columns: [
+        { name: 'sn', label: '序号', width: 80 },
+        { name: 'supplier', label: '供货方', width: 120 },
+        { name: 'number', label: '编号', width: 140 },
+        { name: 'name', label: '名称', width: 140 },
+        { name: 'spec', label: '规格', width: 100 },
+        { name: 'unit', label: '单位', width: 100 },
+        { name: 'dosage', label: '用量', width: 100 },
+        { name: 'lossRate', label: '损耗率(%)', width: 140 },
+        { name: 'includeTaxPrice', label: '含税单价(元)', width: 140 },
+        { name: 'excludeTaxPrice', label: '除税单价(元)', width: 140 },
+        { name: 'tax', label: '税率(%)', width: 140 },
+        { name: 'totalIncludeTaxPrice', label: '含税合价(元)', width: 140 },
+        { name: 'totalExcludeTaxPrice', label: '除税合价(元)', width: 140 },
+        { name: 'isDistribution', label: '配送', width: 100 },
+        { name: 'isDeviceMaterial', label: '设备性材料' },
+      ],
+      isPagination: false,
+      // pageSizeOptions: 10,
+      rowSelection: {
+        type: 'radio',
+      },
+      onSelectChange: (...args) => {
+        console.log;
+      },
+    },
+  };
   const props111 = {
     ref: tableRef,
     alertProps: {
@@ -134,6 +181,7 @@ export default () => {
           name: 'operation',
           uiType: 'buttonList',
           label: '操作',
+          width: 200,
           fixed: 'right',
           props: {
             dataSource: [
@@ -142,6 +190,74 @@ export default () => {
                 text: '点击',
                 onClick: (e, tp) => {
                   console.log(e, tp);
+                },
+              },
+              {
+                uiType: 'table',
+                text: '表格',
+                dialogProps: {
+                  title: '测试',
+                  width: 1000,
+                },
+                manageProps: props222,
+              },
+              {
+                uiType: 'request',
+                text: '删除',
+                request: {
+                  url: '/',
+                  method: 'POST',
+                },
+                refreshAfterRequest: true,
+                confirmBeforeClick: {
+                  modalTitle: '删除',
+                  title: `删除后，该活动将永久失效`,
+                },
+              },
+              {
+                uiType: 'form',
+                request: {
+                  url: `https://front.sit.suosihulian.com/gateway/crm/web/cloudMobile/bind`,
+                  method: 'POST',
+                },
+                text: '表单',
+                dialogProps: {
+                  title: '分配',
+                },
+                formItemLayout: {
+                  labelCol: {
+                    xs: { span: 19 },
+                    sm: { span: 6 },
+                  },
+                  wrapperCol: {
+                    xs: { span: 19 },
+                    sm: { span: 18 },
+                  },
+                },
+                refreshAfterRequest: true,
+                formProps: {
+                  dataSource: [
+                    {
+                      uiType: 'input',
+                      name: 'status2',
+                      label: '状态2',
+                    },
+                    {
+                      uiType: 'select',
+                      name: 'status',
+                      label: '状态',
+                      props: {
+                        dataSource: [
+                          { label: '上架', value: 0 },
+                          { label: '下架', value: 1 },
+                        ],
+                      },
+                    },
+                  ],
+                  initialValuesRequest: {
+                    url: `https://front.sit.suosihulian.com/gateway/crm/web/cloudMobile/get`,
+                    method: 'GET',
+                  },
                 },
               },
             ],
