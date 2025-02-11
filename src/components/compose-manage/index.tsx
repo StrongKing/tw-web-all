@@ -532,7 +532,7 @@ const ComposeManage = forwardRef(
       [filterLabelWidth],
     );
 
-    const updateDataSorce = (dataSorce: any[] = []) => {
+    const updateDataSource = (dataSorce: any[] = []) => {
       setTableSource(dataSorce);
       setTotal(dataSorce.length);
       staticDataSourceCache.current = dataSorce;
@@ -540,7 +540,7 @@ const ComposeManage = forwardRef(
 
     useImperativeHandle(ref, () => ({
       handleReset,
-      updateDataSorce,
+      updateDataSource,
       handleSearch,
     }));
 
