@@ -20,7 +20,7 @@ export default (
   rootIconType?: IconType,
   renderExtra?: Function,
 ) => {
-  const [treeData, setTreeData] = useState([]);
+  const [treeData, setTreeData] = useState<any>([]);
 
   const getNodeIcon = useCallback(
     (iconType: IconType) => {
@@ -70,11 +70,10 @@ export default (
           typeof renderExtra === 'function' ? renderExtra(el) : null;
         return {
           ...itemProps,
-          label,
           iconType,
           title: (
             // <Tooltip placement="topLeft" title={label}>
-            <>
+            <div className="treeNode" title={label}>
               {$nodeIcon}
               <div className="nodeContent">
                 <div className="titleWrapper">
@@ -97,7 +96,7 @@ export default (
                   {(deptNames || []).join(', ')}
                 </p>
               </div>
-            </>
+            </div>
             // </Tooltip>
           ),
           // 渲染子节点，这里不透传 rootIcon，因为该配置只作用于根节点

@@ -90,7 +90,6 @@ function CFTree({
     searchText,
     rootIconType,
     renderExtra,
-    customSwitcherIcon,
   );
   // const [height, setHeight] = useState(0);
   const [minWidth, setMinWidth] = useState(0);
@@ -344,21 +343,21 @@ function CFTree({
                 selectedKeys={selectedKeys}
                 {...others}
                 checkable={false}
-                titleRender={(nodeData: any) => {
-                  let swticherIcon = null;
-                  if (typeof customSwitcherIcon === 'function') {
-                    swticherIcon = customSwitcherIcon(
-                      expandedKeys?.includes(nodeData.key) || false,
-                      nodeData,
-                    );
-                  }
-                  return (
-                    <div className="treeNode" title={nodeData.label}>
-                      {swticherIcon}
-                      {nodeData.title}
-                    </div>
-                  );
-                }}
+                // titleRender={(nodeData: any) => {
+                //   let swticherIcon = null;
+                //   if (typeof customSwitcherIcon === 'function') {
+                //     swticherIcon = customSwitcherIcon(
+                //       expandedKeys?.includes(nodeData.key) || false,
+                //       nodeData,
+                //     );
+                //   }
+                //   return (
+                //     <div className="treeNode" title={nodeData.label}>
+                //       {swticherIcon}
+                //       {nodeData.title}
+                //     </div>
+                //   );
+                // }}
               />
             )}
 
