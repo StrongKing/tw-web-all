@@ -5,6 +5,7 @@ import {
   DataNode,
   TreeProps as AntDTreeProps,
 } from 'antd/lib/tree';
+import { ReactNode } from 'react';
 
 export type IconType = _IconType;
 export type TreeNodeKey = string;
@@ -122,6 +123,7 @@ export interface TreeProps extends Omit<AntDTreeProps, 'onSelect'> {
   firstLoadAll?: boolean;
   groupTypeList?: string[];
   typeKey?: string;
+  customSwitcherIcon: (expanded: boolean, nodeData: ExtendedNode) => ReactNode;
 }
 
 export default interface PropTypes extends Omit<TreeProps, 'dataSource'> {

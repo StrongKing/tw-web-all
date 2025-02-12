@@ -72,6 +72,7 @@ export default ({ title }: { title: string }) => {
           {labelPathName}
         </div>
       )}
+      customSwitcherIcon={(flag) => (flag ? '11' : '22')}
     />
   );
 
