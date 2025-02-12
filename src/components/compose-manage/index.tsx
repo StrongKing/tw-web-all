@@ -460,9 +460,13 @@ const ComposeManage = forwardRef(
 
     const renderEmpty = () => {
       return (
-        <div className="table-empty-style">
-          <img src={emptySVG} alt="" />
-          <span>{emptyText}</span>
+        <div className="table-empty-style" style={{ minHeight: 214 }}>
+          {(dataRequest ? loading : outerLoading) ? null : (
+            <>
+              <img src={emptySVG} alt="" />
+              <span>{emptyText}</span>
+            </>
+          )}
         </div>
       );
     };
@@ -724,7 +728,9 @@ const ComposeManage = forwardRef(
             primaryKey={tableProps?.primaryKey}
             hasBorder={tableProps?.hasBorder}
             columns={tableProps?.columns}
-            dataSource={tableSource || []}
+            dataSource={
+              (dataRequest ? loading : outerLoading) ? [] : tableSource || []
+            }
           />
         </ConfigProvider>
       </div>

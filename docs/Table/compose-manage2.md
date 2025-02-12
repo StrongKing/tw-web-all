@@ -25,7 +25,7 @@ const staticDataSource = new Array(50).fill(1).map((el, i) => ({
 export default () => {
   const tableRef = useRef();
   const onClick = () => {
-    tableRef.current.updateDataSorce(
+    tableRef.current.updateDataSource(
       new Array(30).fill(1).map((el, i) => ({
         name: `货吗名称货吗名称货吗名称货吗名称货吗名称货吗名称${i}${Math.random()}`,
       })),
