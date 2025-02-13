@@ -17,7 +17,6 @@ const cellRenderer = ({
   props = {},
   onEmit,
   primaryKey = 'id',
-  defaultExpandAllRows,
 }: PropTypes &
   ColumnItemProps & {
     tableDataSource: any[] | undefined;
@@ -50,7 +49,6 @@ const cellRenderer = ({
             index,
             record,
             name,
-            defaultExpandAllRows,
           }}
         />
       </Suspense>
