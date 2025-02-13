@@ -161,6 +161,7 @@ export default ({
             }
           }
           if (nodeList.length > 0) {
+            setNowExpandedNode(nodeList[nodeList.length - 1]);
             goToModule(
               nodeList[nodeList.length - 1],
               nodeList.map((el) => el.id).join(SPLITTER),
