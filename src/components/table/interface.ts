@@ -79,5 +79,4 @@ export interface PropTypes
   checkable?: boolean;
   primaryKey?: string | number | ((records?: any) => string);
   total?: number;
-  defaultExpandAllRows?: boolean;
 }
