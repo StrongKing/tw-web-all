@@ -4,7 +4,7 @@ Demo:
 
 ```tsx
 import React, { useState, useEffect, useRef } from 'react';
-import { Button, Modal } from 'antd';
+import { Button, Modal, Drawer } from 'antd';
 // import style from './index.less';
 import moment from 'moment';
 // console.log(import './index.less');
@@ -201,19 +201,19 @@ export default () => {
                 },
                 manageProps: props222,
               },
-              {
-                uiType: 'request',
-                text: '删除',
-                request: {
-                  url: '/',
-                  method: 'POST',
-                },
-                refreshAfterRequest: true,
-                confirmBeforeClick: {
-                  modalTitle: '删除',
-                  title: `删除后，该活动将永久失效`,
-                },
-              },
+              // {
+              //   uiType: 'request',
+              //   text: '删除',
+              //   request: {
+              //     url: '/',
+              //     method: 'POST',
+              //   },
+              //   refreshAfterRequest: true,
+              //   confirmBeforeClick: {
+              //     modalTitle: '删除',
+              //     title: `删除后，该活动将永久失效`,
+              //   },
+              // },
               {
                 uiType: 'form',
                 request: {
@@ -221,6 +221,52 @@ export default () => {
                   method: 'POST',
                 },
                 text: '表单',
+                dialogProps: {
+                  title: '分配',
+                },
+                formItemLayout: {
+                  labelCol: {
+                    xs: { span: 19 },
+                    sm: { span: 6 },
+                  },
+                  wrapperCol: {
+                    xs: { span: 19 },
+                    sm: { span: 18 },
+                  },
+                },
+                refreshAfterRequest: true,
+                formProps: {
+                  dataSource: [
+                    {
+                      uiType: 'input',
+                      name: 'status2',
+                      label: '状态2',
+                    },
+                    {
+                      uiType: 'select',
+                      name: 'status',
+                      label: '状态',
+                      props: {
+                        dataSource: [
+                          { label: '上架', value: 0 },
+                          { label: '下架', value: 1 },
+                        ],
+                      },
+                    },
+                  ],
+                  initialValuesRequest: {
+                    url: `https://front.sit.suosihulian.com/gateway/crm/web/cloudMobile/get`,
+                    method: 'GET',
+                  },
+                },
+              },
+              {
+                uiType: 'drawer-form',
+                request: {
+                  url: `https://front.sit.suosihulian.com/gateway/crm/web/cloudMobile/bind`,
+                  method: 'POST',
+                },
+                text: '抽屉',
                 dialogProps: {
                   title: '分配',
                 },

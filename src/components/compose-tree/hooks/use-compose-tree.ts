@@ -116,6 +116,31 @@ export default ({
       });
   }, [_activeId]);
 
+  const getNodeList = () => {
+    const queue: any[] = [[...cachedDataSource.current]];
+    const nodeList = [];
+    let level = 0;
+    while (level > -1 && queue.length > 0) {
+      const el: any = queue[level].shift();
+      if (!groupTypeList.includes(el[typeKey])) {
+        nodeList.push(el);
+        break;
+      }
+      if (el?.children?.length > 0) {
+        nodeList.push(el);
+        queue.push([...el.children]);
+        level++;
+      } else {
+        while (level > -1 && queue[level].length === 0) {
+          nodeList.pop();
+          queue.pop();
+          level--;
+        }
+      }
+    }
+    return nodeList;
+  };
+
   // 计算路由
   // 如果没有指定下级 module，则默认选中第一个 tree 根节点
   useEffect(() => {
@@ -139,28 +164,9 @@ export default ({
         // console.log('获取初始 tree 数据完成');
         // 如果没有指定路径，深度优先搜索 type不在 groupTypeList 中的第一个
         if (!treePath) {
-          const queue: any[] = [[...cachedDataSource.current]];
-          const nodeList = [];
-          let level = 0;
-          while (level > -1 && queue.length > 0) {
-            const el: any = queue[level].shift();
-            if (!groupTypeList.includes(el[typeKey])) {
-              nodeList.push(el);
-              break;
-            }
-            if (el?.children?.length > 0) {
-              nodeList.push(el);
-              queue.push([...el.children]);
-              level++;
-            } else {
-              while (level > -1 && queue[level].length === 0) {
-                nodeList.pop();
-                queue.pop();
-                level--;
-              }
-            }
-          }
+          const nodeList = getNodeList();
           if (nodeList.length > 0) {
+            setNowExpandedNode(nodeList[nodeList.length - 1]);
             goToModule(
               nodeList[nodeList.length - 1],
               nodeList.map((el) => el.id).join(SPLITTER),
@@ -176,6 +182,9 @@ export default ({
               setDataSource(cachedDataSource.current);
             },
           );
+        } else {
+          const nodeList = getNodeList();
+          setNowExpandedNode(nodeList[nodeList.length - 1]);
         }
       })
       .finally(() => {
