@@ -135,7 +135,6 @@ export default function DialogForm({
                 visible={dlgVis}
                 onClose={hideDlg}
                 footer={actionFormItems}
-                centered
                 {...modalProps}
                 className={classNames(
                   'cf-button-form-drawer',
