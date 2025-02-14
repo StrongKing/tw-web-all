@@ -10,6 +10,7 @@ const comsMap = {
   download: React.lazy(() => import('./download')),
   sync: React.lazy(() => import('./sync')),
   form: React.lazy(() => import('./form')),
+  'drawer-form': React.lazy(() => import('./drawerForm')),
   'business-card': React.lazy(() => import('./business-card')),
   request: React.lazy(() => import('./request')),
   link: React.lazy(() => import('./link')),
