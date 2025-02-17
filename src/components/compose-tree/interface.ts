@@ -124,6 +124,7 @@ export interface TreeProps extends Omit<AntDTreeProps, 'onSelect'> {
   groupTypeList?: string[];
   typeKey?: string;
   customSwitcherIcon: (expanded: boolean, nodeData: ExtendedNode) => ReactNode;
+  moduleRoute?: string;
 }
 
 export default interface PropTypes extends Omit<TreeProps, 'dataSource'> {
@@ -152,6 +153,7 @@ export default interface PropTypes extends Omit<TreeProps, 'dataSource'> {
   expandAllTree?: boolean;
   typeKey?: string;
   groupTypeList?: string[];
+  renderTree: (treeComp: ReactNode, routerComp: ReactNode) => ReactNode;
   requestDataFormatter?: (
     data: {
       dataSource: TreeDataSource;

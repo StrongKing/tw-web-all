@@ -150,6 +150,7 @@ export default ({
   typeKey = 'type',
   groupTypeList,
   requestDataFormatter,
+  moduleRoute,
   ...others
 }: RouteComponentProps<{
   treePath: string;
@@ -163,6 +164,7 @@ export default ({
     expandAllTree,
     groupTypeList,
     requestDataFormatter,
+    moduleRoute,
   });
   return (
     <ComposeTreeContext.Provider value={composeTreeContext}>

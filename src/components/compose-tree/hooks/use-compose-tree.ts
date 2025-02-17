@@ -51,6 +51,7 @@ export default ({
   typeKey = 'type',
   groupTypeList = [],
   requestDataFormatter = (data) => data.dataSource,
+  moduleRoute = '\\*',
 }: RouteComponentProps<{
   treePath: string;
 }> & {
@@ -70,6 +71,7 @@ export default ({
     },
     treeContext: { treePath: string[] },
   ) => TreeDataSource;
+  moduleRoute?: string;
 }): IComposeTreeContext => {
   const match = useRouteMatch();
   const history = useHistory();
@@ -82,8 +84,8 @@ export default ({
   const [firstLoaded, setFirstLoaded] = useState(false);
   const [code, setDataCode] = useState(0);
   // 命中这一级的路由 path，要去掉星号
-  const pathPrefix = path.replace(/[/*]+$/, '');
-  const pathPrefixWithParam = /\/:treePath/.test(pathPrefix)
+  const pathPrefix = path.replace(new RegExp(`\/${moduleRoute}\$`), '');
+  const pathPrefixWithParam = /\/:treePath\??/.test(pathPrefix)
     ? pathPrefix
     : `${pathPrefix}/:treePath`;
   const { treePath } = params;
