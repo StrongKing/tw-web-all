@@ -208,7 +208,7 @@ export default function CFTable({
     }
   }, []);
 
-  const finalScroll = scroll || _scroll;
+  const finalScroll = { ..._scroll, ...(scroll || {}) };
   return (
     <Table
       components={virtuallistParams ? VcComponent : undefined}
