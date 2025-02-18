@@ -566,6 +566,7 @@ const ComposeManage = forwardRef(
           >
             {filterProps?.map((f, index) => (
               <FilterItem
+                formRef={formRef}
                 key={f.name}
                 {...f}
                 labelWidth={filterLabelWidthStr}

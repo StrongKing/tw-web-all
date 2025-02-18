@@ -47,6 +47,7 @@ export default function FilterItem({
   defaultColsNumber,
   dataSource,
   dataSourceFmt,
+  formRef,
   props,
   externalComsMap = {},
   labelWidth,
@@ -119,6 +120,7 @@ export default function FilterItem({
   }
 
   if (type === 'customSelect') {
+    const { onChange = () => {} } = props;
     return (
       <ProForm.Item
         name={name}
@@ -128,7 +130,11 @@ export default function FilterItem({
           display: collapsed && index > defaultColsNumber - 1 ? 'none' : '',
         }}
       >
-        <CustomSelect {...props} dataSource={remoteSource} />
+        <CustomSelect
+          {...props}
+          onChange={(val: any) => onChange(val, formRef)}
+          dataSource={remoteSource || localSource}
+        />
       </ProForm.Item>
     );
   }

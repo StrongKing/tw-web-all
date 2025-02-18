@@ -3,7 +3,7 @@
 Demo:
 
 ```tsx
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Button, Modal } from 'antd';
 // import style from './index.less';
 import moment from 'moment';
@@ -19,7 +19,7 @@ export default () => {
   const formRef = useRef(null);
 
   window.token =
-    'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2luZm8iOiIlN0IlMjJhdmF0YXIlMjIlM0ElMjJodHRwcyUzQSUyRiUyRndld29yay5xcGljLmNuJTJGd3dwaWMlMkYyMDEwNjRfeXc2dERUZldRQU9leUVlXzE2ODU0MDYxNTQlMkYwJTIyJTJDJTIyY29ycElkJTIyJTNBJTIyd3BvRzg0Q2dBQWpWZThBU21zbFd1eTFla3ZzSVFXUHclMjIlMkMlMjJpbmR1c3RyeVR5cGUlMjIlM0ElMjJteXR4bCUyMiUyQyUyMmxvZ2luVHlwZSUyMiUzQSUyMm5vcm1hbCUyMiUyQyUyMm1lbWJlcklkJTIyJTNBMTU2MTk2Nzg0NjcyMzI4NTAyNiUyQyUyMm1lbWJlck5hbWUlMjIlM0ElMjIlRTYlOUQlOEUlRTUlQkIlQkElRTUlQkQlQUMlMjIlMkMlMjJtb2JpbGUlMjIlM0ElMjIxMzY1NzA4NjQ1MSUyMiUyQyUyMm9yZ0lkJTIyJTNBMzAwMTAwMTAwMTAwMDAwNiUyQyUyMm9yZ05hbWUlMjIlM0ElMjIlRTYlOUQlQUQlRTUlQjclOUUlRTYlQUQlQTMlRTUlOUQlOUIlRTclQTclOTElRTYlOEElODAlRTYlOUMlODklRTklOTklOTAlRTUlODUlQUMlRTUlOEYlQjglRUYlQkMlODglRTYlQUYlOEQlRTUlQTklQjQlRUYlQkMlODklMjIlMkMlMjJvcmdUeXBlJTIyJTNBJTIyZ2VuZXJhbCUyMiUyQyUyMnJlZ2lvbkNvZGUlMjIlM0ElMjIzMzAxMDIwMDAwMDAwMDAwMDAlMjIlMkMlMjJzaG9ydE5hbWUlMjIlM0ElMjIlRTYlQUQlQTMlRTUlOUQlOUIlRTclQTclOTElRTYlOEElODAlMjIlMkMlMjJ1c2VySWQlMjIlM0ExNTYxOTY3ODQ2NzIzMjg1MDI2JTJDJTIydXNlck5hbWUlMjIlM0ElMjIlRTYlOUQlOEUlRTUlQkIlQkElRTUlQkQlQUMlMjIlMkMlMjJ1c2VyVHlwZSUyMiUzQSUyMmVtcGxveWVlJTIyJTdEIiwidXNlcl9uYW1lIjoiMzAwMTAwMTAwMTAwMDAwNjsxNTYxOTY3ODQ2NzIzMjg1MDI2O2VtcGxveWVlO25vcm1hbCIsIm9yZ19pZCI6MzAwMTAwMTAwMTAwMDAwNiwic2NvcGUiOlsid3JpdGUiXSwiZXhwIjoxNzM5MzQyNDI2LCJqdGkiOiJjNDYyY2MxNC0xODJkLTRmNDYtOTIyNS0xN2ZlYWFkN2RiYzAiLCJjbGllbnRfaWQiOiJzaXQifQ.b-9gsWzrUDGYB-ZzB44TGFZO0IvZVALp26JncEyXmEG5idIagTrqSobIYRvgKERhyD49-F5KiVdKSB_0OWwyXyY5HiC8a8RLII24RPTUkjdr3zwf_yPIRXiIL9zMTbQ0BUo8YIVeRHJjQBc8-Pzorut92A8VQny0FGucPOfV-i8';
+    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcmVhX25hbWUiOiLmtZnmsZ8iLCJ1c2VyX2lkIjoxLCJ1c2VyX25hbWUiOiJhZG1pbiIsInNjb3BlIjpbInNlcnZlciJdLCJjb21wYW55X25hbWUiOiLlm73nvZHmtZnmsZ_nnIHnlLXlipvlhazlj7giLCJ1c2VyX2tleSI6IjNkNmIxOGYxLThiNjYtNDQ2NC04ZDc4LTI0N2ZjNDM1N2Y2NSIsImFyZWFfbmF0dXJlIjowLCJleHAiOjE3Mzk4ODYzMDgsImp0aSI6ImtCeU1HZTJIS3R6ODJBU1Z1QmlzY3RGaUZaSSIsImNsaWVudF9pZCI6ImFwcCJ9.2hM9dU0Fi0LNrxlWtJqRlgiUI9I0XBjLjJKwg5HdlGc';
 
   const getData = (value) => value;
   const url = {
@@ -689,6 +689,56 @@ export default () => {
     },
   ];
 
+  const [areaCode, setAreaCode] = useState('');
+
+  const list = useMemo(() => {
+    return [
+      {
+        type: 'customSelect',
+        name: 'newsTypes',
+        label: '所属地市',
+        allowClear: true,
+        props: {
+          placeholder: '请选择1',
+          mode: '',
+          optionFilterProp: 'areaName',
+          fieldNames: {
+            label: 'areaName',
+            value: 'areaCode',
+          },
+          onChange: (val, formVal) => {
+            setAreaCode((e) => {
+              if (e !== val) {
+                formVal.current.setFieldsValue({ newsTypes1: '' });
+                return val;
+              }
+              return e;
+            });
+          },
+        },
+        dataSource: 'http://tei.sit.zjds.tech/prod-api/sys/sys/area/city_tree',
+      },
+      {
+        type: 'customSelect',
+        name: 'newsTypes1',
+        label: `所属区县`,
+        allowClear: true,
+        props: {
+          placeholder: '请选择',
+          mode: '',
+          optionFilterProp: 'areaName',
+          fieldNames: {
+            label: 'areaName',
+            value: 'areaCode',
+          },
+        },
+        dataSource: areaCode
+          ? `http://tei.sit.zjds.tech/prod-api/sys/sys/area/county_tree?areaCode=${areaCode}`
+          : [],
+      },
+    ];
+  }, [areaCode]);
+
   const props = {
     dataRequest: {
       url: `https://front.sit.suosihulian.com/gateway/group/web/liveCode/staff/page`,
@@ -758,26 +808,26 @@ export default () => {
       //   ],
       //   label: '客户来源',
       // },
-
-      {
-        type: 'datepicker',
-        name: 'addTime2',
-        label: '添加时间2',
-      },
-      {
-        type: 'dateRangePicker',
-        name: 'addTime',
-        label: '添加时间',
-      },
-      {
-        type: 'dateTimeRangePicker',
-        name: 'addTime1',
-        label: '添加时间1',
-        props: {
-          format: 'YYYY-MM-DD HH:mm',
-          allowClear: true,
-        },
-      },
+      ...list,
+      // {
+      //   type: 'datepicker',
+      //   name: 'addTime2',
+      //   label: '添加时间2',
+      // },
+      // {
+      //   type: 'dateRangePicker',
+      //   name: 'addTime',
+      //   label: '添加时间',
+      // },
+      // {
+      //   type: 'dateTimeRangePicker',
+      //   name: 'addTime1',
+      //   label: '添加时间1',
+      //   props: {
+      //     format: 'YYYY-MM-DD HH:mm',
+      //     allowClear: true,
+      //   },
+      // },
       {
         type: 'select',
         name: 'stateId',
