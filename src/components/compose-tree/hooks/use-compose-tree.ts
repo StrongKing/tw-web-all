@@ -1,3 +1,4 @@
+/* eslint-disable no-loop-func */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-unused-expressions */
 import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
@@ -144,6 +145,23 @@ export default ({
     return nodeList;
   };
 
+  const getPathNodeList = () => {
+    const nodeList = [];
+    let level = 0;
+    let list: any[] = [...(cachedDataSource.current || [])];
+    while (list.length && level < _paths.length) {
+      const item = list.find((el) => el.id === _paths[level]);
+      if (item) {
+        nodeList.push({ ...item });
+        list = [...(item.children || [])];
+        level++;
+      } else {
+        break;
+      }
+    }
+    return nodeList;
+  };
+
   // 计算路由
   // 如果没有指定下级 module，则默认选中第一个 tree 根节点
   useEffect(() => {
@@ -186,7 +204,7 @@ export default ({
             },
           );
         } else {
-          const nodeList = getNodeList();
+          const nodeList = getPathNodeList();
           setNowExpandedNode(nodeList[nodeList.length - 1]);
         }
       })
