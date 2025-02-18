@@ -119,6 +119,7 @@ export default ({
   }, [_activeId]);
 
   const getNodeList = () => {
+    if (!cachedDataSource.current?.length) return [];
     const queue: any[] = [[...cachedDataSource.current]];
     const nodeList = [];
     let level = 0;
