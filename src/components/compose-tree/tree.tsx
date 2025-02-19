@@ -60,9 +60,9 @@ function CFTree({
   firstLoadAll,
   groupTypeList = [],
   maxShowNum = 20,
+  searchListKey = 'peopleList',
   typeKey = 'type',
   customSwitcherIcon,
-  ...others
 }: PropTypes) {
   const {
     expandedKeys,
@@ -84,7 +84,7 @@ function CFTree({
     () => (searchText ? searchResult : dataSource),
     [searchText, searchResult, dataSource],
   );
-  const treeWrapper = useRef<HTMLDivElement>();
+  const treeWrapper = useRef<HTMLDivElement>(null);
   const [treeData] = useTreeData(
     partialDataSource,
     searchText,
@@ -161,7 +161,7 @@ function CFTree({
             })),
           );
           setUserList(
-            (data?.peopleList || []).map((item: any) => ({
+            (data?.[searchListKey] || []).map((item: any) => ({
               ...item,
               key: getUid(),
               id: item.key,
@@ -341,7 +341,6 @@ function CFTree({
                 // loadData={loadData}
                 treeData={treeData}
                 selectedKeys={selectedKeys}
-                {...others}
                 checkable={false}
                 titleRender={(nodeData: any) => {
                   let swticherIcon = null;

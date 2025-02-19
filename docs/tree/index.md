@@ -60,6 +60,7 @@ export default ({ title }: { title: string }) => {
         'tag-group': '标签组1',
       }}
       maxShowNum={10}
+      searchListKey="detailList"
       renderSearchExtra={({ labelPathName }) => (
         <div
           style={{
