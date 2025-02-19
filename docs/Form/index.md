@@ -79,6 +79,16 @@ export default () => {
     //   rules: [{ required: true, message: '请选择生效时间' }],
     // },
     {
+      label: 'aaa',
+      name: 'aaa',
+      props: {
+        valueFormatter: (val) => {
+          console.log(val);
+          return 'bbb' + val;
+        },
+      },
+    },
+    {
       label: '邀请客户入群',
       uiType: 'selectUser',
       name: 'cusSignature',
@@ -315,6 +325,7 @@ export default () => {
     title: '添加',
     controls: dataForm,
     initialValues: {
+      aaa: 'ccc',
       img: '0',
       time: [moment(moment(), 'YYYY-MM-DD'), null],
       // groupId: '1536330523708399617',
@@ -425,6 +436,7 @@ export default () => {
     //   postRemoveSearch: true,
     // },
     initialValues: {
+      aaa: 'ccc',
       cusSignature: [
         {
           childDelete: true,
