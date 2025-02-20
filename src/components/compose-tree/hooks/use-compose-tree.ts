@@ -53,6 +53,7 @@ export default ({
   groupTypeList = [],
   requestDataFormatter = (data) => data.dataSource,
   moduleRoute = '\\*',
+  dataSourceFormatter,
 }: RouteComponentProps<{
   treePath: string;
 }> & {
@@ -73,6 +74,7 @@ export default ({
     treeContext: { treePath: string[] },
   ) => TreeDataSource;
   moduleRoute?: string;
+  dataSourceFormatter?: (val: any[]) => any[];
 }): IComposeTreeContext => {
   const match = useRouteMatch();
   const history = useHistory();
@@ -81,7 +83,7 @@ export default ({
   const { getTreeNodes } = request;
   const { path, params } = match;
 
-  const [dataSource, setDataSource] = useState([]);
+  const [dataSource, setDataSource] = useState<any[]>([]);
   const [firstLoaded, setFirstLoaded] = useState(false);
   const [code, setDataCode] = useState(0);
   // 命中这一级的路由 path，要去掉星号
@@ -107,6 +109,14 @@ export default ({
     expandedKeys.current = _nextExpandedKeys;
     _setExpandedKeys(_nextExpandedKeys);
   };
+  const updateDataSource = (val = cachedDataSource.current) => {
+    console.log('inner   updateDataSource');
+    setDataSource(
+      typeof dataSourceFormatter === 'function'
+        ? dataSourceFormatter(val)
+        : val,
+    );
+  };
   const _activeId = _paths.slice(-1)[0];
   useLayoutEffect(() => {
     if (!_activeId) {
@@ -114,7 +124,9 @@ export default ({
     }
     cachedDataSource.current.length &&
       loadDataByTreePath(_paths, false).then(() => {
-        setDataSource(cachedDataSource.current);
+        console.log(2222222);
+
+        updateDataSource(cachedDataSource.current);
         // console.log('cachedDataSource.current', cachedDataSource.current);
       });
   }, [_activeId]);
@@ -200,7 +212,7 @@ export default ({
         if (!firstLoadAll) {
           loadTreeByPath(_paths, cachedDataSource.current, '0', true).then(
             () => {
-              setDataSource(cachedDataSource.current);
+              updateDataSource(cachedDataSource.current);
             },
           );
         } else {
@@ -235,7 +247,7 @@ export default ({
   function reloadTree() {
     // tslint:disable-next-line: no-floating-promises
     loadTreeByPath(_paths, cachedDataSource.current, '0', true).then(() => {
-      setDataSource(cachedDataSource.current);
+      updateDataSource(cachedDataSource.current);
     });
   }
 
@@ -301,7 +313,7 @@ export default ({
 
   async function loadData(node: Partial<ExtendedEventNode>): Promise<void> {
     await loadDataWithReturn(node);
-    setDataSource(cachedDataSource.current);
+    updateDataSource(cachedDataSource.current);
     setExpandedKeys([...expandedKeys.current, node.key]);
     // console.log("loadData->setDataSource", cachedDataSource.current)
   }
@@ -347,7 +359,7 @@ export default ({
       indexList.join('-'),
       forceUpdate,
     );
-    setDataSource(cachedDataSource.current);
+    updateDataSource(cachedDataSource.current);
     setExpandedKeys([...expandedKeys.current, ...keyList]);
   }
 
@@ -514,7 +526,7 @@ export default ({
                   clone,
                 )
               : nextChildren;
-            setDataSource(cachedDataSource.current);
+            updateDataSource(cachedDataSource.current);
             if (idToMatch && !nextChildren.some((_) => _.id === idToMatch)) {
               console.log(
                 `请求结果没有命中需要匹配的 key - ${idToMatch}，重定向到根节点。`,
@@ -565,6 +577,7 @@ export default ({
     generateUrlByTreePaths,
     isInTree: true,
     firstLoaded,
+    updateDataSource,
   };
 };
 

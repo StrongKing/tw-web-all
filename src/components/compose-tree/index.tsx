@@ -1,4 +1,10 @@
-import React, { ReactNode, useContext } from 'react';
+import React, {
+  ForwardedRef,
+  forwardRef,
+  ReactNode,
+  useContext,
+  useImperativeHandle,
+} from 'react';
 import { RouteComponentProps, Switch, Route } from 'react-router-dom';
 import Tree from './tree';
 import {
@@ -142,41 +148,55 @@ function ComposeTree({
   );
 }
 
-export default ({
-  request,
-  extendModuleMap,
-  firstLoadAll = false,
-  expandAllTree = true,
-  typeKey = 'type',
-  groupTypeList,
-  requestDataFormatter,
-  moduleRoute,
-  ...others
-}: RouteComponentProps<{
-  treePath: string;
-}> &
-  PropTypes) => {
-  const composeTreeContext: IComposeTreeContext = useComposeTree({
-    request: { getTreeNodes: request.getTreeNodes },
-    extendModuleMap,
-    firstLoadAll,
-    typeKey,
-    expandAllTree,
-    groupTypeList,
-    requestDataFormatter,
-    moduleRoute,
-  });
-  return (
-    <ComposeTreeContext.Provider value={composeTreeContext}>
-      <ComposeTree
-        {...others}
-        groupTypeList={groupTypeList}
-        request={request}
-        firstLoadAll={firstLoadAll}
-        typeKey={typeKey}
-      />
-    </ComposeTreeContext.Provider>
-  );
-};
+export default forwardRef(
+  (
+    {
+      request,
+      extendModuleMap,
+      firstLoadAll = false,
+      expandAllTree = true,
+      typeKey = 'type',
+      groupTypeList,
+      requestDataFormatter,
+      moduleRoute,
+      dataSourceFormatter,
+      ...others
+    }: RouteComponentProps<{
+      treePath: string;
+    }> &
+      PropTypes,
+    ref: ForwardedRef<any>,
+  ) => {
+    const composeTreeContext: IComposeTreeContext = useComposeTree({
+      request: { getTreeNodes: request.getTreeNodes },
+      extendModuleMap,
+      firstLoadAll,
+      typeKey,
+      expandAllTree,
+      groupTypeList,
+      requestDataFormatter,
+      moduleRoute,
+      dataSourceFormatter,
+    });
+
+    useImperativeHandle(ref, () => ({
+      updateDataSource: () => {
+        console.log('out   updateDataSource');
+        composeTreeContext.updateDataSource();
+      },
+    }));
+    return (
+      <ComposeTreeContext.Provider value={composeTreeContext}>
+        <ComposeTree
+          {...others}
+          groupTypeList={groupTypeList}
+          request={request}
+          firstLoadAll={firstLoadAll}
+          typeKey={typeKey}
+        />
+      </ComposeTreeContext.Provider>
+    );
+  },
+);
 
 export { SPLITTER, ComposeTreeContext, PropTypes };
