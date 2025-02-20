@@ -1,0 +1,22 @@
+.ss-splitter {
+  display: flex;
+  .ss-splitter-bar {
+    background-color: #f0f0f0;
+  }
+  &.ss-splitter-vertical {
+    flex-direction: column;
+    .ss-splitter-bar {
+      width: 100%;
+      height: var(--ss-splitter-bar-size);
+      cursor: row-resize;
+    }
+  }
+  &.ss-splitter-horizontal {
+    flex-direction: row;
+    .ss-splitter-bar {
+      height: 100%;
+      width: var(--ss-splitter-bar-size);
+      cursor: col-resize;
+    }
+  }
+}
