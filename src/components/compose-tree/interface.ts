@@ -115,6 +115,8 @@ export interface TreeProps extends Omit<AntDTreeProps, 'onSelect'> {
   permissionCode?: string | number;
   // 搜索最大展示数
   maxShowNum?: number;
+  // 搜索时展示具体明细的list key
+  searchListKey: string;
   // 点击用户节点的回调
   onUserSelect?: (id: string, type: UserType, orgId: string) => void;
   // 搜索树对应的nameMao，如果不设置，则默认使用tree组件里的nameMap。

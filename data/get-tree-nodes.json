@@ -5,6 +5,7 @@
         "key": 1,
         "label": "产品校园校区1222333",
         "type": "tag-group122",
+        "iconType": "root",
         "isLeaf": false,
         "params": null,
         "children": [
@@ -13,6 +14,7 @@
             "label": "111产品校园校区1222333222",
             "type": "tag-group122",
             "isLeaf": false,
+            "iconType": "dept",
             "params": null,
             "children": [
               {
