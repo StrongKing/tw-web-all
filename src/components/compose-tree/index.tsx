@@ -181,7 +181,6 @@ export default forwardRef(
 
     useImperativeHandle(ref, () => ({
       updateDataSource: () => {
-        console.log('out   updateDataSource');
         composeTreeContext.updateDataSource();
       },
     }));

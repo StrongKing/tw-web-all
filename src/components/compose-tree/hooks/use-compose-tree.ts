@@ -110,7 +110,6 @@ export default ({
     _setExpandedKeys(_nextExpandedKeys);
   };
   const updateDataSource = (val = cachedDataSource.current) => {
-    console.log('inner   updateDataSource');
     setDataSource(
       typeof dataSourceFormatter === 'function'
         ? dataSourceFormatter(val)
@@ -124,10 +123,7 @@ export default ({
     }
     cachedDataSource.current.length &&
       loadDataByTreePath(_paths, false).then(() => {
-        console.log(2222222);
-
         updateDataSource(cachedDataSource.current);
-        // console.log('cachedDataSource.current', cachedDataSource.current);
       });
   }, [_activeId]);
 
@@ -415,7 +411,6 @@ export default ({
   ): Promise<TreeDataSource> {
     return new Promise<TreeDataSource>((resolve, reject) => {
       const { id = '', params: nodeParams, pos } = node || {};
-      // console.log(typeof id, 'idid', id === 'null');
       // if (id === 'null') {
       //   reject();
       // }
@@ -470,7 +465,6 @@ export default ({
           ({ data, ...others }: { data: { dataSource: TreeDataSource } }) => {
             const { code } = others;
             // localStorage.setItem('request-code', code);
-            // console.log(data, 'data');
             const cached = cache ? JSON.parse(cache) : null;
             if (!data) {
               setDataCode(code);
