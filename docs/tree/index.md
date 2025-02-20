@@ -55,9 +55,6 @@ export default ({ title }: { title: string }) => {
           renderExtra={() => {
             return <span>建��</span>;
           }}
-          externalIconMap={{
-            dept: () => 2,
-          }}
           // showSearch={false}
           groupTypeList={['tag-group122']}
           requestDataFormatter={(data, { treePath }) => {
