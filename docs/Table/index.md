@@ -11,6 +11,7 @@ import moment from 'moment';
 import ComposeManage, { ColumnItemProps } from '@/components/compose-manage';
 import CustomSelect from '@/components/compose-form/mod/custom-select';
 import { getRangeMap } from '@/common/dateRange';
+import ButtonList from '@/components/button/buttonList';
 import net from '@/services/net';
 import './index.less';
 import { isCurrentUser, isIncludeCurrentUser } from '@/utils';
@@ -739,7 +740,7 @@ export default () => {
     ];
   }, [areaCode]);
 
-  const props = {
+  const props999 = {
     dataRequest: {
       url: `https://front.sit.suosihulian.com/gateway/group/web/liveCode/staff/page`,
       method: 'post',
@@ -1073,7 +1074,98 @@ export default () => {
     setKey(Date.now());
     return Promise.resolve();
   };
-
+  const buttonList123 = [
+    {
+      uiType: 'form',
+      request: {
+        url: `https://front.sit.suosihulian.com/gateway/crm/web/label/group/save`,
+        method: 'POST',
+      },
+      text: '添加',
+      // buttonProps: {
+      //   type: 'primary',
+      // },
+      dialogProps: {
+        title: '添加',
+        className: 'xxx',
+        wrapClassName: 'msg-modal',
+      },
+      formItemLayout: {
+        labelCol: {
+          xs: { span: 19 },
+          sm: { span: 5 },
+        },
+        wrapperCol: {
+          xs: { span: 19 },
+          sm: { span: 19 },
+        },
+      },
+      formProps: {
+        dataSource: [
+          {
+            uiType: 'radio',
+            name: 'input2',
+            label: '输入框',
+            props: {
+              dataSource: [{ label: '选项1', value: '1' }],
+            },
+          },
+          {
+            uiType: 'input',
+            name: 'input3',
+            label: '输入框2',
+          },
+        ],
+        dataFormatBeforeSubmit: (formValue) => {
+          return {
+            ...formValue,
+            ...formValue.syncCorpSelect,
+          };
+        },
+        initialValues: {
+          groupPermission: 1,
+          labelGroupType: 0,
+          syncCorpSelect: {
+            syncCorpSelect: 1,
+          },
+        },
+      },
+    },
+    {
+      uiType: 'sync',
+      text: '同步1',
+      // isBatch: true,
+      // buttonProps: {
+      //   type: 'primary',
+      // },
+      buttonProps: {
+        type: 'primary',
+      },
+      content: 'xxx',
+      request: {
+        url: `https://front.sit.suosihulian.com/gateway/contact-sync/contact-sync/wechat/internal/user`,
+        method: 'get',
+      },
+    },
+    {
+      uiType: 'download',
+      text: '导出筛选明细',
+      buttonProps: {
+        type: 'primary',
+      },
+      request: {
+        url: 'https://front.sit.suosihulian.com/gateway/user-center/web/followUser/exportList',
+        method: 'post',
+      },
+      innerRequest: {
+        url: `https//front.sit.suosihulian.com/gateway/publicity/web/file/fileUrlByRedisKey`,
+        method: 'GET',
+        params: {
+          redisKey: '',
+        },
+      },
+    },
+  ];
   return (
     <div>
       <button
@@ -1083,12 +1175,15 @@ export default () => {
       >
         333
       </button>
+      <ButtonList buttonList={buttonList123} />
+      <ButtonList buttonList={buttonList123} primaryPosition="end" />
+      <ButtonList buttonList={buttonList123} primaryPosition="normal" />
       {visible && (
         <Modal visible={visible} {...modalProps11}>
           <ComposeManage {...props11} />
         </Modal>
       )}
-      <ComposeManage ref={formRef} {...props} />
+      <ComposeManage ref={formRef} {...props999} />
     </div>
   );
   // return <App />
