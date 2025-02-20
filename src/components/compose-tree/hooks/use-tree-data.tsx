@@ -19,11 +19,15 @@ export default (
   searchText: string,
   rootIconType?: IconType,
   renderExtra?: Function,
+  externalIconMap?: Record<string, React.FunctionComponent>,
 ) => {
   const [treeData, setTreeData] = useState([]);
 
   const getNodeIcon = useCallback(
     (iconType: IconType) => {
+      if (externalIconMap) {
+        return { ...iconMap, ...externalIconMap }[iconType];
+      }
       return iconMap[iconType];
     },
     [iconMap],

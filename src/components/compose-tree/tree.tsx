@@ -61,6 +61,7 @@ function CFTree({
   groupTypeList = [],
   maxShowNum = 20,
   searchListKey = 'peopleList',
+  externalIconMap,
   typeKey = 'type',
   customSwitcherIcon,
 }: PropTypes) {
@@ -90,6 +91,7 @@ function CFTree({
     searchText,
     rootIconType,
     renderExtra,
+    externalIconMap,
   );
   // const [height, setHeight] = useState(0);
   const [minWidth, setMinWidth] = useState(0);
@@ -316,6 +318,7 @@ function CFTree({
             {permissionCode !== 30512 && searchText && userList.length > 0 ? (
               <UserTree
                 dataSource={userList}
+                externalIconMap={externalIconMap}
                 searchText={searchText}
                 userType={userType}
                 maxShowNum={maxShowNum}
