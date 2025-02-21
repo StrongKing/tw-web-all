@@ -1,22 +1,47 @@
 .ss-splitter {
   display: flex;
+  align-items: stretch;
+  width: 100%;
+  height: 100%;
   .ss-splitter-bar {
-    background-color: #f0f0f0;
+    position: relative;
+    flex: none;
+    user-select: none;
+    .ss-splitter-bar-dragger {
+      position: relative;
+      background-color: #f0f0f0;
+    }
   }
   &.ss-splitter-vertical {
     flex-direction: column;
     .ss-splitter-bar {
+      height: 0;
+      .ss-splitter-bar-dragger {
+        cursor: row-resize;
+        width: 100%;
+        height: 2px;
+        top: -1px;
+        left: 0;
+      }
+    }
+    .ss-splitter-panel {
       width: 100%;
-      height: var(--ss-splitter-bar-size);
-      cursor: row-resize;
     }
   }
   &.ss-splitter-horizontal {
     flex-direction: row;
     .ss-splitter-bar {
+      width: 0;
+      .ss-splitter-bar-dragger {
+        cursor: col-resize;
+        height: 100%;
+        width: 2px;
+        left: -1px;
+        top: 0;
+      }
+    }
+    .ss-splitter-panel {
       height: 100%;
-      width: var(--ss-splitter-bar-size);
-      cursor: col-resize;
     }
   }
 }

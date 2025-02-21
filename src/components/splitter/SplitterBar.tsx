@@ -1,9 +1,12 @@
 import React from 'react';
-import useMouseMove, { UseMouseMoveProps } from '@/hooks/useMouseMove';
+import { SplitterBarProps } from './interface';
 
-const SplitterBar: React.FC<UseMouseMoveProps> = ({ ...mouseFns }) => {
-  const mouseEvent = useMouseMove(mouseFns);
-  return <div className="ss-splitter-bar" {...mouseEvent} />;
+const SplitterBar: React.FC<SplitterBarProps> = ({ onMouseDown }) => {
+  return (
+    <div className="ss-splitter-bar">
+      <div className="ss-splitter-bar-dragger" onMouseDown={onMouseDown} />
+    </div>
+  );
 };
 
 export default SplitterBar;

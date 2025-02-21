@@ -1,13 +1,19 @@
-import { ReactNode } from 'react';
+import { MouseEventHandler, ReactNode } from 'react';
 
 export interface SplitterProps {
   layout?: 'vertical' | 'horizontal';
-  barSize?: number;
   children: ReactNode;
+  onResize?: (sizes: number[]) => void;
 }
 
 export interface SplitterPanelProps {
   children: ReactNode;
+  defaultSize?: number | string;
+  size?: number | string;
+  min?: number | string;
+  max?: number | string;
 }
 
-export interface SplitterBarProps {}
+export interface SplitterBarProps {
+  onMouseDown: MouseEventHandler<HTMLDivElement>;
+}

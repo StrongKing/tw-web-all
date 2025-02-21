@@ -1,7 +1,7 @@
-import { MouseEvent, useRef } from 'react';
+import React, { MouseEvent, useRef } from 'react';
 
 export interface UseMouseMoveProps {
-  start?: (e: MouseEvent) => boolean;
+  start?: (e: MouseEvent, ...args: any[]) => boolean;
   move?: (val: { changeX: number; changeY: number }, e: MouseEvent) => void;
   end?: (val: { changeX: number; changeY: number }, e: MouseEvent) => void;
 }
@@ -10,9 +10,9 @@ const useMouseMove = ({ start, move, end }: UseMouseMoveProps) => {
   /**
    * @param {MouseEvent} e
    */
-  const onMouseDown = (e: MouseEvent) => {
+  const onMouseDown = (e: MouseEvent, ...args: any[]) => {
     if (typeof start === 'function') {
-      if (!start(e)) return;
+      if (!start(e, ...args)) return;
     }
     pressPoint.current = {
       clientX: e.clientX,
