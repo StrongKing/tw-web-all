@@ -59,6 +59,8 @@ export interface PropTypes {
   onSearchChange?: (search: any) => void;
   // 请求成功的回调
   onRequestSuccess?: (data: any) => void;
+  // 重置的回调
+  onResetClick?: (data: any) => void;
   // 同步到search
   synchValues?: any;
   // 样式
