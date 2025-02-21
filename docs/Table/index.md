@@ -741,6 +741,9 @@ export default () => {
   }, [areaCode]);
 
   const props999 = {
+    onResetClick: (data) => {
+      console.log(data, '22');
+    },
     dataRequest: {
       url: `https://front.sit.suosihulian.com/gateway/group/web/liveCode/staff/page`,
       method: 'post',

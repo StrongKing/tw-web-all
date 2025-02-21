@@ -59,6 +59,7 @@ const ComposeManage = forwardRef(
       buttonList = [],
       onSearchChange,
       onRequestSuccess,
+      onResetClick,
       onEmit,
       initialFilterValues = {},
       isCacheListFilter = true,
@@ -313,7 +314,10 @@ const ComposeManage = forwardRef(
       if (!dataRequest && typeof staticSearch === 'function') {
         staticSearch(initialFilterValues);
       }
-      // return Promise.resolve();
+
+      if (onResetClick) {
+        onResetClick(initialFilterValues);
+      }
     };
 
     // 批量操作;
