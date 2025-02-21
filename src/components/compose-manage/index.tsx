@@ -544,7 +544,7 @@ const ComposeManage = forwardRef(
         total: newTotal,
         pageNo: newPageNo,
         pageSize: newPageSize,
-      }: { total?: number; pageNo?: number; pageSize?: number },
+      }: { total?: number; pageNo?: number; pageSize?: number } = {},
     ) => {
       setTableSource(dataSorce);
       setTotal(newTotal ?? dataSorce.length);
