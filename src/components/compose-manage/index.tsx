@@ -69,6 +69,7 @@ const ComposeManage = forwardRef(
       outerLoading = false,
       captionRight,
       defaultCollapsed = true,
+      onPageChange,
     }: PropTypes,
     ref: ForwardedRef<any>,
   ) => {
@@ -211,6 +212,7 @@ const ComposeManage = forwardRef(
     const handlePageChange = (nextPage: number, pageSize: number) => {
       setPageNo(nextPage);
       setPageSize(pageSize);
+      typeof onPageChange === 'function' && onPageChange(nextPage, pageSize);
     };
 
     // 执行查询的逻辑;
@@ -536,9 +538,22 @@ const ComposeManage = forwardRef(
       [filterLabelWidth],
     );
 
-    const updateDataSource = (dataSorce: any[] = []) => {
+    const updateDataSource = (
+      dataSorce: any[] = [],
+      {
+        total: newTotal,
+        pageNo: newPageNo,
+        pageSize: newPageSize,
+      }: { total?: number; pageNo?: number; pageSize?: number } = {},
+    ) => {
       setTableSource(dataSorce);
-      setTotal(dataSorce.length);
+      setTotal(newTotal ?? dataSorce.length);
+      if (typeof newPageNo === 'number') {
+        setPageNo(newPageNo);
+      }
+      if (typeof newPageSize === 'number') {
+        setPageSize(newPageSize);
+      }
       staticDataSourceCache.current = dataSorce;
     };
 

@@ -103,11 +103,11 @@ export interface TreeProps extends Omit<AntDTreeProps, 'onSelect'> {
   userType?: UserType;
   searchProps?: any;
   showSearch: boolean;
-  onSelect(
+  onSelect: (
     nextSelectedKeys: TreeNodeKey[],
     event: SelectedDataNode,
     currentDataSource: TreeDataSource,
-  ): void;
+  ) => void;
   dataSource: TreeDataSource;
   // 根节点的 icon 类型，如果不设置，则默认使用节点的 iconType 属性。
   rootIconType?: IconType;
@@ -115,6 +115,8 @@ export interface TreeProps extends Omit<AntDTreeProps, 'onSelect'> {
   permissionCode?: string | number;
   // 搜索最大展示数
   maxShowNum?: number;
+  // iconMap
+  externalIconMap?: Record<string, React.FunctionComponent>;
   // 搜索时展示具体明细的list key
   searchListKey: string;
   // 点击用户节点的回调
@@ -165,5 +167,16 @@ export default interface PropTypes extends Omit<TreeProps, 'dataSource'> {
   ) => TreeDataSource;
   dataSourceFormatter?: (val: any[]) => any[];
 }
-
+export type UserTreeProps = {
+  dataSource: TreeDataSource;
+  searchText: string;
+  userType: UserType;
+  selfNameMap?: SelfNameMap;
+  maxShowNum?: number;
+  onUserSelect: Function;
+  handleSelect: Function;
+  renderExtra?: Function;
+  typeKey?: string;
+  externalIconMap?: Record<string, React.FunctionComponent>;
+};
 export { PropTypes };

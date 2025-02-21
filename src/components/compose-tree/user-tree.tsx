@@ -1,20 +1,9 @@
 import React from 'react';
 import { Tree, type TreeProps } from 'antd';
 import useTreeData from './hooks/use-tree-data';
-import { TreeDataSource, UserType, SelfNameMap } from './interface';
+import { UserTreeProps } from './interface';
 import './index.less';
 
-export interface PropTypes {
-  dataSource: TreeDataSource;
-  searchText: string;
-  userType: UserType;
-  selfNameMap?: SelfNameMap;
-  maxShowNum?: number;
-  onUserSelect: any;
-  handleSelect: any;
-  renderExtra?: Function;
-  typeKey?: string;
-}
 export default ({
   dataSource,
   searchText,
@@ -25,12 +14,14 @@ export default ({
   renderExtra,
   typeKey = 'type',
   maxShowNum = 20,
-}: PropTypes) => {
+  externalIconMap,
+}: UserTreeProps) => {
   const [treeData] = useTreeData(
     dataSource,
     searchText,
     undefined,
     renderExtra,
+    externalIconMap,
   );
   const handleUserSelect: TreeProps['onSelect'] = (keys, arg) => {
     const { orgId, id } = arg.node;

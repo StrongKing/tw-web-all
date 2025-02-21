@@ -76,6 +76,7 @@ export interface PropTypes {
   staticFilter?: (newSearch: any, el: any, i: number) => any;
   staticDataSource?: any[];
   defaultCollapsed?: boolean;
+  onPageChange?: (page: number, pageSize: number) => void;
 }
 
 export { ColumnItemProps };
