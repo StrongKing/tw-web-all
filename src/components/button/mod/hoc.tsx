@@ -46,6 +46,7 @@ export const withConfirmHOC = withHandlers({
           cancelText: '取消',
           closable: true,
           className: 'ssp-buttom-comfirm-modal',
+          centered: true,
           title: (
             <div className="ssp-button-comfirm">
               <span>{modalTitle}</span>

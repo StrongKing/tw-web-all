@@ -25,6 +25,7 @@ export const downloadButtonHOC =
       modal.current = Modal.info({
         content,
         icon: <LoadingOutlined />,
+        centered: true,
         // okText: '1',
         // footer: null,
       });

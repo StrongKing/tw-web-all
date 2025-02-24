@@ -20,6 +20,8 @@ const Splitter: React.FC<SplitterProps> = ({
   onResize,
   disabled = false,
   disabledHideBar = true,
+  className,
+  style,
 }) => {
   const splitterRef = useRef<HTMLDivElement>(null);
   const [cacheSizes, setCacheSizes, cacheSizesRef] = useRefState<number[]>([]);
@@ -127,7 +129,9 @@ const Splitter: React.FC<SplitterProps> = ({
         'ss-splitter',
         `ss-splitter-${layout}`,
         disabled ? 'ss-splitter--disabled' : '',
+        className || '',
       ].join(' ')}
+      style={style}
       onMouseMove={onMouseMove}
     >
       {panels.map((el, i) => (

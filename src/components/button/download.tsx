@@ -33,11 +33,13 @@ export const downloadButtonHOC =
       modal.current = Modal.info({
         content: '正在导出中，请稍候…',
         icon: <LoadingOutlined />,
+        centered: true,
         onOk(close) {
           Modal.confirm({
             okText: '确认',
             cancelText: '取消',
             content: '您确定要取消下载吗？',
+            centered: true,
             onOk() {
               close();
               terminate();

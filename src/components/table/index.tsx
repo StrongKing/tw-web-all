@@ -206,7 +206,7 @@ export default function CFTable({
         resetTopWhenDataChange: false,
       });
     }
-  }, []);
+  }, [virtuallistParams?.height]);
 
   const finalScroll = { ..._scroll, ...(scroll || {}) };
   return (

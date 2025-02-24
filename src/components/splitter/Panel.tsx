@@ -8,7 +8,7 @@ export const InnerPanel: React.FC<SplitterPanelProps> = ({
   return (
     <div
       className="ss-splitter-panel"
-      style={{ flexBasis: size, flexGrow: size ? 1 : 0 }}
+      style={{ flexBasis: size, flexGrow: size ? 1 : 0, flexShrink: 1 }}
     >
       {children}
     </div>

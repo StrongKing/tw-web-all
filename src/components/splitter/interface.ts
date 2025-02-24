@@ -1,4 +1,4 @@
-import { MouseEventHandler, ReactNode } from 'react';
+import { CSSProperties, MouseEventHandler, ReactNode } from 'react';
 
 export interface SplitterProps {
   layout?: 'vertical' | 'horizontal';
@@ -6,6 +6,8 @@ export interface SplitterProps {
   onResize?: (sizes: number[]) => void;
   disabled?: boolean;
   disabledHideBar?: boolean;
+  className?: string;
+  style?: CSSProperties;
 }
 
 export interface SplitterPanelProps {
