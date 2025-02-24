@@ -18,6 +18,8 @@ const Splitter: React.FC<SplitterProps> = ({
   layout = 'horizontal',
   children,
   onResize,
+  disabled = false,
+  disabledHideBar = true,
 }) => {
   const splitterRef = useRef<HTMLDivElement>(null);
   const [cacheSizes, setCacheSizes, cacheSizesRef] = useRefState<number[]>([]);
@@ -58,6 +60,7 @@ const Splitter: React.FC<SplitterProps> = ({
   const moveBar = useRef({ oldSizePrev: 0, oldSizeNext: 0, index: -1 });
   const { onMouseDown, onMouseUp, onMouseMove } = useMouseMove({
     start: (e, i: number) => {
+      if (disabled) return false;
       moveBar.current = {
         index: i,
         oldSizePrev: panelSizes[i - 1] as number,
@@ -111,16 +114,25 @@ const Splitter: React.FC<SplitterProps> = ({
       onResize?.(cacheSizesRef.current);
     },
   });
+  useEffect(() => {
+    document.body.addEventListener('mouseup', onMouseUp as any);
+    return () => {
+      document.body.removeEventListener('mouseup', onMouseUp as any);
+    };
+  }, [onMouseUp]);
   return (
     <div
       ref={splitterRef}
-      className={`ss-splitter ss-splitter-${layout}`}
-      onMouseUp={onMouseUp}
+      className={[
+        'ss-splitter',
+        `ss-splitter-${layout}`,
+        disabled ? 'ss-splitter--disabled' : '',
+      ].join(' ')}
       onMouseMove={onMouseMove}
     >
       {panels.map((el, i) => (
         <>
-          {i !== 0 && (
+          {i !== 0 && (!disabled || !disabledHideBar) && (
             <SplitterBar
               key={`splitter-bar-${i}`}
               onMouseDown={(e) => onMouseDown(e, i)}

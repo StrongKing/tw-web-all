@@ -4,6 +4,8 @@ export interface SplitterProps {
   layout?: 'vertical' | 'horizontal';
   children: ReactNode;
   onResize?: (sizes: number[]) => void;
+  disabled?: boolean;
+  disabledHideBar?: boolean;
 }
 
 export interface SplitterPanelProps {
