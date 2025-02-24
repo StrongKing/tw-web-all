@@ -27,7 +27,7 @@ export default ({
     if (['start', 'end'].includes(primaryPosition)) {
       if (
         index === (primaryPosition === 'start' ? 0 : buttonList.length - 1) &&
-        (!btnProps.type || buttonProps.type === 'default')
+        (!buttonProps.type || buttonProps.type === 'default')
       ) {
         buttonProps.type = 'primary';
       } else if (

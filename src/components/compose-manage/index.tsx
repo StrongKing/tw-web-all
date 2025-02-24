@@ -615,7 +615,7 @@ const ComposeManage = forwardRef(
                 } = btnProps;
                 if (
                   index === 0 &&
-                  (!btnProps.type || buttonProps.type === 'default')
+                  (!buttonProps.type || buttonProps.type === 'default')
                 ) {
                   buttonProps.type = 'primary';
                 } else if (index > 0 && buttonProps.type === 'primary') {
