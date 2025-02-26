@@ -3,7 +3,7 @@
 Demo:
 
 ```tsx
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Route, HashRouter as Router, Switch } from 'react-router-dom';
 import ComposeTab from '@/components/compose-tab';
 import ComposeTree from '@/components/compose-tree';
@@ -18,6 +18,7 @@ export default ({ title }: { title: string }) => {
     const ref = useRef(null);
     const click = () => {
       console.log(';click', ref, ref.current);
+      setCcc((old) => old + 1);
       ref.current.updateDataSource();
     };
     const filterLevel = (arr, level = Infinity, currLevel = 1) => {
@@ -30,12 +31,14 @@ export default ({ title }: { title: string }) => {
           : filterLevel(el.children || [], level, currLevel + 1),
       }));
     };
+    const [ccc, setCcc] = useState(1);
     return (
       <>
-        <button onClick={click}>更新</button>
+        <button onClick={click}>更新, {ccc}</button>
         <ComposeTree
           ref={ref}
           firstLoadAll
+          extraTransparentParams={ccc}
           dataSourceFormatter={(val) => {
             console.log('dataSourceFormatter', val);
             return filterLevel(val);

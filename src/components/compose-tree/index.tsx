@@ -160,6 +160,7 @@ export default forwardRef(
       requestDataFormatter,
       moduleRoute,
       dataSourceFormatter,
+      extraTransparentParams,
       ...others
     }: RouteComponentProps<{
       treePath: string;
@@ -177,6 +178,7 @@ export default forwardRef(
       requestDataFormatter,
       moduleRoute,
       dataSourceFormatter,
+      extraTransparentParams,
     });
 
     useImperativeHandle(ref, () => ({

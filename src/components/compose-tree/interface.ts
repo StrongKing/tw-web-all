@@ -77,6 +77,7 @@ export interface IComposeTreeContext {
   isInTree: boolean;
   firstLoaded: boolean;
   updateDataSource: () => void;
+  extraTransparentParams?: any;
 }
 
 export type UserType = 'customer' | 'employee';
@@ -166,6 +167,7 @@ export default interface PropTypes extends Omit<TreeProps, 'dataSource'> {
     treeContext: { treePath: string[] },
   ) => TreeDataSource;
   dataSourceFormatter?: (val: any[]) => any[];
+  extraTransparentParams?: any;
 }
 export type UserTreeProps = {
   dataSource: TreeDataSource;

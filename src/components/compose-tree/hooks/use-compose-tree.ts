@@ -54,6 +54,7 @@ export default ({
   requestDataFormatter = (data) => data.dataSource,
   moduleRoute = '\\*',
   dataSourceFormatter,
+  extraTransparentParams,
 }: RouteComponentProps<{
   treePath: string;
 }> & {
@@ -75,6 +76,7 @@ export default ({
   ) => TreeDataSource;
   moduleRoute?: string;
   dataSourceFormatter?: (val: any[]) => any[];
+  extraTransparentParams?: any;
 }): IComposeTreeContext => {
   const match = useRouteMatch();
   const history = useHistory();
@@ -572,6 +574,7 @@ export default ({
     isInTree: true,
     firstLoaded,
     updateDataSource,
+    extraTransparentParams,
   };
 };
 

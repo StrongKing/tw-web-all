@@ -1,7 +1,11 @@
-import React from 'react';
-import ComposeManage from '@/components/compose-manage';
+import React, { useContext, useEffect } from 'react';
+import { ComposeTreeContext } from '@/components/compose-tree/hooks/use-compose-tree';
 
 const AAA = ({ text }) => {
+  const treeObj = useContext(ComposeTreeContext);
+  useEffect(() => {
+    console.log(treeObj?.extraTransparentParams);
+  }, [treeObj?.extraTransparentParams]);
   const columns = [
     {
       help: null,
@@ -378,6 +382,10 @@ const AAA = ({ text }) => {
     ],
   };
   // return <ComposeManage {...props} />;
-  return text;
+  return (
+    <div>
+      {text},{treeObj?.extraTransparentParams}
+    </div>
+  );
 };
 export default AAA;
