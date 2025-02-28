@@ -62,13 +62,11 @@
     "react": "16.12.0",
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
-    "react-window": "^1.8.11",
     "recompose": "^0.30.0",
     "redux": "^4.0.5",
     "runes": "^0.4.3",
     "store2": "^2.13.2",
     "typescript": "^4.2.3",
-    "virtuallist-antd": "^0.8.0-beta.1",
     "wangeditor": "^4.7.15"
   },
   "devDependencies": {
