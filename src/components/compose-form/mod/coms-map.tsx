@@ -38,6 +38,7 @@ import cascaderSelect from './cascaderSelect';
 
 import LinkText from '@/components/link-text';
 import PhoneSmsCode from './phoneSmsCode';
+import SwitchText from './switch-text';
 
 const submitHOC = compose(
   withProps(() => ({
@@ -84,6 +85,7 @@ export default {
   mobilePhone: MobilePhone,
   linkText: LinkText,
   phoneSmsCode: PhoneSmsCode,
+  switchText: SwitchText,
 };
 
 export { default as UnSupport } from './un-support';

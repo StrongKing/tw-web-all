@@ -14,9 +14,10 @@ export interface SplitterProps {
 export interface SplitterPanelProps {
   children: ReactNode;
   defaultSize?: number | string;
-  // size?: number | string;
+  size?: number | string;
   min?: number | string;
   max?: number | string;
+  className?: string;
 }
 
 export interface SplitterBarProps {

@@ -3,12 +3,22 @@ import ComposeForm from '@/components/compose-form';
 
 const DrawLottery = ({ id, title = '', luckyNumberSource = '' }) => {
   const props = {
-    initialValues: { title, luckyNumberSource },
+    initialValues: { title, luckyNumberSource, title1: '计取' },
     controls: [
       {
         label: '标题',
         uiType: 'text',
         name: 'title',
+      },
+      {
+        label: '开关',
+        uiType: 'switchText',
+        name: 'title1',
+        props: {
+          checkedValue: '计取',
+          uncheckedValue: '不计取',
+          checkedChildren: '计取',
+        },
       },
       {
         label: '幸运号码来源',
@@ -71,6 +81,9 @@ const DrawLottery = ({ id, title = '', luckyNumberSource = '' }) => {
         },
       },
     ],
+    onValuesChange: (...args) => {
+      console.log(args);
+    },
   };
   return <ComposeForm {...props} />;
 };
