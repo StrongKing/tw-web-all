@@ -5,11 +5,13 @@ import React, {
   Suspense,
   useEffect,
   useRef,
+  useState,
+  useContext,
+  createContext,
 } from 'react';
 import { Table, Tooltip } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
-import { VList } from 'virtuallist-antd';
 import Spin from '../loading';
 import defaultComsMap, { UnSupport } from './coms-map';
 import { TableCellProps, PropTypes, ColumnItemProps } from './interface';
@@ -205,24 +207,126 @@ export default function CFTable({
     }
   }, [columns]);
 
-  const VcComponent = useMemo(() => {
-    if (virtuallistParams) {
-      return VList({
-        height: virtuallistParams?.height,
-        resetTopWhenDataChange: false,
-      });
-    }
-  }, [virtuallistParams?.height]);
-
   const finalScroll = { ..._scroll, ...(scroll || {}) };
+
+  const scrollTopRef = useRef(0);
+
+  const VirtualTableContext = createContext({
+    childrenLen: 0,
+    scrollTop: 0,
+    startRowIndex: 0,
+    startOffset: 0,
+    endRowIndex: 0,
+    dispatch: (params: { type: string; payload: any }) => {},
+  });
+
+  const VcComponent = useMemo(() => {
+    return {
+      table: ({ children: tableChildren, ...restProps }) => {
+        const [childrenLen, setChildrenLen] = useState(0);
+        const [scrollTop, setScrollTop] = useState(scrollTopRef.current);
+        const scrollChildRef = useRef<HTMLDivElement>(null);
+        const [startRowIndex, startOffset, endRowIndex] = useMemo(() => {
+          const rowHeight = virtuallistParams?.height ?? 40;
+          const startRowIndex = Math.floor(scrollTop / rowHeight);
+          const startOffset = scrollTop - startRowIndex * rowHeight;
+          const endRowIndex = Math.ceil(
+            (scrollTop + (finalScroll.y as number)) / rowHeight,
+          );
+          return [startRowIndex, startOffset, endRowIndex];
+        }, [scrollTop, virtuallistParams?.height, finalScroll.y]);
+        const dispatch = ({
+          type,
+          payload,
+        }: {
+          type: string;
+          payload: any;
+        }) => {
+          switch (type) {
+            case 'childrenLen':
+              setChildrenLen(payload);
+              break;
+            case 'scrollTop':
+              setScrollTop(payload);
+              break;
+          }
+        };
+        const onVirtualScroll = (e: any) => {
+          scrollTopRef.current = e.target.scrollTop;
+          setScrollTop(e.target.scrollTop);
+        };
+        useEffect(() => {
+          const scrollEle = scrollChildRef.current?.parentNode as HTMLElement;
+          if (scrollEle) {
+            scrollEle.scrollTop = scrollTopRef.current;
+            scrollEle.addEventListener('scroll', onVirtualScroll);
+          }
+          return () => {
+            if (scrollEle) {
+              scrollEle.removeEventListener('scroll', onVirtualScroll);
+            }
+          };
+        }, []);
+        return (
+          <VirtualTableContext.Provider
+            value={{
+              childrenLen,
+              scrollTop,
+              startRowIndex,
+              startOffset,
+              endRowIndex,
+              dispatch,
+            }}
+          >
+            <div
+              ref={scrollChildRef}
+              style={{
+                boxSizing: 'border-box',
+                height: (virtuallistParams?.height || 40) * childrenLen,
+                paddingTop: scrollTop,
+              }}
+            >
+              <table
+                {...restProps}
+                style={{
+                  ...(restProps.style || {}),
+                  minWidth: '100%',
+                  tableLayout: 'fixed',
+                  width: finalScroll.x as number,
+                  transform: `translateY(-${startOffset}px)`,
+                }}
+              >
+                {tableChildren}
+              </table>
+            </div>
+          </VirtualTableContext.Provider>
+        );
+      },
+      body: {
+        wrapper: ({ children: wrapperChildren, ...restProps }) => {
+          const { dispatch, startRowIndex, endRowIndex } =
+            useContext(VirtualTableContext);
+          useEffect(() => {
+            dispatch({
+              type: 'childrenLen',
+              payload: wrapperChildren?.[1]?.length ?? 0,
+            });
+          }, [wrapperChildren]);
+          return (
+            <tbody {...restProps}>
+              {wrapperChildren[0]}
+              {wrapperChildren[1].slice(startRowIndex, endRowIndex)}
+            </tbody>
+          );
+        },
+      },
+    };
+  }, []);
+
   return (
     <Table
       components={virtuallistParams ? VcComponent : undefined}
-      scroll={
-        virtuallistParams
-          ? { x: finalScroll?.x, y: virtuallistParams.height }
-          : finalScroll
-      }
+      scroll={finalScroll}
       dataSource={dataSource}
       loadingComponent={renderLoading}
       rowKey={primaryKey}

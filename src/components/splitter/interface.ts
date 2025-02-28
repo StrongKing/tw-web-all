@@ -8,12 +8,13 @@ export interface SplitterProps {
   disabledHideBar?: boolean;
   className?: string;
   style?: CSSProperties;
+  sizes?: (string | number | undefined)[];
 }
 
 export interface SplitterPanelProps {
   children: ReactNode;
   defaultSize?: number | string;
-  size?: number | string;
+  // size?: number | string;
   min?: number | string;
   max?: number | string;
 }

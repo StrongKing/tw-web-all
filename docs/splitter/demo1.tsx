@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Splitter from '@/components/splitter';
 
 export default () => {
+  const [sizes, setSizes] = useState([]);
   return (
-    <Splitter layout="vertical" style={{ height: 500 }}>
+    <Splitter
+      layout="vertical"
+      style={{ height: 500 }}
+      sizes={sizes}
+      onResize={(val) => setSizes(val || [])}
+    >
       <Splitter.Panel defaultSize="40%">
         <div style={{ height: 300 }}>1</div>
       </Splitter.Panel>

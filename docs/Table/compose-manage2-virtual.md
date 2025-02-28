@@ -121,10 +121,11 @@ export default () => {
     staticDataSource: staticDataSource,
     virtualTable: true,
     tableProps: {
-      virtuallistParams: { height: 578 },
+      virtuallistParams: { height: 40 },
       primaryKey: 'id',
       otherKey: 'id',
       pagination: false,
+      scroll: { y: 600 },
       expandable: {
         // expandedRowKeys: ['1', '1-2', '2', '2-3'],
         defaultExpandAllRows: true,
@@ -173,7 +174,6 @@ export default () => {
           label: '活码名称',
           name: 'name',
           uiType: null,
-          // width: 200,
           props: {
             // valueFormatter: (record, value) => (
             //   <span>
