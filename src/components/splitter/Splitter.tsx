@@ -21,6 +21,7 @@ const Splitter: React.FC<SplitterProps> = ({
   disabled = false,
   disabledHideBar = true,
   className,
+  sizes = [],
   style,
 }) => {
   const splitterRef = useRef<HTMLDivElement>(null);
@@ -33,13 +34,19 @@ const Splitter: React.FC<SplitterProps> = ({
           const { props } = node as ReactElement<SplitterPanelProps>;
           return {
             ...props,
-            size: props.size ?? cacheSizes[i],
           };
         }),
-    [cacheSizes, children],
+    [children],
+  );
+  const propSizes = useMemo(
+    () =>
+      panels.map((el, i) => {
+        return cacheSizes[i] ?? sizes[i];
+      }),
+    [cacheSizes, sizes, panels],
   );
   const [containerSize, setContainerSize] = useState(0);
-  const { panelSizes } = useSizes(panels, containerSize);
+  const { panelSizes } = useSizes(panels, propSizes, containerSize);
   useEffect(() => {
     const observer = new ResizeObserver((entries) => {
       entries.forEach((entry) => {
@@ -59,7 +66,12 @@ const Splitter: React.FC<SplitterProps> = ({
       observer.disconnect();
     };
   }, []);
-  const moveBar = useRef({ oldSizePrev: 0, oldSizeNext: 0, index: -1 });
+  const moveBar = useRef({
+    oldSizePrev: 0,
+    oldSizeNext: 0,
+    index: -1,
+    sizes: [] as number[],
+  });
   const { onMouseDown, onMouseUp, onMouseMove } = useMouseMove({
     start: (e, i: number) => {
       if (disabled) return false;
@@ -67,6 +79,7 @@ const Splitter: React.FC<SplitterProps> = ({
         index: i,
         oldSizePrev: panelSizes[i - 1] as number,
         oldSizeNext: panelSizes[i] as number,
+        sizes: [...(panelSizes as number[])],
       };
       return true;
     },
@@ -92,28 +105,26 @@ const Splitter: React.FC<SplitterProps> = ({
       });
     },
     end: ({ changeX, changeY }) => {
-      console.log(changeX, changeY);
       if (moveBar.current.index === -1) return;
       const changePt = layout === 'horizontal' ? changeX : changeY;
-      setCacheSizes((old) => {
-        old[moveBar.current.index - 1] = Math.max(
-          0,
-          Math.min(
-            moveBar.current.oldSizePrev + moveBar.current.oldSizeNext,
-            moveBar.current.oldSizePrev + changePt,
-          ),
-        );
-        old[moveBar.current.index] = Math.max(
-          0,
-          Math.min(
-            moveBar.current.oldSizePrev + moveBar.current.oldSizeNext,
-            moveBar.current.oldSizeNext - changePt,
-          ),
-        );
-        return [...old];
-      });
+      const old = [...cacheSizesRef.current];
+      old[moveBar.current.index - 1] = Math.max(
+        0,
+        Math.min(
+          moveBar.current.oldSizePrev + moveBar.current.oldSizeNext,
+          moveBar.current.oldSizePrev + changePt,
+        ),
+      );
+      old[moveBar.current.index] = Math.max(
+        0,
+        Math.min(
+          moveBar.current.oldSizePrev + moveBar.current.oldSizeNext,
+          moveBar.current.oldSizeNext - changePt,
+        ),
+      );
+      onResize?.(old);
+      setCacheSizes([]);
       moveBar.current.index = -1;
-      onResize?.(cacheSizesRef.current);
     },
   });
   useEffect(() => {

@@ -2,11 +2,11 @@
 import { useMemo, useState } from 'react';
 import { SplitterPanelProps } from './interface';
 
-const useSizes = (panelPropList: SplitterPanelProps[], containerSize = 0) => {
-  const propSizes = useMemo(
-    () => panelPropList.map((el) => el.size),
-    [panelPropList],
-  );
+const useSizes = (
+  panelPropList: SplitterPanelProps[],
+  propSizes: (string | number | undefined)[],
+  containerSize = 0,
+) => {
   const [defaultSizes] = useState(() =>
     panelPropList.map((el) => el.defaultSize),
   );
@@ -90,6 +90,7 @@ const useSizes = (panelPropList: SplitterPanelProps[], containerSize = 0) => {
     () => (containerSize ? pxSizes : sizes),
     [pxSizes, containerSize, sizes],
   );
+
   return {
     percentSizes,
     percentMinSizes,

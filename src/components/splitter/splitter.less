@@ -10,7 +10,19 @@
     flex: 0 0 0;
     .ss-splitter-bar-dragger {
       position: relative;
-      background-color: #f0f0f0;
+      &::before {
+        display: block;
+        content: '';
+        width: 100%;
+        height: 100%;
+        background-color: #f0f0f0;
+      }
+      &:hover {
+        background-color: var(--ant-primary-2, #e6f7ff);
+        &::before {
+          background-color: transparent;
+        }
+      }
     }
   }
   .ss-splitter-panel {
@@ -23,9 +35,14 @@
       .ss-splitter-bar-dragger {
         cursor: row-resize;
         width: 100%;
-        height: 2px;
-        top: -1px;
+        height: 6px;
+        top: -3px;
+        box-sizing: border-box;
+        padding: 2px 0;
         left: 0;
+        &::before {
+          height: 2px;
+        }
       }
     }
     .ss-splitter-panel {
@@ -39,9 +56,14 @@
       .ss-splitter-bar-dragger {
         cursor: col-resize;
         height: 100%;
-        width: 2px;
-        left: -1px;
+        width: 6px;
+        left: -3px;
+        box-sizing: border-box;
+        padding: 0 2px;
         top: 0;
+        &::before {
+          width: 2px;
+        }
       }
     }
     .ss-splitter-panel {
