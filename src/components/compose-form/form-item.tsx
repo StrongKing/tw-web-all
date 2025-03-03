@@ -108,22 +108,7 @@ export default function CFFormItem(componentProps: CFFormItemInternalProps) {
     comProps.dataSource = remoteSource;
   }
 
-  const showTipsUiType = [
-    'select',
-    'radio',
-    'datepicker',
-    'date-range-picker',
-    'textarea',
-    'input',
-    'number',
-    'selectTag',
-    'selectUser',
-    'upload-file',
-    'checkbox-group',
-    'text',
-    'date-picker',
-    'switch',
-  ];
+  const hideTipsUiType = ['upload-img'];
 
   const isRequired = useMemo(
     () =>
@@ -179,7 +164,7 @@ export default function CFFormItem(componentProps: CFFormItemInternalProps) {
       <Form.Item noStyle name={name} key={name || index} {...formItemProps}>
         <Com {...comProps} form={form} onChange={onComponentChange} />
       </Form.Item>
-      {props?.tips && showTipsUiType.indexOf(uiType) > -1 && (
+      {props?.tips && hideTipsUiType.indexOf(uiType) === -1 && (
         <div
           style={{
             color: '#999',
