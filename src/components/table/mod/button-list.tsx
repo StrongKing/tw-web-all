@@ -194,6 +194,10 @@ const withTableButtonFeatures = mapProps(
           tableProps,
           formProps: formProps && {
             ...formProps,
+            dataSource:
+              typeof formProps.formItemsFormat === 'function'
+                ? formProps.formItemsFormat(tableProps, formProps.dataSource)
+                : formProps.dataSource,
             request: formProps.request && produceRequest(formProps.request),
             initialValuesRequest:
               formProps.initialValuesRequest &&
