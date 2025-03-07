@@ -6,6 +6,8 @@ export default ({
   onChange,
   checkedValue = true,
   uncheckedValue = false,
+  className = '',
+  style = {},
   ...others
 }: any) => {
   const [switchChecked, setSwitchChecked] = useState<boolean>(
@@ -19,7 +21,7 @@ export default ({
     setSwitchChecked(value === checkedValue);
   }, [value]);
   return (
-    <div style={{ lineHeight: '32px' }}>
+    <div style={{ lineHeight: '32px', ...style }} className={className}>
       <Switch checked={switchChecked} onChange={handleChange} {...others} />
     </div>
   );

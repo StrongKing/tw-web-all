@@ -216,6 +216,10 @@ export default ({
         } else {
           const nodeList = getPathNodeList();
           setNowExpandedNode(nodeList[nodeList.length - 1]);
+          const newPath = nodeList.map((el) => el.id).join(SPLITTER);
+          if (treePath !== newPath) {
+            goToModule(nodeList[nodeList.length - 1], newPath, true);
+          }
         }
       })
       .finally(() => {
