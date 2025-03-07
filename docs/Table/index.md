@@ -20,7 +20,7 @@ export default () => {
   const formRef = useRef(null);
 
   window.token =
-    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcmVhX25hbWUiOiLmtZnmsZ8iLCJ1c2VyX2lkIjoxLCJ1c2VyX25hbWUiOiJhZG1pbiIsInNjb3BlIjpbInNlcnZlciJdLCJjb21wYW55X25hbWUiOiLlm73nvZHmtZnmsZ_nnIHnlLXlipvlhazlj7giLCJ1c2VyX2tleSI6IjNkNmIxOGYxLThiNjYtNDQ2NC04ZDc4LTI0N2ZjNDM1N2Y2NSIsImFyZWFfbmF0dXJlIjowLCJleHAiOjE3Mzk4ODYzMDgsImp0aSI6ImtCeU1HZTJIS3R6ODJBU1Z1QmlzY3RGaUZaSSIsImNsaWVudF9pZCI6ImFwcCJ9.2hM9dU0Fi0LNrxlWtJqRlgiUI9I0XBjLjJKwg5HdlGc';
+    'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2luZm8iOiIlN0IlMjJhdmF0YXIlMjIlM0ElMjJodHRwcyUzQSUyRiUyRndld29yay5xcGljLmNuJTJGd3dwaWMlMkYyMDEwNjRfeXc2dERUZldRQU9leUVlXzE2ODU0MDYxNTQlMkYwJTIyJTJDJTIyY29ycElkJTIyJTNBJTIyd3BvRzg0Q2dBQWpWZThBU21zbFd1eTFla3ZzSVFXUHclMjIlMkMlMjJpbmR1c3RyeVR5cGUlMjIlM0ElMjJteXR4bCUyMiUyQyUyMmxvZ2luVHlwZSUyMiUzQSUyMm5vcm1hbCUyMiUyQyUyMm1lbWJlcklkJTIyJTNBMTU2MTk2Nzg0NjcyMzI4NTAyNiUyQyUyMm1lbWJlck5hbWUlMjIlM0ElMjIlRTYlOUQlOEUlRTUlQkIlQkElRTUlQkQlQUMlMjIlMkMlMjJtb2JpbGUlMjIlM0ElMjIxMzY1NzA4NjQ1MSUyMiUyQyUyMm9yZ0lkJTIyJTNBMzAwMTAwMTAwMTAwMDAwNiUyQyUyMm9yZ05hbWUlMjIlM0ElMjIlRTYlOUQlQUQlRTUlQjclOUUlRTYlQUQlQTMlRTUlOUQlOUIlRTclQTclOTElRTYlOEElODAlRTYlOUMlODklRTklOTklOTAlRTUlODUlQUMlRTUlOEYlQjglRUYlQkMlODglRTYlQUYlOEQlRTUlQTklQjQlRUYlQkMlODklMjIlMkMlMjJvcmdUeXBlJTIyJTNBJTIyZ2VuZXJhbCUyMiUyQyUyMnJlZ2lvbkNvZGUlMjIlM0ElMjIzMzAxMDIwMDAwMDAwMDAwMDAlMjIlMkMlMjJzaG9ydE5hbWUlMjIlM0ElMjIlRTYlQUQlQTMlRTUlOUQlOUIlRTclQTclOTElRTYlOEElODAlMjIlMkMlMjJ1c2VySWQlMjIlM0ExNTYxOTY3ODQ2NzIzMjg1MDI2JTJDJTIydXNlck5hbWUlMjIlM0ElMjIlRTYlOUQlOEUlRTUlQkIlQkElRTUlQkQlQUMlMjIlMkMlMjJ1c2VyVHlwZSUyMiUzQSUyMmVtcGxveWVlJTIyJTdEIiwidXNlcl9uYW1lIjoiMzAwMTAwMTAwMTAwMDAwNjsxNTYxOTY3ODQ2NzIzMjg1MDI2O2VtcGxveWVlO25vcm1hbCIsIm9yZ19pZCI6MzAwMTAwMTAwMTAwMDAwNiwic2NvcGUiOlsid3JpdGUiXSwiZXhwIjoxNzQzODQyMjMzLCJqdGkiOiJlZjc2MmZjMy03ZjFiLTQwMzQtYTg0Mi0xN2JkNDNmZWYxNDEiLCJjbGllbnRfaWQiOiJzaXQifQ.OUIvqc_au_I1AoLMOj6rpDGyXMOWsAkMx4et0VQS9z04sfqMf0Fwk239vJ4LCGFhpiszLYVnqxt-rPF3FbtHOFNwzaQrom_ip6kzzmbCPNwC5PKp3wevFxpfJLxjO3H8zN7Vwta2WZbJ5tyYMnNnUSFiQLRFX5Q_MHQURij6ii4';
 
   const getData = (value) => value;
   const url = {
@@ -970,6 +970,21 @@ export default () => {
       },
     },
     buttonList: [
+      {
+        uiType: 'upload',
+        label: '上传',
+        name: 'file',
+        accept: '.jpg,.jpeg,.png',
+        multiple: false,
+        buttonProps: {
+          type: 'primary',
+        },
+        onFinish: (res) => {
+          console.log(res, 'rese11');
+        },
+        requestUrl: `https://front.sit.suosihulian.com/gateway/file-center/web/file/uploadFileList?appCode=hsk&groupId=0&bizGroupId=0`,
+      },
+
       {
         uiType: 'form',
         request: {
