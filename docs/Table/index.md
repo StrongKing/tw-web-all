@@ -972,10 +972,8 @@ export default () => {
     buttonList: [
       {
         uiType: 'upload',
-        label: '上传',
-        name: 'file',
+        text: '上传111',
         accept: '.jpg,.jpeg,.png',
-        multiple: false,
         buttonProps: {
           type: 'primary',
         },
