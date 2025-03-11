@@ -19,7 +19,10 @@ export default function Index({
         .map((item: { value: string }) => item.value);
       onChange(data);
     } else {
-      onChange(val);
+      const record = dataSource.find(
+        (el: any) => el[fieldNames?.value || 'value'] === val,
+      );
+      onChange(val, record);
     }
   };
 
