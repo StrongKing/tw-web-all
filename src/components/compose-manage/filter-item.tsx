@@ -48,7 +48,7 @@ export default function FilterItem({
   dataSource,
   dataSourceFmt,
   formRef,
-  props,
+  props = {},
   externalComsMap = {},
   labelWidth,
   ...others
