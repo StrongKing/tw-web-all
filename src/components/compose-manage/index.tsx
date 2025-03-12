@@ -431,11 +431,13 @@ const ComposeManage = forwardRef(
             showSizeChanger: total - 20 >= 0,
             showQuickJumper: true,
             ...(tableProps?.pagination as any),
-            showTotal: () => {
-              return `${
-                tooltip ? '' : `共 ${total} 条数据`
-              } 第 ${pageNo}/${Math.ceil(total / pageSize)} 页`;
-            },
+            showTotal:
+              tableProps?.pagination?.showTotal ||
+              (() => {
+                return `${
+                  tooltip ? '' : `共 ${total} 条数据`
+                } 第 ${pageNo}/${Math.ceil(total / pageSize)} 页`;
+              }),
           };
 
     const formProps: QueryFilterProps & BaseFormProps = useMemo(
