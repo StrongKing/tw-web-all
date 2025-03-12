@@ -93,10 +93,12 @@ export default function FilterItem({
   }
 
   if (type === 'select') {
+    const { onChange = () => {} } = props;
     return (
       <ProFormSelect
         {...props}
         {...others}
+        onChange={(val: any) => onChange(val, formRef)}
         options={remoteSource || localSource}
         fieldProps={props}
         allowClear
