@@ -76,6 +76,7 @@ export default function TableCellText({
   unClickableExpress,
   clickable = false,
   valueFormatter,
+  contentFormatter,
 }) {
   const { record, name } = tableProps || {};
   const textRef = useRef(null);
@@ -131,6 +132,10 @@ export default function TableCellText({
     );
   } else {
     content = <span className="popoverText">{showValue}</span>;
+  }
+
+  if (contentFormatter && typeof contentFormatter === 'function') {
+    content = <span className="popoverText">{contentFormatter(record)}</span>;
   }
 
   const overlayInnerStyle = {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Upload } from 'antd';
 import type { RcFile, UploadProps } from 'antd/es/upload';
 import request from '@/common/fileRequest';
@@ -8,15 +8,17 @@ import './index.less';
 const BaseUpload = ({
   onFinish,
   listType = 'text',
-  multiple,
+  multiple = false,
   accept,
   value,
+  text,
   buttonProps,
   requestUrl,
   ...props
 }: UploadProps & {
   buttonProps?: ButtonProps;
   value?: any;
+  text: string;
   requestUrl: string;
   onFinish: (data: any) => void;
 }) => {
@@ -88,7 +90,7 @@ const BaseUpload = ({
   return (
     <div className="upload-container">
       <Upload {...uploadProps}>
-        <Button {...buttonProps}>上传</Button>
+        <Button {...buttonProps}>{text}</Button>
       </Upload>
     </div>
   );

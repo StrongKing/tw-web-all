@@ -161,7 +161,19 @@ export default () => {
         { name: 'sn', label: '序号', width: 80 },
         { name: 'supplier', label: '供货方', width: 120 },
         { name: 'number', label: '编号', width: 140 },
-        { name: 'name', label: '名称', width: 140 },
+        {
+          name: 'name',
+          label: '名称333',
+          width: 140,
+          props: {
+            valueFormatter: (record, value) => {
+              return <>111</>;
+            },
+            contentFormatter: (record) => {
+              return <>test</>;
+            },
+          },
+        },
         { name: 'spec', label: '规格', width: 100 },
         { name: 'unit', label: '单位', width: 100 },
         { name: 'dosage', label: '用量', width: 100 },
