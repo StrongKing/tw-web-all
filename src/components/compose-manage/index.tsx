@@ -222,7 +222,7 @@ const ComposeManage = forwardRef(
         if (item.type === 'datepicker') {
           values[item.name] = values[item.name]
             ? moment(values[item.name]).format(item.props._format)
-            : '';
+            : undefined;
         }
 
         if (item.type === 'dateRangePicker') {
