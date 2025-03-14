@@ -84,7 +84,7 @@ export default function FilterItem({
         label={label}
         labelCol={{ flex: labelWidth }}
         style={{
-          display: collapsed && index > defaultColsNumber - 1 ? 'none' : '',
+          display: collapsed && index >= defaultColsNumber - 1 ? 'none' : '',
         }}
       >
         <Com {...props} />
@@ -113,7 +113,7 @@ export default function FilterItem({
         label={label}
         labelCol={{ flex: labelWidth }}
         style={{
-          display: collapsed && index > defaultColsNumber - 1 ? 'none' : '',
+          display: collapsed && index >= defaultColsNumber - 1 ? 'none' : '',
         }}
       >
         <CascaderSelect {...props} dataSource={remoteSource || localSource} />
@@ -129,7 +129,7 @@ export default function FilterItem({
         label={label}
         labelCol={{ flex: labelWidth }}
         style={{
-          display: collapsed && index > defaultColsNumber - 1 ? 'none' : '',
+          display: collapsed && index >= defaultColsNumber - 1 ? 'none' : '',
         }}
       >
         <CustomSelect
