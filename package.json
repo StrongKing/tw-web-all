@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "ds-web-all",
-  "version": "1.0.1-beta.31",
+  "version": "1.0.1-beta.32",
   "scripts": {
     "start": "cross-env BUILD_ENV=dev && dumi dev",
     "docs:build": "cross-env BUILD_ENV=production && dumi build",
