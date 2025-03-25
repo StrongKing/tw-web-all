@@ -36,6 +36,7 @@ const BaseUpload = ({
 
   const [_accept, setAccept] = useState<string>('');
   const [uploadFiles, setUploadFiles] = useState<RcFile[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     if (accept) {
@@ -53,6 +54,7 @@ const BaseUpload = ({
   }, [accept]);
 
   const customRequest = () => {
+    setLoading(true);
     const formData = new FormData();
     uploadFiles.forEach((file) => {
       formData.append(`file`, file);
@@ -64,6 +66,7 @@ const BaseUpload = ({
       },
       data: formData,
     }).then((res) => {
+      setLoading(false);
       onFinish(res);
     });
   };
@@ -90,7 +93,9 @@ const BaseUpload = ({
   return (
     <div className="upload-container">
       <Upload {...uploadProps}>
-        <Button {...buttonProps}>{text}</Button>
+        <Button loading={loading} {...buttonProps}>
+          {text}
+        </Button>
       </Upload>
     </div>
   );
