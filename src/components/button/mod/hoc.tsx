@@ -20,7 +20,11 @@ export const withConfirmHOC = withHandlers({
       ...others
     }: PropTypes) =>
     async (arg) => {
-      if (!confirmBeforeClick) {
+      const fmtRes =
+        typeof confirmBeforeClickFormatter === 'function'
+          ? confirmBeforeClickFormatter(tableProps)
+          : undefined;
+      if (!confirmBeforeClick && !fmtRes) {
         if (onBeforeClick) {
           await onBeforeClick(arg);
         }
@@ -28,10 +32,6 @@ export const withConfirmHOC = withHandlers({
       }
 
       return new Promise((resolve, reject) => {
-        const fmtRes =
-          typeof confirmBeforeClickFormatter === 'function'
-            ? confirmBeforeClickFormatter(tableProps)
-            : {};
         const config = {
           ...(confirmBeforeClick || {}),
           ...(typeof fmtRes === 'object' ? fmtRes : {}),
