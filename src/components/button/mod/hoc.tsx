@@ -22,7 +22,7 @@ export const withConfirmHOC = withHandlers({
     async (arg) => {
       const fmtRes =
         typeof confirmBeforeClickFormatter === 'function'
-          ? confirmBeforeClickFormatter(tableProps)
+          ? await confirmBeforeClickFormatter(tableProps)
           : undefined;
       if (!confirmBeforeClick && !fmtRes) {
         if (onBeforeClick) {
