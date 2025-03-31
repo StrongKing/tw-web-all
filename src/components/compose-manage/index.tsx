@@ -566,6 +566,11 @@ const ComposeManage = forwardRef(
     const scrollTableRefCb = (ref: HTMLElement) => {
       scrollTableRef.current = ref;
     };
+    const clearSelected = () => {
+      selectedRowKeysRef.current = [];
+      selectedRowsRef.current = [];
+      setSelectedRowKeys([]);
+    };
     useImperativeHandle(ref, () => ({
       handleReset,
       updateDataSource,
@@ -578,6 +583,7 @@ const ComposeManage = forwardRef(
           scrollTableRef.current?.scrollTo(x);
         }
       },
+      clearSelected,
     }));
 
     return (
@@ -691,9 +697,7 @@ const ComposeManage = forwardRef(
                       request={request}
                       onSuccess={(...args: any) => {
                         if (isBatch) {
-                          selectedRowKeysRef.current = [];
-                          selectedRowsRef.current = [];
-                          setSelectedRowKeys([]);
+                          clearSelected();
                         }
                         onSuccess && onSuccess(...args);
                         handleRequestButtonSuccess();
@@ -716,9 +720,7 @@ const ComposeManage = forwardRef(
                     selectedRowKeys={selectedRowKeys}
                     onSuccess={(...args: any) => {
                       if (isBatch) {
-                        selectedRowKeysRef.current = [];
-                        selectedRowsRef.current = [];
-                        setSelectedRowKeys([]);
+                        clearSelected();
                       }
                       onSuccess && onSuccess(...args);
                       handleRequestButtonSuccess();
