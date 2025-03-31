@@ -37,11 +37,12 @@ export default () => {
   const tableRef = useRef();
   const [selectedId, setSelectedId] = useState('');
   const onClick = () => {
-    tableRef.current.updateDataSource(
-      new Array(30)
-        .fill(1)
-        .map((el, i) => ({ name: `货吗名称${i}${Math.random()}` })),
-    );
+    // tableRef.current.updateDataSource(
+    //   new Array(30)
+    //     .fill(1)
+    //     .map((el, i) => ({ name: `货吗名称${i}${Math.random()}` })),
+    // );
+    tableRef.current.scrollTo({ top: 600, behavior: 'smooth' });
   };
   const props111 = {
     ref: tableRef,

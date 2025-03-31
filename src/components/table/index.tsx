@@ -80,6 +80,7 @@ export default function CFTable({
   size = 'small',
   virtuallistParams = null,
   fixFirstColumn = true,
+  scrollTableRef,
   ...others
 }: PropTypes & {
   onPageChange: (current: any, size: any) => void;
@@ -257,6 +258,9 @@ export default function CFTable({
         };
         useEffect(() => {
           const scrollEle = scrollChildRef.current?.parentNode as HTMLElement;
+          if (typeof scrollTableRef === 'function') {
+            scrollTableRef(scrollEle);
+          }
           if (scrollEle) {
             scrollEle.scrollTop = scrollTopRef.current;
             scrollEle.addEventListener('scroll', onVirtualScroll);

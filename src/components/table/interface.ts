@@ -2,6 +2,7 @@ import {
   TableProps as AntDTableProps,
   TablePaginationConfig,
 } from 'antd/lib/table';
+import { RefObject } from 'react';
 
 // 单元格组件属性
 export interface TableCellProps {
@@ -79,4 +80,5 @@ export interface PropTypes
   checkable?: boolean;
   primaryKey?: string | number | ((records?: any) => string);
   total?: number;
+  scrollTableRef?: (e: HTMLElement) => void;
 }

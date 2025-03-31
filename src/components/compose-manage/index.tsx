@@ -562,11 +562,22 @@ const ComposeManage = forwardRef(
       }
       staticDataSourceCache.current = dataSorce;
     };
-
+    const scrollTableRef = useRef<HTMLElement>(null);
+    const scrollTableRefCb = (ref: HTMLElement) => {
+      scrollTableRef.current = ref;
+    };
     useImperativeHandle(ref, () => ({
       handleReset,
       updateDataSource,
       handleSearch,
+      scrollTo: (x?: number | ScrollToOptions, y?: number) => {
+        if (!scrollTableRef.current) return;
+        if (typeof x === 'number') {
+          scrollTableRef.current?.scrollTo(x, y as number);
+        } else {
+          scrollTableRef.current?.scrollTo(x);
+        }
+      },
     }));
 
     return (
@@ -578,7 +589,6 @@ const ComposeManage = forwardRef(
           }}
         />
         {filterProps?.length > 0 && (
-          // <div ref={}>
           <QueryFilter
             formRef={formRef}
             {...formProps}
@@ -740,6 +750,7 @@ const ComposeManage = forwardRef(
         <ConfigProvider renderEmpty={renderEmpty}>
           <Table
             {...tableProps}
+            scrollTableRef={scrollTableRefCb}
             loading={dataRequest ? loading : outerLoading}
             pagination={tablePagination}
             onPageChange={handlePageChange}
