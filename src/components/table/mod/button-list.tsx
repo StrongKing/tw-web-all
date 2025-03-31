@@ -130,7 +130,7 @@ const withTableButtonFeatures = mapProps(
             // 主键
             [idName]: primaryValue,
             // 行内容
-            rowData: record,
+            // rowData: record,
             // 兼容单个操作和批量操作走同一接口的场景
             idList: [primaryValue],
             ...(params || {}),
