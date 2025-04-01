@@ -302,7 +302,7 @@ export default () => {
     buttonList: [
       {
         uiType: 'downloadFe',
-        text: '导出筛选明细',
+        text: '导出筛选明细888',
         importHeaders: [
           { key: 'groupName', label: '群聊名称' },
           { key: 'groupId', label: '咚咚群id' },
@@ -317,9 +317,9 @@ export default () => {
           },
           { key: 'failedReason', label: '备注' },
         ],
-        buttonProps: {
-          type: 'primary',
-        },
+        // buttonProps: {
+        //   type: 'primary',
+        // },
         request: {
           url: `http://xunhong.sit.suosihulian.com/rpa/config/query_sendlist`,
           method: 'POST',
@@ -974,9 +974,9 @@ export default () => {
         uiType: 'upload',
         text: '上传111',
         accept: '.jpg,.jpeg,.png',
-        buttonProps: {
-          type: 'primary',
-        },
+        // buttonProps: {
+        //   type: 'primary',
+        // },
         onFinish: (res) => {
           console.log(res, 'rese11');
         },

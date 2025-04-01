@@ -82,6 +82,7 @@ export default ({
         {...btnProps}
         qrBeforeClick={qrBeforeClick}
         isBatch={isBatch}
+        buttonProps={buttonProps}
       />
     );
   });

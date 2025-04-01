@@ -725,6 +725,7 @@ const ComposeManage = forwardRef(
                       onSuccess && onSuccess(...args);
                       handleRequestButtonSuccess();
                     }}
+                    buttonProps={buttonProps}
                   />
                 );
               })}
