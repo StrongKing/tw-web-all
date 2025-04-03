@@ -20,6 +20,7 @@ export interface CFFormItemInternalProps
   errors?: React.ReactNode;
   rules?: FormItemProps['rules'];
   tooltip?: string;
+  msg?: string;
   value?: any;
   visibleOn?: (data?: any) => boolean;
   showableOn?: any;
