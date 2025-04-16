@@ -15,6 +15,7 @@ export default function CFFormItem(componentProps: CFFormItemInternalProps) {
     index,
     props,
     tooltip,
+    msg,
     label,
     info,
     errors,
@@ -164,6 +165,14 @@ export default function CFFormItem(componentProps: CFFormItemInternalProps) {
       <Form.Item noStyle name={name} key={name || index} {...formItemProps}>
         <Com {...comProps} form={form} onChange={onComponentChange} />
       </Form.Item>
+      {msg ? (
+        <span
+          key={name || index}
+          style={{ fontWeight: 400, fontSize: '12px', color: '#999999' }}
+        >
+          {msg}
+        </span>
+      ) : null}
       {props?.tips && hideTipsUiType.indexOf(uiType) === -1 && (
         <div
           style={{
