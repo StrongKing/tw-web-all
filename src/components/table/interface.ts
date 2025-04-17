@@ -2,7 +2,7 @@ import {
   TableProps as AntDTableProps,
   TablePaginationConfig,
 } from 'antd/lib/table';
-import { RefObject } from 'react';
+import { ReactNode, RefObject } from 'react';
 
 // 单元格组件属性
 export interface TableCellProps {
@@ -93,6 +93,7 @@ export interface PropTypes
     enable: boolean;
     name?: string;
     color?: string;
+    showFormatter?: (value?: any) => ReactNode;
     valueFormatter?: (value: any, comparisionRecord: any, record: any) => any;
   };
 }
