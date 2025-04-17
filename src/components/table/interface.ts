@@ -54,6 +54,13 @@ export interface ColumnItemProps {
   fixed?: any;
   className?: string;
   children?: ColumnItemProps[];
+  comparision: {
+    value?: any;
+    enable: boolean;
+    name: string;
+    color: string;
+    valueFormatter?: (value: any, comparisionRecord: any, record: any) => any;
+  };
 }
 
 export interface PropTypes
@@ -81,4 +88,11 @@ export interface PropTypes
   primaryKey?: string | number | ((records?: any) => string);
   total?: number;
   scrollTableRef?: (e: HTMLElement) => void;
+  comparision?: {
+    value?: any;
+    enable?: boolean;
+    name?: string;
+    color?: string;
+    valueFormatter?: (value: any, comparisionRecord: any, record: any) => any;
+  };
 }

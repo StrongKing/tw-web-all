@@ -25,6 +25,7 @@ const cellRenderer = ({
   props = {},
   onEmit,
   primaryKey = 'id',
+  comparision,
 }: PropTypes &
   ColumnItemProps & {
     tableDataSource: any[] | undefined;
@@ -38,6 +39,15 @@ const cellRenderer = ({
   const Com = comsMap[uiType] || defaultComsMap[uiType] || UnSupport;
 
   return (value: any, record: any, index: any) => {
+    comparision.value = comparision.enable
+      ? typeof comparision.valueFormatter === 'function'
+        ? comparision.valueFormatter(
+            record?.[comparision.name]?.[name],
+            record?.[comparision.name],
+            record,
+          )
+        : record?.[comparision.name]?.[name]
+      : undefined;
     return (
       <Suspense fallback={<div>2</div>}>
         <Com
@@ -57,7 +67,9 @@ const cellRenderer = ({
             index,
             record,
             name,
+            comparision,
           }}
+          comparision={comparision}
         />
       </Suspense>
     );
@@ -81,6 +93,7 @@ export default function CFTable({
   virtuallistParams = null,
   fixFirstColumn = true,
   scrollTableRef,
+  comparision,
   ...others
 }: PropTypes & {
   onPageChange: (current: any, size: any) => void;
@@ -93,6 +106,13 @@ export default function CFTable({
   ) => void;
   onSelect: (record: any, selected: boolean, selectedRows: any[]) => void;
 }) {
+  const comparisionConfig = useMemo(() => {
+    if (comparision)
+      return { enable: true, name: 'src', color: '#f67d00', ...comparision };
+    return {
+      enable: false,
+    };
+  }, [comparision]);
   const renderColumn = (
     {
       name,
@@ -120,6 +140,7 @@ export default function CFTable({
         primaryKey,
         tableDataSource: dataSource,
         children,
+        comparision: comparisionConfig,
       });
     }
     let _fixed = fixed;

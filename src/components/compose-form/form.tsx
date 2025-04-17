@@ -8,7 +8,7 @@ import React, {
 } from 'react';
 import classNames from 'classnames';
 import { Form, Alert, message, Spin, Divider } from 'antd';
-import { isBoolean, isEqual } from 'lodash';
+import { isBoolean, isEqual, set } from 'lodash';
 import net from '@/services/index';
 import CFFormItem from '@/components/compose-form/form-item';
 import { getComByUiType } from '@/components/compose-form/helper';
@@ -62,6 +62,7 @@ function CFForm({
     xs: { span: 19 },
     sm: { span: 19 },
   },
+  comparision,
   ...others
 }: CFFormProps) {
   // 标识 form 原始的值，用于配合 disableSubmitWhenUnChanged 属性判断是否要禁用提交。
@@ -74,7 +75,23 @@ function CFForm({
   );
   const [form] = Form.useForm();
   const eventEmitter = useRef<EventEmitter>(new EventEmitter());
+  const [comparisionValues, setComparisionValues] = useState(
+    comparision?.init?.values || {},
+  );
 
+  const comparisionConfig = useMemo(() => {
+    return {
+      enable: !!comparision,
+      name: 'src',
+      color: '#f67d00',
+      showFormatter: (val: any) => `(送审：${val})`,
+      ...comparision,
+      init: {
+        valueFormatter: (val: any) => val,
+        ...(comparision || {}),
+      },
+    };
+  }, [comparision]);
   useEffect(() => {
     if ((controls || []).some((_) => _.name === 'nodeName')) {
       console.error(
@@ -123,6 +140,13 @@ function CFForm({
       let remoteData = null;
       if (dataFormatAfterInit) {
         initialFormValue = await dataFormatAfterInit(initialFormValue || {});
+      }
+      if (comparisionConfig.enable) {
+        const comparisionVals = await comparisionConfig.init.valueFormatter(
+          initialFormValue?.[comparisionConfig.name],
+          initialFormValue,
+        );
+        setComparisionValues(comparisionVals);
       }
       if (groupIdRequest) {
         const res = await net.request(groupIdRequest?.url, {
@@ -307,7 +331,10 @@ function CFForm({
     }
   };
   // 渲染Form组件里的FormItem
-  const renderItem = (config: CFFormItemProps, index: number) => {
+  const renderItem = (
+    { comparision: itemComparision, ...config }: CFFormItemProps,
+    index: number,
+  ) => {
     return (
       <CFFormItem
         key={`cf-form-item-${config.name || index}`}
@@ -316,6 +343,13 @@ function CFForm({
         index={index}
         form={form}
         emitter={eventEmitter.current}
+        comparision={{
+          ...comparisionConfig,
+          enable: itemComparision?.enable,
+          showBottom: itemComparision?.showBottom || true,
+          showFormatter: itemComparision?.showFormatter,
+        }}
+        comparisionValues={comparisionValues}
       />
     );
   };

@@ -19,6 +19,9 @@ const staticDataSource = new Array(50).fill(1).map((el, i) => ({
   id: `${i + 1}`,
   name: `货吗名称${i + 1}`,
   groupName: 'groupName分组',
+  src: {
+    name: 'ss',
+  },
 }));
 
 // console.log(isCurrentUser());
@@ -28,6 +31,9 @@ export default () => {
     tableRef.current.updateDataSource(
       new Array(30).fill(1).map((el, i) => ({
         name: `货吗名称货吗名称货吗名称货吗名称货吗名称货吗名称${i}${Math.random()}`,
+        src: {
+          name: 'ss',
+        },
       })),
     );
   };
@@ -155,6 +161,7 @@ export default () => {
     staticFilter: (searchParams, el) => el.name.includes(searchParams.keyword),
     staticDataSource,
     tableProps: {
+      comparision: {},
       primaryKey: 'id',
       // virtuallistParams: { height: 578 },
       columns: [
@@ -165,14 +172,6 @@ export default () => {
           name: 'name',
           label: '名称333',
           width: 140,
-          props: {
-            valueFormatter: (record, value) => {
-              return <>111</>;
-            },
-            contentFormatter: (record) => {
-              return <>test</>;
-            },
-          },
         },
         { name: 'spec', label: '规格', width: 100 },
         { name: 'unit', label: '单位', width: 100 },
