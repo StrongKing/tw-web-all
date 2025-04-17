@@ -31,6 +31,7 @@ export default function CFFormItem(componentProps: CFFormItemInternalProps) {
     className = '',
     comparision,
     comparisionValues,
+    currFieldValue,
     ...formItemProps
   } = componentProps;
   const [visible, setVisible] = useState(
@@ -175,8 +176,9 @@ export default function CFFormItem(componentProps: CFFormItemInternalProps) {
         <Com {...comProps} form={form} onChange={onComponentChange} />
       </Form.Item>
       {comparisionProps.enable &&
+      comparisionProps.showBottom &&
       typeof comparisionProps.value !== 'undefined' &&
-      form.getFieldValue(name) !== comparisionProps.value ? (
+      currFieldValue !== comparisionProps.value ? (
         <span
           key={name || index}
           style={{

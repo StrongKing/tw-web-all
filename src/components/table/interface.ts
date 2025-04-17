@@ -90,7 +90,7 @@ export interface PropTypes
   scrollTableRef?: (e: HTMLElement) => void;
   comparision?: {
     value?: any;
-    enable?: boolean;
+    enable: boolean;
     name?: string;
     color?: string;
     valueFormatter?: (value: any, comparisionRecord: any, record: any) => any;

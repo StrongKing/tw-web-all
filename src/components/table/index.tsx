@@ -107,10 +107,11 @@ export default function CFTable({
   onSelect: (record: any, selected: boolean, selectedRows: any[]) => void;
 }) {
   const comparisionConfig = useMemo(() => {
-    if (comparision)
-      return { enable: true, name: 'src', color: '#f67d00', ...comparision };
     return {
-      enable: false,
+      enable: !!comparision,
+      name: 'src',
+      color: '#f67d00',
+      ...(comparision || {}),
     };
   }, [comparision]);
   const renderColumn = (
@@ -126,6 +127,7 @@ export default function CFTable({
       help,
       fixed,
       children = [],
+      comparision: itemComparision,
       ...others
     }: ColumnItemProps,
     colIndex: number,
@@ -140,7 +142,10 @@ export default function CFTable({
         primaryKey,
         tableDataSource: dataSource,
         children,
-        comparision: comparisionConfig,
+        comparision: {
+          ...comparisionConfig,
+          enable: itemComparision?.enable ?? comparisionConfig.enable,
+        },
       });
     }
     let _fixed = fixed;

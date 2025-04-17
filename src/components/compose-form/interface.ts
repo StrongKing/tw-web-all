@@ -39,6 +39,7 @@ export interface CFFormItemInternalProps
     // valueFormatter?: (value: any, comparsionFormValues: any, formValues: any) => any;
   };
   comparisionValues?: any;
+  currFieldValue?: any;
 }
 
 export type CFFormItemProps = Omit<

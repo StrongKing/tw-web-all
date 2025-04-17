@@ -8,7 +8,7 @@ import React, {
 } from 'react';
 import classNames from 'classnames';
 import { Form, Alert, message, Spin, Divider } from 'antd';
-import { isBoolean, isEqual, set } from 'lodash';
+import { isBoolean, isEqual } from 'lodash';
 import net from '@/services/index';
 import CFFormItem from '@/components/compose-form/form-item';
 import { getComByUiType } from '@/components/compose-form/helper';
@@ -67,6 +67,7 @@ function CFForm({
 }: CFFormProps) {
   // 标识 form 原始的值，用于配合 disableSubmitWhenUnChanged 属性判断是否要禁用提交。
   const initialValuesRef = useRef<any>(initialValues);
+  const [formValues, setFormValues] = useState(initialValues);
   const [globalError, setGlobalError] = useState(null);
   const [submitLoadGoBack, setSubmitLoadGoBack] = useState(false);
   const [submitLoadRefresh, setSubmitLoadRefresh] = useState(false);
@@ -105,6 +106,7 @@ function CFForm({
     // 如果组件非受控，则在初始化时将 initialValues 设置为表单初始值
     if (value === undefined) {
       form.setFieldsValue(initialValues);
+      setFormValues(initialValues);
       initialValuesRequestSuccess && initialValuesRequestSuccess(eventEmitter);
     }
   }, []);
@@ -113,6 +115,7 @@ function CFForm({
     // 如果组件受控，则受控同步 form 的值
     if (value !== undefined) {
       form.setFieldsValue({ ...form.getFieldsValue(), ...value });
+      setFormValues({ ...form.getFieldsValue(), ...value });
     }
   }, [value]);
   // 请求
@@ -169,7 +172,7 @@ function CFForm({
       }
 
       form.setFieldsValue(initialFormValue);
-
+      setFormValues(initialFormValue);
       initialValuesRequestSuccess && initialValuesRequestSuccess(eventEmitter);
 
       initialValuesRef.current = form.getFieldsValue();
@@ -286,6 +289,7 @@ function CFForm({
   // 表单处理
   const handleFormChange = (changedValue: any, formValue: any) => {
     onValuesChange(changedValue, formValue, form.setFieldsValue, form);
+    setFormValues(formValue);
     disableSubmitIfPossible();
   };
 
@@ -345,11 +349,13 @@ function CFForm({
         emitter={eventEmitter.current}
         comparision={{
           ...comparisionConfig,
-          enable: itemComparision?.enable,
+          enable: itemComparision?.enable ?? comparisionConfig.enable,
           showBottom: itemComparision?.showBottom || true,
-          showFormatter: itemComparision?.showFormatter,
+          showFormatter:
+            itemComparision?.showFormatter ?? comparisionConfig.showFormatter,
         }}
         comparisionValues={comparisionValues}
+        currFieldValue={formValues?.[config.name]}
       />
     );
   };
@@ -386,6 +392,7 @@ function CFForm({
       case 'reset':
         comProps.onClick = () => {
           form.setFieldsValue(initialValuesRef.current);
+          setFormValues(initialValuesRef.current);
         };
         break;
       default:

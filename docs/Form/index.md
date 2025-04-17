@@ -89,46 +89,8 @@ export default () => {
       },
     },
     {
-      label: '邀请客户入群',
-      uiType: 'selectUser',
-      name: 'cusSignature',
-      props: {
-        wrapperKey: 'externalUserInfoList',
-        selectUserProps: {
-          showTabList: ['externalByAcctIdContacts'],
-          userOrigin: 'https://front.sit.suosihulian.com/gateway/user-center',
-          unCheckableNodeType: ['DEPT'],
-          isSaveSelectSignature: true,
-          multiple: true,
-          requestParams: {
-            selectTypeList: ['user'],
-            types: ['acctIdAndExternalContacts'],
-            acctId: 'wooG84CgAAOWt2LNyhAML7VHuENDNOgA',
-          },
-          selectType: 'user',
-          dialogProps: {
-            title: '选人组件',
-          },
-          onOkValidator: ({
-            maternalInfoList,
-          }: {
-            maternalInfoList: any[];
-          }) => {
-            if (maternalInfoList?.length > 36) {
-              message.error('最多只能选择36个客户');
-              return false;
-            }
-            return true;
-          },
-        },
-        tips: '单个客户群最多支持邀请36人',
-      },
-      rules: [
-        {
-          required: true,
-          message: '请选择客户',
-        },
-      ],
+      label: 'ddd',
+      name: 'ddd',
     },
     {
       uiType: 'upload-img',
@@ -427,35 +389,34 @@ export default () => {
   const props2 = {
     // title: '延期生效',
     controls,
-    // initialValuesRequest: {
-    //   url: 'https://front.sit.suosihulian.com/gateway/crm/rpa/config/query_taskdetail',
-    //   method: 'POST',
-    //   params: {
-    //     taskId: '1c46efc5cb2dedd593b34ba53dd32c1b',
-    //   },
-    //   postRemoveSearch: true,
-    // },
-    initialValues: {
-      aaa: 'ccc',
-      cusSignature: [
-        {
-          childDelete: true,
-          contactType: 11,
-          extendedAttribute: {
-            realName: '马杰',
-            externalUserId: 'wmoG84CgAAhJVh6QoAmZzAgic0Z40DsQ',
-            openId: '',
-          },
-          externalUserId: 'wmoG84CgAAhJVh6QoAmZzAgic0Z40DsQ',
-          openId: '',
-          realName: '马杰',
-          id: 'wmoG84CgAAhJVh6QoAmZzAgic0Z40DsQ',
-          key: 'wmoG84CgAAhJVh6QoAmZzAgic0Z40DsQ',
-          name: '马杰(wmoG84CgAAhJVh6QoAmZzAgic0Z40DsQ)',
-          type: 'EXTERNAL_USER',
-        },
-      ],
+    initialValuesRequest: {
+      url: '/data/get-form-data.json',
+      method: 'GET',
     },
+    comparision: {
+      enable: true,
+    },
+    // initialValues: {
+    //   aaa: 'ccc',
+    //   cusSignature: [
+    //     {
+    //       childDelete: true,
+    //       contactType: 11,
+    //       extendedAttribute: {
+    //         realName: '马杰',
+    //         externalUserId: 'wmoG84CgAAhJVh6QoAmZzAgic0Z40DsQ',
+    //         openId: '',
+    //       },
+    //       externalUserId: 'wmoG84CgAAhJVh6QoAmZzAgic0Z40DsQ',
+    //       openId: '',
+    //       realName: '马杰',
+    //       id: 'wmoG84CgAAhJVh6QoAmZzAgic0Z40DsQ',
+    //       key: 'wmoG84CgAAhJVh6QoAmZzAgic0Z40DsQ',
+    //       name: '马杰(wmoG84CgAAhJVh6QoAmZzAgic0Z40DsQ)',
+    //       type: 'EXTERNAL_USER',
+    //     },
+    //   ],
+    // },
     actions: [
       {
         uiType: 'button',
@@ -557,5 +518,7 @@ export default () => {
 ```
 
 <code src="./requestDemo.tsx" description="请求报错">请求报错</code>
+
+<code src="./comparisionDemo.tsx" description="对比">对比</code>
 
 More skills for writing demo: https://d.umijs.org/guide/basic#write-component-demo
