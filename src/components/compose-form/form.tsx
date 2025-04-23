@@ -93,6 +93,15 @@ function CFForm({
       },
     };
   }, [comparision]);
+  const updateConparisionVal = async (val: any) => {
+    if (comparisionConfig.enable) {
+      const comparisionVals = await comparisionConfig.init.valueFormatter(
+        val?.[comparisionConfig.name],
+        val,
+      );
+      setComparisionValues(comparisionVals);
+    }
+  };
   useEffect(() => {
     if ((controls || []).some((_) => _.name === 'nodeName')) {
       console.error(
@@ -105,6 +114,7 @@ function CFForm({
   useEffect(() => {
     // 如果组件非受控，则在初始化时将 initialValues 设置为表单初始值
     if (value === undefined) {
+      updateConparisionVal(initialValues);
       form.setFieldsValue(initialValues);
       setFormValues(initialValues);
       initialValuesRequestSuccess && initialValuesRequestSuccess(eventEmitter);
@@ -114,6 +124,7 @@ function CFForm({
   useEffect(() => {
     // 如果组件受控，则受控同步 form 的值
     if (value !== undefined) {
+      updateConparisionVal(value);
       form.setFieldsValue({ ...form.getFieldsValue(), ...value });
       setFormValues({ ...form.getFieldsValue(), ...value });
     }
@@ -144,13 +155,6 @@ function CFForm({
       if (dataFormatAfterInit) {
         initialFormValue = await dataFormatAfterInit(initialFormValue || {});
       }
-      if (comparisionConfig.enable) {
-        const comparisionVals = await comparisionConfig.init.valueFormatter(
-          initialFormValue?.[comparisionConfig.name],
-          initialFormValue,
-        );
-        setComparisionValues(comparisionVals);
-      }
       if (groupIdRequest) {
         const res = await net.request(groupIdRequest?.url, {
           method: 'GET',
@@ -171,10 +175,12 @@ function CFForm({
         initialFormValue = await { ...initialFormValue, ...newObj };
       }
 
-      form.setFieldsValue(initialFormValue);
-      setFormValues(initialFormValue);
+      if (initialValuesRequest) {
+        await updateConparisionVal(initialFormValue);
+        form.setFieldsValue(initialFormValue);
+        setFormValues(initialFormValue);
+      }
       initialValuesRequestSuccess && initialValuesRequestSuccess(eventEmitter);
-
       initialValuesRef.current = form.getFieldsValue();
     },
   );
@@ -289,7 +295,7 @@ function CFForm({
   // 表单处理
   const handleFormChange = (changedValue: any, formValue: any) => {
     onValuesChange(changedValue, formValue, form.setFieldsValue, form);
-    setFormValues(formValue);
+    setFormValues(form.getFieldsValue());
     disableSubmitIfPossible();
   };
 

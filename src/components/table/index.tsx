@@ -111,7 +111,7 @@ export default function CFTable({
       enable: !!comparision,
       name: 'source',
       color: '#f67d00',
-      showFormatter: (val: any) => `(审价：${val})`,
+      showFormatter: (val: any) => `(送审：${val})`,
       ...(comparision || {}),
     };
   }, [comparision]);

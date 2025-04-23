@@ -124,8 +124,10 @@ export default function TableCellText({
 
   const comparisionText = useMemo(
     () =>
-      comparision.enable && typeof comparision.value !== 'undefined' ? (
-        <span style={{ color: comparision.color }}>
+      comparision.enable &&
+      typeof comparision.value !== 'undefined' &&
+      comparision.value !== value ? (
+        <span style={{ color: comparision.color, marginLeft: 4 }}>
           {comparision.showFormatter(comparision.value, record)}
         </span>
       ) : null,
