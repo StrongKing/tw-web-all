@@ -19,7 +19,7 @@ const staticDataSource = new Array(50).fill(1).map((el, i) => ({
   id: `${i + 1}`,
   name: `货吗名称${i + 1}`,
   groupName: 'groupName分组',
-  src: {
+  source: {
     name: 'ss',
   },
 }));
@@ -31,7 +31,7 @@ export default () => {
     tableRef.current.updateDataSource(
       new Array(30).fill(1).map((el, i) => ({
         name: `货吗名称货吗名称货吗名称货吗名称货吗名称货吗名称${i}${Math.random()}`,
-        src: {
+        source: {
           name: 'ss',
         },
       })),
