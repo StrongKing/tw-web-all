@@ -77,6 +77,7 @@ export default function TableCellText({
   clickable = false,
   valueFormatter,
   contentFormatter,
+  comparision,
 }) {
   const { record, name } = tableProps || {};
   const textRef = useRef(null);
@@ -121,6 +122,18 @@ export default function TableCellText({
   //   }
   // }, [showValue, ellipsis]);
 
+  const comparisionText = useMemo(
+    () =>
+      comparision.enable &&
+      typeof comparision.value !== 'undefined' &&
+      comparision.value !== value ? (
+        <span style={{ color: comparision.color, marginLeft: 4 }}>
+          {comparision.showFormatter(comparision.value, record)}
+        </span>
+      ) : null,
+    [comparision, record],
+  );
+
   let content = null;
   if (showValue instanceof Array) {
     content = (
@@ -128,14 +141,25 @@ export default function TableCellText({
         {showValue.map((item) => (
           <div>{item}</div>
         ))}
+        {comparisionText}
       </span>
     );
   } else {
-    content = <span className="popoverText">{showValue}</span>;
+    content = (
+      <span className="popoverText">
+        {showValue}
+        {comparisionText}
+      </span>
+    );
   }
 
   if (contentFormatter && typeof contentFormatter === 'function') {
-    content = <span className="popoverText">{contentFormatter(record)}</span>;
+    content = (
+      <span className="popoverText">
+        {contentFormatter(record)}
+        {comparisionText}
+      </span>
+    );
   }
 
   const overlayInnerStyle = {
@@ -171,21 +195,24 @@ export default function TableCellText({
   };
 
   return (
-    <Popover
-      content={content}
-      placement="bottomLeft"
-      overlayInnerStyle={overlayInnerStyle}
-    >
-      <div
-        ref={textRef}
-        // onClick={onClick?.bind(null, record, name)}
-        onClick={() => handleClick()}
-        className={textClass}
-        style={{ WebkitLineClamp: rows }}
+    <>
+      <Popover
+        content={content}
+        placement="bottomLeft"
+        overlayInnerStyle={overlayInnerStyle}
       >
-        {unClickableExpress && unClickableExpress(record, name)}
-        {isNullOrUndefinedOrEmpty(showValue) ? '-' : showValue}
-      </div>
-    </Popover>
+        <div
+          ref={textRef}
+          // onClick={onClick?.bind(null, record, name)}
+          onClick={() => handleClick()}
+          className={textClass}
+          style={{ WebkitLineClamp: rows }}
+        >
+          {unClickableExpress && unClickableExpress(record, name)}
+          {isNullOrUndefinedOrEmpty(showValue) ? '-' : showValue}
+          {comparisionText}
+        </div>
+      </Popover>
+    </>
   );
 }

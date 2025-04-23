@@ -29,6 +29,9 @@ export default function CFFormItem(componentProps: CFFormItemInternalProps) {
     showableOn,
     labelWrap = false,
     className = '',
+    comparision,
+    comparisionValues,
+    currFieldValue,
     ...formItemProps
   } = componentProps;
   const [visible, setVisible] = useState(
@@ -103,7 +106,14 @@ export default function CFFormItem(componentProps: CFFormItemInternalProps) {
 
   // 获取组件类型，并设置相关Props
   const Com = getComByUiType(uiType, externalComsMap);
-  const comProps = { ...props };
+  const comparisionProps = useMemo(
+    () => ({
+      ...comparision,
+      value: comparision?.enable ? comparisionValues?.[name] : undefined,
+    }),
+    [name, comparision, comparisionValues],
+  );
+  const comProps = { ...props, comparision: comparisionProps };
   if (source) {
     comProps.loading = loading;
     comProps.dataSource = remoteSource;
@@ -165,6 +175,24 @@ export default function CFFormItem(componentProps: CFFormItemInternalProps) {
       <Form.Item noStyle name={name} key={name || index} {...formItemProps}>
         <Com {...comProps} form={form} onChange={onComponentChange} />
       </Form.Item>
+      {comparisionProps.enable &&
+      comparisionProps.showBottom &&
+      typeof comparisionProps.value !== 'undefined' &&
+      currFieldValue !== comparisionProps.value ? (
+        <span
+          key={name || index}
+          style={{
+            fontWeight: 400,
+            fontSize: '12px',
+            color: comparisionProps.color,
+            ...(comparisionProps.style || {}),
+          }}
+        >
+          {typeof comparisionProps.showFormatter === 'function'
+            ? comparisionProps.showFormatter(comparisionProps.value)
+            : comparisionProps.value}
+        </span>
+      ) : null}
       {msg ? (
         <span
           key={name || index}

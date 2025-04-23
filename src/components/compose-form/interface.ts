@@ -3,6 +3,7 @@ import { AlertProps } from 'antd/lib/alert';
 import EventEmitter from '@/components/compose-form/events';
 import { FormProps, FormItemProps, FormInstance } from 'antd/lib/form';
 import { Request } from '@/components/interface';
+import { ReactNode } from 'react';
 
 export interface CFFormItemInternalProps
   extends Omit<FormItemProps, 'children'> {
@@ -27,6 +28,18 @@ export interface CFFormItemInternalProps
   newSourceParams?: (prevParams?: any, data?: any) => any;
   labelWrap?: boolean;
   className?: string;
+  comparision?: {
+    value?: any;
+    enable?: boolean;
+    name?: string;
+    color?: string;
+    showFormatter?: (value: any) => ReactNode;
+    style?: React.CSSProperties;
+    showBottom?: boolean;
+    // valueFormatter?: (value: any, comparsionFormValues: any, formValues: any) => any;
+  };
+  comparisionValues?: any;
+  currFieldValue?: any;
 }
 
 export type CFFormItemProps = Omit<
@@ -94,6 +107,18 @@ export interface CFFormProps extends FormProps {
   // 分栏数
   columns?: number;
   noContainer?: boolean;
+  comparision?: {
+    value?: any;
+    enable?: boolean;
+    name?: string;
+    color?: string;
+    valueFormatter?: (value: any, formValues: any) => any;
+    showFormatter?: (value: any) => ReactNode;
+    init?: {
+      values: any;
+      valueFormatter?: (values: any) => any;
+    };
+  };
 }
 
 export interface CFFormCustomComProps {

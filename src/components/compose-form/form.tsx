@@ -62,10 +62,12 @@ function CFForm({
     xs: { span: 19 },
     sm: { span: 19 },
   },
+  comparision,
   ...others
 }: CFFormProps) {
   // 标识 form 原始的值，用于配合 disableSubmitWhenUnChanged 属性判断是否要禁用提交。
   const initialValuesRef = useRef<any>(initialValues);
+  const [formValues, setFormValues] = useState(initialValues);
   const [globalError, setGlobalError] = useState(null);
   const [submitLoadGoBack, setSubmitLoadGoBack] = useState(false);
   const [submitLoadRefresh, setSubmitLoadRefresh] = useState(false);
@@ -74,7 +76,32 @@ function CFForm({
   );
   const [form] = Form.useForm();
   const eventEmitter = useRef<EventEmitter>(new EventEmitter());
+  const [comparisionValues, setComparisionValues] = useState(
+    comparision?.init?.values || {},
+  );
 
+  const comparisionConfig = useMemo(() => {
+    return {
+      enable: !!comparision,
+      name: 'source',
+      color: '#f67d00',
+      showFormatter: (val: any) => `(送审：${val})`,
+      ...comparision,
+      init: {
+        valueFormatter: (val: any) => val,
+        ...(comparision || {}),
+      },
+    };
+  }, [comparision]);
+  const updateConparisionVal = async (val: any) => {
+    if (comparisionConfig.enable) {
+      const comparisionVals = await comparisionConfig.init.valueFormatter(
+        val?.[comparisionConfig.name],
+        val,
+      );
+      setComparisionValues(comparisionVals);
+    }
+  };
   useEffect(() => {
     if ((controls || []).some((_) => _.name === 'nodeName')) {
       console.error(
@@ -87,7 +114,9 @@ function CFForm({
   useEffect(() => {
     // 如果组件非受控，则在初始化时将 initialValues 设置为表单初始值
     if (value === undefined) {
+      updateConparisionVal(initialValues);
       form.setFieldsValue(initialValues);
+      setFormValues(initialValues);
       initialValuesRequestSuccess && initialValuesRequestSuccess(eventEmitter);
     }
   }, []);
@@ -95,7 +124,9 @@ function CFForm({
   useEffect(() => {
     // 如果组件受控，则受控同步 form 的值
     if (value !== undefined) {
+      updateConparisionVal(value);
       form.setFieldsValue({ ...form.getFieldsValue(), ...value });
+      setFormValues({ ...form.getFieldsValue(), ...value });
     }
   }, [value]);
   // 请求
@@ -144,10 +175,12 @@ function CFForm({
         initialFormValue = await { ...initialFormValue, ...newObj };
       }
 
-      form.setFieldsValue(initialFormValue);
-
+      if (initialValuesRequest) {
+        await updateConparisionVal(initialFormValue);
+        form.setFieldsValue(initialFormValue);
+        setFormValues(initialFormValue);
+      }
       initialValuesRequestSuccess && initialValuesRequestSuccess(eventEmitter);
-
       initialValuesRef.current = form.getFieldsValue();
     },
   );
@@ -262,6 +295,7 @@ function CFForm({
   // 表单处理
   const handleFormChange = (changedValue: any, formValue: any) => {
     onValuesChange(changedValue, formValue, form.setFieldsValue, form);
+    setFormValues(form.getFieldsValue());
     disableSubmitIfPossible();
   };
 
@@ -307,7 +341,10 @@ function CFForm({
     }
   };
   // 渲染Form组件里的FormItem
-  const renderItem = (config: CFFormItemProps, index: number) => {
+  const renderItem = (
+    { comparision: itemComparision, ...config }: CFFormItemProps,
+    index: number,
+  ) => {
     return (
       <CFFormItem
         key={`cf-form-item-${config.name || index}`}
@@ -316,6 +353,15 @@ function CFForm({
         index={index}
         form={form}
         emitter={eventEmitter.current}
+        comparision={{
+          ...comparisionConfig,
+          enable: itemComparision?.enable ?? comparisionConfig.enable,
+          showBottom: itemComparision?.showBottom || true,
+          showFormatter:
+            itemComparision?.showFormatter ?? comparisionConfig.showFormatter,
+        }}
+        comparisionValues={comparisionValues}
+        currFieldValue={formValues?.[config.name]}
       />
     );
   };
@@ -352,6 +398,7 @@ function CFForm({
       case 'reset':
         comProps.onClick = () => {
           form.setFieldsValue(initialValuesRef.current);
+          setFormValues(initialValuesRef.current);
         };
         break;
       default:
