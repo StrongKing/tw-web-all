@@ -109,7 +109,7 @@ export default function CFTable({
   const comparisionConfig = useMemo(() => {
     return {
       enable: !!comparision,
-      name: 'src',
+      name: 'source',
       color: '#f67d00',
       showFormatter: (val: any) => `(审价：${val})`,
       ...(comparision || {}),
