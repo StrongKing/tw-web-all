@@ -108,10 +108,9 @@ export default function CFFormItem(componentProps: CFFormItemInternalProps) {
   const Com = getComByUiType(uiType, externalComsMap);
   const comparisionProps = useMemo(
     () => ({
-      ...comparision,
-      value: comparision?.enable ? comparisionValues?.[name] : undefined,
+      ...(comparision || {}),
     }),
-    [name, comparision, comparisionValues],
+    [comparision],
   );
   const comProps = { ...props, comparision: comparisionProps };
   if (source) {

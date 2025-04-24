@@ -356,9 +356,10 @@ function CFForm({
         comparision={{
           ...comparisionConfig,
           enable: itemComparision?.enable ?? comparisionConfig.enable,
-          showBottom: itemComparision?.showBottom || true,
+          showBottom: itemComparision?.showBottom ?? true,
           showFormatter:
             itemComparision?.showFormatter ?? comparisionConfig.showFormatter,
+          value: comparisionValues?.[config.name],
         }}
         comparisionValues={comparisionValues}
         currFieldValue={formValues?.[config.name]}
@@ -410,7 +411,7 @@ function CFForm({
 
   const formItemNodes = useMemo(
     () => (controls || []).map(renderItem),
-    [controls, comsMap],
+    [controls, comsMap, comparisionValues],
   );
   const formActionNodes = useMemo(
     () => (actions || []).map(renderAction),
