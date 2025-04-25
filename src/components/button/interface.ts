@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { ButtonProps } from 'antd/lib/button';
 import { ModalProps } from 'antd/lib/modal';
-import { BadgeProps } from 'antd';
+import { BadgeProps, TooltipProps } from 'antd';
 import { Request } from '@/components/interface';
 import { CFFormProps } from '@/components/compose-form';
 import { PropTypes as TablePropTypes } from '@/components/compose-manage/interface';
@@ -80,6 +80,7 @@ export type BasePropTypes = {
   additions?: any;
   tableProps?: any;
   badgeProps?: BadgeProps;
+  tooltipProps?: TooltipProps;
 } & Pick<ButtonProps, 'onClick'>;
 
 export type EventButtonProps = BasePropTypes & {

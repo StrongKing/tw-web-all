@@ -975,6 +975,7 @@ export default () => {
         uiType: 'upload',
         text: '上传111',
         badgeProps: { dot: true },
+        tooltipProps: { title: '提示文字' },
         accept: '.jpg,.jpeg,.png',
         // buttonProps: {
         //   type: 'primary',

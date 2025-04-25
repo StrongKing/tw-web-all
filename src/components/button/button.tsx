@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { PropTypes } from './interface';
 import Button from './default';
 import { Spin } from '@/components/blank';
-import { Badge } from 'antd';
+import { Badge, Tooltip } from 'antd';
 
 const comsMap = {
   default: Button,
@@ -28,18 +28,35 @@ const comsMap = {
   table: React.lazy(() => import('./table')),
 };
 
-export default ({ uiType = 'default', badgeProps, ...others }: PropTypes) => {
-  const BtnCom = comsMap[uiType] || Button;
+const withOuterComp =
+  (Comp: any, OuterComp: any, outerPropsName: keyof PropTypes) =>
+  ({ [outerPropsName]: outerProps, ...others }: PropTypes) => {
+    return outerProps ? (
+      <OuterComp {...outerProps}>
+        <Comp {...others} />
+      </OuterComp>
+    ) : (
+      <Comp {...others} />
+    );
+  };
+const outerCompList = [
+  [Badge, 'badgeProps'],
+  [Tooltip, 'tooltipProps'],
+];
+
+export default ({ uiType = 'default', ...others }: PropTypes) => {
+  let BtnCom = comsMap[uiType] || Button;
+  outerCompList.forEach(([OuterComp, outerPropsName]) => {
+    BtnCom = withOuterComp(
+      BtnCom,
+      OuterComp,
+      outerPropsName as keyof PropTypes,
+    );
+  });
   // @ts-ignore
   return (
     <Suspense fallback={<Spin />}>
-      {badgeProps ? (
-        <Badge {...badgeProps}>
-          <BtnCom {...others} />
-        </Badge>
-      ) : (
-        <BtnCom {...others} />
-      )}
+      <BtnCom {...others} />
     </Suspense>
   );
 };
