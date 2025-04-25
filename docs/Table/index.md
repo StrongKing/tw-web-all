@@ -303,6 +303,7 @@ export default () => {
       {
         uiType: 'downloadFe',
         text: '导出筛选明细888',
+        badge: { dot: true },
         importHeaders: [
           { key: 'groupName', label: '群聊名称' },
           { key: 'groupId', label: '咚咚群id' },
@@ -973,6 +974,7 @@ export default () => {
       {
         uiType: 'upload',
         text: '上传111',
+        badgeProps: { dot: true },
         accept: '.jpg,.jpeg,.png',
         // buttonProps: {
         //   type: 'primary',

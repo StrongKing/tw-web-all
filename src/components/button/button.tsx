@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import { PropTypes } from './interface';
 import Button from './default';
 import { Spin } from '@/components/blank';
+import { Badge } from 'antd';
 
 const comsMap = {
   default: Button,
@@ -27,12 +28,18 @@ const comsMap = {
   table: React.lazy(() => import('./table')),
 };
 
-export default ({ uiType = 'default', ...others }: PropTypes) => {
+export default ({ uiType = 'default', badgeProps, ...others }: PropTypes) => {
   const BtnCom = comsMap[uiType] || Button;
   // @ts-ignore
   return (
     <Suspense fallback={<Spin />}>
-      <BtnCom {...others} />
+      {badgeProps ? (
+        <Badge {...badgeProps}>
+          <BtnCom {...others} />
+        </Badge>
+      ) : (
+        <BtnCom {...others} />
+      )}
     </Suspense>
   );
 };
