@@ -6,11 +6,6 @@ import infoIcon from './info.svg';
 import './index.less';
 
 export const withConfirmHOC = withHandlers({
-  toggleVisibility: ({ toggleVis, isVisible }) => {
-    return () => {
-      return toggleVis(!isVisible);
-    };
-  },
   onBeforeClick:
     ({
       confirmBeforeClick,
@@ -80,8 +75,9 @@ export const withConfirmHOC = withHandlers({
 });
 
 export const spreadButtonPropsHOC = mapProps(
-  ({ buttonProps, text, onClick }: PropTypes) => {
+  ({ buttonProps, text, onClick, ...other }: PropTypes) => {
     return {
+      ...other,
       ...buttonProps,
       children: text,
       onClick,

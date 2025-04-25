@@ -210,7 +210,6 @@ const withRequest =
     );
   };
 export const requestHoc = compose(
-  withState('isVisible', 'toggleVis', false),
   withConfirmHOC,
   withRequest,
   spreadButtonPropsHOC,

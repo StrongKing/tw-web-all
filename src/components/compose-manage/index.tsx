@@ -627,7 +627,6 @@ const ComposeManage = forwardRef(
                   isBatch,
                   buttonProps = {},
                   onSuccess,
-                  qrBeforeClick = false,
                   confirmBeforeClick,
                   ...others
                 } = btnProps;
@@ -702,7 +701,6 @@ const ComposeManage = forwardRef(
                         onSuccess && onSuccess(...args);
                         handleRequestButtonSuccess();
                       }}
-                      qrBeforeClick={qrBeforeClick}
                       isBatch={isBatch}
                       buttonProps={buttonProps}
                       selectedRowKeys={selectedRowKeys}
@@ -715,7 +713,6 @@ const ComposeManage = forwardRef(
                   <ActionButton
                     key={index}
                     {...btnProps}
-                    qrBeforeClick={qrBeforeClick}
                     isBatch={isBatch}
                     selectedRowKeys={selectedRowKeys}
                     onSuccess={(...args: any) => {

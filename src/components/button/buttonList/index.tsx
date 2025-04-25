@@ -19,7 +19,6 @@ export default ({
       request,
       isBatch,
       buttonProps: oldBtnProps = {},
-      qrBeforeClick = false,
       confirmBeforeClick,
       ...others
     } = btnProps;
@@ -68,7 +67,6 @@ export default ({
           uiType={uiType}
           key={index}
           request={request}
-          qrBeforeClick={qrBeforeClick}
           isBatch={isBatch}
           buttonProps={buttonProps}
           confirmBeforeClick={nextConfirmBeforeClick}
@@ -80,7 +78,6 @@ export default ({
       <ActionButton
         key={index}
         {...btnProps}
-        qrBeforeClick={qrBeforeClick}
         isBatch={isBatch}
         buttonProps={buttonProps}
       />

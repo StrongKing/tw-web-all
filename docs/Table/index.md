@@ -972,7 +972,62 @@ export default () => {
     },
     buttonList: [
       {
+        uiType: 'button',
+        text: 'button',
+        badgeProps: { dot: true },
+        tooltipProps: { title: '提示文字' },
+      },
+      {
+        uiType: 'request',
+        text: 'request',
+        badgeProps: { dot: true },
+        tooltipProps: { title: '提示文字' },
+      },
+      {
         uiType: 'upload',
+        text: 'upload',
+        badgeProps: { dot: true },
+        tooltipProps: { title: '提示文字' },
+      },
+      {
+        uiType: 'download',
+        text: 'download',
+        badgeProps: { dot: true },
+        tooltipProps: { title: '提示文字' },
+      },
+      {
+        uiType: 'event',
+        text: 'event',
+        badgeProps: { dot: true },
+        tooltipProps: { title: '提示文字' },
+      },
+      {
+        uiType: 'form',
+        text: 'form',
+        badgeProps: { dot: true },
+        tooltipProps: { title: '提示文字' },
+        formProps: {},
+      },
+      {
+        uiType: 'link',
+        text: 'link',
+        badgeProps: { dot: true },
+        tooltipProps: { title: '提示文字' },
+      },
+      {
+        uiType: 'table',
+        text: 'table',
+        badgeProps: { dot: true },
+        tooltipProps: { title: '提示文字' },
+      },
+      {
+        uiType: 'btn',
+        text: 'btn',
+        badgeProps: { dot: true },
+        tooltipProps: { title: '提示文字' },
+      },
+      {
+        uiType: 'request',
         text: '上传111',
         badgeProps: { dot: true },
         tooltipProps: { title: '提示文字' },
