@@ -357,6 +357,7 @@ function CFForm({
           ...comparisionConfig,
           enable: itemComparision?.enable ?? comparisionConfig.enable,
           showBottom: itemComparision?.showBottom ?? true,
+          isComparisionEqual: itemComparision?.isComparisionEqual,
           showFormatter:
             itemComparision?.showFormatter ?? comparisionConfig.showFormatter,
           value: comparisionValues?.[config.name],

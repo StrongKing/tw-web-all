@@ -14,6 +14,12 @@ export default () => {
             return `bbb${val}`;
           },
         },
+        comparision: {
+          isComparisionEqual: (val, oldVal) => {
+            console.log(val, oldVal);
+            return true;
+          },
+        },
       },
       {
         label: 'bbb',

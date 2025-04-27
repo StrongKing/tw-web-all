@@ -109,6 +109,9 @@ export default function CFFormItem(componentProps: CFFormItemInternalProps) {
   const comparisionProps = useMemo(
     () => ({
       ...(comparision || {}),
+      isComparisionEqual:
+        comparision?.isComparisionEqual ??
+        ((fieldVal: any, comparisionVal: any) => fieldVal === comparisionVal),
     }),
     [comparision],
   );
@@ -177,7 +180,10 @@ export default function CFFormItem(componentProps: CFFormItemInternalProps) {
       {comparisionProps.enable &&
       comparisionProps.showBottom &&
       typeof comparisionProps.value !== 'undefined' &&
-      currFieldValue !== comparisionProps.value ? (
+      !comparisionProps.isComparisionEqual(
+        currFieldValue,
+        comparisionProps.value,
+      ) ? (
         <span
           key={name || index}
           style={{
