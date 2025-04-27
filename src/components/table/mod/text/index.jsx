@@ -121,7 +121,6 @@ export default function TableCellText({
   //     setShowOverFlow(false);
   //   }
   // }, [showValue, ellipsis]);
-
   const comparisionText = useMemo(
     () =>
       comparision.enable &&

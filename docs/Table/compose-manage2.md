@@ -19,9 +19,7 @@ const staticDataSource = new Array(50).fill(1).map((el, i) => ({
   id: `${i + 1}`,
   name: `货吗名称${i + 1}`,
   groupName: 'groupName分组',
-  source: {
-    name: 'ss',
-  },
+  subTotal: 11,
 }));
 
 // console.log(isCurrentUser());
@@ -31,9 +29,7 @@ export default () => {
     tableRef.current.updateDataSource(
       new Array(30).fill(1).map((el, i) => ({
         name: `货吗名称货吗名称货吗名称货吗名称货吗名称货吗名称${i}${Math.random()}`,
-        source: {
-          name: 'ss',
-        },
+        subTotal: 11,
       })),
     );
   };
@@ -161,7 +157,11 @@ export default () => {
     staticFilter: (searchParams, el) => el.name.includes(searchParams.keyword),
     staticDataSource,
     tableProps: {
-      comparision: {},
+      comparision: {
+        name: 'subTotal',
+        enable: true,
+        recordFormatter: (src, record) => ({ name: record?.subTotal }),
+      },
       primaryKey: 'id',
       // virtuallistParams: { height: 578 },
       columns: [

@@ -39,15 +39,23 @@ const cellRenderer = ({
   const Com = comsMap[uiType] || defaultComsMap[uiType] || UnSupport;
 
   return (value: any, record: any, index: any) => {
-    comparision.value = comparision.enable
-      ? typeof comparision.valueFormatter === 'function'
-        ? comparision.valueFormatter(
-            record?.[comparision.name]?.[name],
-            record?.[comparision.name],
-            record,
-          )
-        : record?.[comparision.name]?.[name]
-      : undefined;
+    const comparisionRecord =
+      typeof comparision.recordFormatter === 'function'
+        ? comparision.recordFormatter(record?.[comparision.name], record)
+        : record?.[comparision.name];
+    const newComparision = {
+      ...comparision,
+      value: comparision.enable
+        ? typeof comparision.valueFormatter === 'function'
+          ? comparision.valueFormatter(
+              comparisionRecord?.[name],
+              comparisionRecord,
+              record,
+            )
+          : comparisionRecord?.[name]
+        : undefined,
+      record: comparisionRecord,
+    };
     return (
       <Suspense fallback={<div>2</div>}>
         <Com
@@ -67,9 +75,9 @@ const cellRenderer = ({
             index,
             record,
             name,
-            comparision,
+            comparision: newComparision,
           }}
-          comparision={comparision}
+          comparision={newComparision}
         />
       </Suspense>
     );
@@ -113,6 +121,7 @@ export default function CFTable({
       color: '#999',
       valColor: '#f00',
       comparisionTitle: '送审',
+      recordFormatter: (val: any) => val,
       ...(comparision || {}),
     };
   }, [comparision]);
@@ -147,6 +156,7 @@ export default function CFTable({
         comparision: {
           ...comparisionConfig,
           enable: itemComparision?.enable ?? comparisionConfig.enable,
+          valueFormatter: itemComparision?.valueFormatter ?? ((val) => val),
           showFormatter: itemComparision?.showFormatter ?? ((val) => val),
         },
       });
