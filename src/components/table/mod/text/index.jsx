@@ -127,8 +127,12 @@ export default function TableCellText({
       comparision.enable &&
       typeof comparision.value !== 'undefined' &&
       comparision.value !== value ? (
-        <span style={{ color: comparision.color, marginLeft: 4 }}>
-          {comparision.showFormatter(comparision.value, record)}
+        <span style={{ color: comparision.color, marginLeft: 4, fontSize: 12 }}>
+          ({comparision.comparisionTitle}：
+          <span style={{ color: comparision.valColor }}>
+            {comparision.showFormatter(comparision.value, record)}
+          </span>
+          )
         </span>
       ) : null,
     [comparision, record],

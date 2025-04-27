@@ -84,8 +84,9 @@ function CFForm({
     return {
       enable: !!comparision,
       name: 'source',
-      color: '#f67d00',
-      showFormatter: (val: any) => `(送审：${val})`,
+      color: '#999',
+      valColor: '#f00',
+      comparisionTitle: '送审',
       ...comparision,
       init: {
         valueFormatter: (val: any) => val,
@@ -358,8 +359,7 @@ function CFForm({
           enable: itemComparision?.enable ?? comparisionConfig.enable,
           showBottom: itemComparision?.showBottom ?? true,
           isComparisionEqual: itemComparision?.isComparisionEqual,
-          showFormatter:
-            itemComparision?.showFormatter ?? comparisionConfig.showFormatter,
+          showFormatter: itemComparision?.showFormatter ?? ((val) => val),
           value: comparisionValues?.[config.name],
         }}
         comparisionValues={comparisionValues}

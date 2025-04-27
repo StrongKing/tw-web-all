@@ -33,6 +33,8 @@ export interface CFFormItemInternalProps
     enable?: boolean;
     name?: string;
     color?: string;
+    valColor?: string;
+    comparisionTitle?: string;
     isComparisionEqual?: (val1: any, val2: any) => boolean;
     showFormatter?: (value: any) => ReactNode;
     style?: React.CSSProperties;

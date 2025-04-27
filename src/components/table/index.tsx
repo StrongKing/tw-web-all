@@ -110,8 +110,9 @@ export default function CFTable({
     return {
       enable: !!comparision,
       name: 'source',
-      color: '#f67d00',
-      showFormatter: (val: any) => `(送审：${val})`,
+      color: '#999',
+      valColor: '#f00',
+      comparisionTitle: '送审',
       ...(comparision || {}),
     };
   }, [comparision]);
@@ -146,8 +147,7 @@ export default function CFTable({
         comparision: {
           ...comparisionConfig,
           enable: itemComparision?.enable ?? comparisionConfig.enable,
-          showFormatter:
-            itemComparision?.showFormatter ?? comparisionConfig.showFormatter,
+          showFormatter: itemComparision?.showFormatter ?? ((val) => val),
         },
       });
     }

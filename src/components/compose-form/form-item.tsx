@@ -193,9 +193,13 @@ export default function CFFormItem(componentProps: CFFormItemInternalProps) {
             ...(comparisionProps.style || {}),
           }}
         >
-          {typeof comparisionProps.showFormatter === 'function'
-            ? comparisionProps.showFormatter(comparisionProps.value)
-            : comparisionProps.value}
+          ({comparisionProps.comparisionTitle}：
+          <span style={{ color: comparisionProps.valColor }}>
+            {typeof comparisionProps?.showFormatter === 'function'
+              ? comparisionProps.showFormatter(comparisionProps.value)
+              : comparisionProps.value}
+          </span>
+          )
         </span>
       ) : null}
       {msg ? (
