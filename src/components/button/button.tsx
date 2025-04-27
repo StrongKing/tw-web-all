@@ -28,35 +28,32 @@ const comsMap = {
   table: React.lazy(() => import('./table')),
 };
 
-const withOuterComp =
-  (Comp: any, OuterComp: any, outerPropsName: keyof PropTypes) =>
-  ({ [outerPropsName]: outerProps, ...others }: PropTypes) => {
-    return outerProps ? (
-      <OuterComp {...outerProps}>
-        <Comp {...others} />
-      </OuterComp>
-    ) : (
-      <Comp {...others} />
-    );
-  };
-const outerCompList = [
+const outerComponents = [
   [Badge, 'badgeProps'],
   [Tooltip, 'tooltipProps'],
 ];
 
-export default ({ uiType = 'default', ...others }: PropTypes) => {
-  let BtnCom = comsMap[uiType] || Button;
-  outerCompList.forEach(([OuterComp, outerPropsName]) => {
-    BtnCom = withOuterComp(
-      BtnCom,
-      OuterComp,
-      outerPropsName as keyof PropTypes,
-    );
-  });
-  // @ts-ignore
+export default ({ uiType = 'default', ...props }: PropTypes) => {
+  const BaseComponent = comsMap[uiType] || Button;
+  const renderWithWrappers = (
+    Component: React.ComponentType<any>,
+    index = 0,
+  ): React.ReactElement => {
+    if (index >= outerComponents.length) {
+      return <Component {...props} />;
+    }
+    const [WrapperComponent, propName] = outerComponents[index];
+    const wrapperProps = props[propName as keyof PropTypes];
+    if (wrapperProps) {
+      return (
+        <WrapperComponent {...wrapperProps}>
+          {renderWithWrappers(Component, index + 1)}
+        </WrapperComponent>
+      );
+    }
+    return renderWithWrappers(Component, index + 1);
+  };
   return (
-    <Suspense fallback={<Spin />}>
-      <BtnCom {...others} />
-    </Suspense>
+    <Suspense fallback={<Spin />}>{renderWithWrappers(BaseComponent)}</Suspense>
   );
 };
