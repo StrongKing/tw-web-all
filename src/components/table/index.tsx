@@ -146,6 +146,8 @@ export default function CFTable({
         comparision: {
           ...comparisionConfig,
           enable: itemComparision?.enable ?? comparisionConfig.enable,
+          showFormatter:
+            itemComparision?.showFormatter ?? comparisionConfig.showFormatter,
         },
       });
     }

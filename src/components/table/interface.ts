@@ -60,6 +60,7 @@ export interface ColumnItemProps {
     name: string;
     color: string;
     valueFormatter?: (value: any, comparisionRecord: any, record: any) => any;
+    showFormatter?: (value?: any) => ReactNode;
   };
 }
 
