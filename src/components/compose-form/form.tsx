@@ -411,7 +411,7 @@ function CFForm({
 
   const formItemNodes = useMemo(
     () => (controls || []).map(renderItem),
-    [controls, comsMap, comparisionValues],
+    [controls, comsMap, comparisionValues, formValues],
   );
   const formActionNodes = useMemo(
     () => (actions || []).map(renderAction),
