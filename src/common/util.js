@@ -31,23 +31,6 @@ export function parseParam(
 }
 
 /**
- * 解析cookie
- * @return {object}
- */
-export function parseCookie() {
-  const cookieStr = window.document ? document.cookie : '';
-  const cookieAry = cookieStr.split(/\s?;\s?/);
-  const cookieMap = {};
-  cookieAry.forEach(function (x) {
-    const i = x.indexOf('=');
-    if (i >= 0) {
-      cookieMap[x.substring(0, i)] = x.substring(i + 1);
-    }
-  });
-  return cookieMap;
-}
-
-/**
  * 从对象中解析出想要的值
  * @param {object} obj object
  * @param {string} key keys
