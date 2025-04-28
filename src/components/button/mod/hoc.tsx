@@ -6,6 +6,11 @@ import infoIcon from './info.svg';
 import './index.less';
 
 export const withConfirmHOC = withHandlers({
+  toggleVisibility: ({ toggleVis, isVisible }) => {
+    return () => {
+      return toggleVis(!isVisible);
+    };
+  },
   onBeforeClick:
     ({
       confirmBeforeClick,
