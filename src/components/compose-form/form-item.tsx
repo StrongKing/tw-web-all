@@ -7,6 +7,7 @@ import { getComByUiType } from '@/components/compose-form/helper';
 import useRequest from '@/common/use-request';
 import { CFFormItemInternalProps } from './interface';
 import './form-item.less';
+import { valOrNullDef } from '@/common/util';
 
 export default function CFFormItem(componentProps: CFFormItemInternalProps) {
   const {
@@ -195,9 +196,11 @@ export default function CFFormItem(componentProps: CFFormItemInternalProps) {
         >
           ({comparisionProps.comparisionTitle}：
           <span style={{ color: comparisionProps.valColor }}>
-            {typeof comparisionProps?.showFormatter === 'function'
-              ? comparisionProps.showFormatter(comparisionProps.value)
-              : comparisionProps.value}
+            {valOrNullDef(
+              typeof comparisionProps?.showFormatter === 'function'
+                ? comparisionProps.showFormatter(comparisionProps.value)
+                : comparisionProps.value,
+            )}
           </span>
           )
         </span>

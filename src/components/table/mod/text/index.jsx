@@ -12,6 +12,7 @@ import classNames from 'classnames';
 import { Popover } from 'antd';
 // import widthMap from './letterWidth';
 import './index.less';
+import { valOrNullDef } from '@/common/util';
 
 // function getStrlen(str = '') {
 //   let needWidth = 0;
@@ -83,6 +84,7 @@ export default function TableCellText({
   const textRef = useRef(null);
   // const [showOverFlow, setShowOverFlow] = useState(0);
   // const [overFlowValue, setOverFlowValue] = useState('');
+
   const showValue = useMemo(() => {
     if (!valueFormatter || typeof valueFormatter !== 'function') {
       return value;
@@ -129,7 +131,7 @@ export default function TableCellText({
         <span style={{ color: comparision.color, marginLeft: 4, fontSize: 12 }}>
           ({comparision.comparisionTitle}：
           <span style={{ color: comparision.valColor }}>
-            {comparision.showFormatter(comparision.value, record)}
+            {valOrNullDef(comparision.showFormatter(comparision.value, record))}
           </span>
           )
         </span>
@@ -192,11 +194,6 @@ export default function TableCellText({
       onClick(record, name);
     }
   };
-
-  const isNullOrUndefinedOrEmpty = (val) => {
-    return val === null || val === undefined || val === '';
-  };
-
   return (
     <>
       <Popover
@@ -212,7 +209,7 @@ export default function TableCellText({
           style={{ WebkitLineClamp: rows }}
         >
           {unClickableExpress && unClickableExpress(record, name)}
-          {isNullOrUndefinedOrEmpty(showValue) ? '-' : showValue}
+          {valOrNullDef(showValue)}
           {comparisionText}
         </div>
       </Popover>

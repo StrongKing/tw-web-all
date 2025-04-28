@@ -146,3 +146,10 @@ export const getVideoDuration = (file) => {
   });
 };
 export const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+export const isNullOrUndefinedOrEmpty = (val) => {
+  return val === null || val === undefined || val === '';
+};
+
+export const valOrNullDef = (val, def = '-') =>
+  isNullOrUndefinedOrEmpty(val) ? def : val;
