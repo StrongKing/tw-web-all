@@ -520,5 +520,6 @@ export default () => {
 <code src="./requestDemo.tsx" description="请求报错">请求报错</code>
 
 <code src="./comparisionDemo.tsx" description="对比">对比</code>
+<code src="./formItemLayoutDemo.tsx" description="布局">布局</code>
 
 More skills for writing demo: https://d.umijs.org/guide/basic#write-component-demo

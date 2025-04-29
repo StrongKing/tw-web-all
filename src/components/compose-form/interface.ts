@@ -4,6 +4,7 @@ import EventEmitter from '@/components/compose-form/events';
 import { FormProps, FormItemProps, FormInstance } from 'antd/lib/form';
 import { Request } from '@/components/interface';
 import { ReactNode } from 'react';
+import { ColProps } from 'antd';
 
 export interface CFFormItemInternalProps
   extends Omit<FormItemProps, 'children'> {
@@ -43,6 +44,7 @@ export interface CFFormItemInternalProps
   };
   comparisionValues?: any;
   currFieldValue?: any;
+  inlineLayoutCol?: ColProps;
 }
 
 export type CFFormItemProps = Omit<
