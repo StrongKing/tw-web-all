@@ -7,7 +7,7 @@ import React, {
   useCallback,
 } from 'react';
 import classNames from 'classnames';
-import { Form, Alert, message, Spin, Divider } from 'antd';
+import { Form, Alert, message, Spin, Divider, Row, Col } from 'antd';
 import { isBoolean, isEqual } from 'lodash';
 import net from '@/services/index';
 import CFFormItem from '@/components/compose-form/form-item';
@@ -63,6 +63,10 @@ function CFForm({
     sm: { span: 19 },
   },
   comparision,
+  layout,
+  inlineLayoutCol,
+  inlineLayoutRow = {},
+  inlineFlex = true,
   ...others
 }: CFFormProps) {
   // 标识 form 原始的值，用于配合 disableSubmitWhenUnChanged 属性判断是否要禁用提交。
@@ -411,7 +415,18 @@ function CFForm({
   };
 
   const formItemNodes = useMemo(
-    () => (controls || []).map(renderItem),
+    () =>
+      layout === 'inline' && inlineFlex ? (
+        <Row {...inlineLayoutRow} style={{ width: '100%' }}>
+          {(controls || []).map(
+            ({ layoutCol = inlineLayoutCol, ...el }, index) => (
+              <Col {...layoutCol}>{renderItem(el, index)}</Col>
+            ),
+          )}
+        </Row>
+      ) : (
+        (controls || []).map(renderItem)
+      ),
     [controls, comsMap, comparisionValues, formValues],
   );
   const formActionNodes = useMemo(
@@ -456,6 +471,7 @@ function CFForm({
           className={classNames('cf-compose-form', className)}
           labelCol={labelCol}
           wrapperCol={wrapperCol}
+          layout={layout}
           {...others}
           onValuesChange={handleFormChange}
         >
