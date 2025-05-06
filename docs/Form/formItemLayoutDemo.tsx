@@ -1,20 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Switch } from 'antd';
 import ComposeForm from '@/components/compose-form';
 
 export default () => {
+  const [inlineFlex, setInlineFlex] = useState(true);
   const props2 = {
+    inlineFlex,
     // title: '延期生效',
     controls: [
       {
         label: 'aaa',
         name: 'aaa',
-        inlineLayoutCol: { span: 8 },
+        layoutCol: { span: 8 },
       },
       {
         label: 'bbb',
         name: 'bbb',
         uiType: 'input',
-        inlineLayoutCol: { span: 8 },
+        layoutCol: { span: 8 },
       },
       {
         label: 'ddd',
@@ -30,7 +33,8 @@ export default () => {
       },
     ],
     layout: 'inline',
-    labelCol: { flex: '0 0 100px' },
+    labelCol: { flex: '0 0 80px' },
+    inlineLayoutCol: { span: 8 },
     wrapperCol: { flex: 1 },
     initialValuesRequest: {
       url: '/data/get-form-data.json',
@@ -40,5 +44,11 @@ export default () => {
       enable: true,
     },
   };
-  return <ComposeForm {...props2} />;
+  return (
+    <div>
+      inlineFlex：
+      <Switch checked={inlineFlex} onChange={(val) => setInlineFlex(val)} />
+      <ComposeForm {...props2} />
+    </div>
+  );
 };

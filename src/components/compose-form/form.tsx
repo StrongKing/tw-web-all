@@ -64,6 +64,9 @@ function CFForm({
   },
   comparision,
   layout,
+  inlineLayoutCol,
+  inlineLayoutRow = {},
+  inlineFlex = true,
   ...others
 }: CFFormProps) {
   // 标识 form 原始的值，用于配合 disableSubmitWhenUnChanged 属性判断是否要禁用提交。
@@ -413,13 +416,11 @@ function CFForm({
 
   const formItemNodes = useMemo(
     () =>
-      layout === 'inline' ? (
-        <Row>
-          {(controls || []).map(({ inlineLayoutCol, ...el }, index) =>
-            inlineLayoutCol ? (
-              <Col {...inlineLayoutCol}>{renderItem(el, index)}</Col>
-            ) : (
-              renderItem(el, index)
+      layout === 'inline' && inlineFlex ? (
+        <Row {...inlineLayoutRow} style={{ width: '100%' }}>
+          {(controls || []).map(
+            ({ layoutCol = inlineLayoutCol, ...el }, index) => (
+              <Col {...layoutCol}>{renderItem(el, index)}</Col>
             ),
           )}
         </Row>
