@@ -21,6 +21,7 @@ export {
 } from './components/compose-form';
 export { default as Confirm } from './components/Confirm';
 export { default as ActionButton } from './components/button';
+export { default as ButtonList } from './components/button/buttonList';
 export { default as ExpandCollapse } from './components/expand-collapse';
 export { default as Empty } from './components/empty';
 export {
