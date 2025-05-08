@@ -127,7 +127,7 @@ export default function TableCellText({
     () =>
       comparision.enable &&
       typeof comparision.value !== 'undefined' &&
-      comparision.isEqual(value, comparision.value, record) ? (
+      !comparision.isEqual(value, comparision.value, record) ? (
         <span style={{ color: comparision.color, marginLeft: 4, fontSize: 12 }}>
           ({comparision.comparisionTitle}：
           <span style={{ color: comparision.valColor }}>
