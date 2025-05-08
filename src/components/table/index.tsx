@@ -158,6 +158,8 @@ export default function CFTable({
           enable: itemComparision?.enable ?? comparisionConfig.enable,
           valueFormatter: itemComparision?.valueFormatter ?? ((val) => val),
           showFormatter: itemComparision?.showFormatter ?? ((val) => val),
+          isEqual:
+            itemComparision?.isEqual ?? ((val, oldVal) => val === oldVal),
         },
       });
     }
