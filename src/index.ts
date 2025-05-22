@@ -17,7 +17,6 @@ export {
   CFFormProps,
   CFFormItemProps,
   CFFormCustomComProps,
-  RichText,
 } from './components/compose-form';
 export { default as Confirm } from './components/Confirm';
 export { default as ActionButton } from './components/button';

@@ -30,7 +30,6 @@ import BooleanToText from './booleanToText';
 import Form_ from '@/components/button/form';
 import SelectSearch from '@/components/button/select-search';
 import BusinessCard from '@/components/button/business-card';
-import RichText from './richText';
 import UploadFile from './uploadFile';
 import UploadImg from './uploadImg';
 import Textarea from './textarea';
@@ -51,7 +50,6 @@ export default {
   password: Input.Password,
   textarea: Textarea,
   number: InputNumber,
-  'rich-text': RichText,
   'upload-file': UploadFile,
   'upload-img': UploadImg,
   'cascader-select': cascaderSelect,

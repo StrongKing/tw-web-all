@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import { mapProps } from 'recompose';
 import { Row, Col, Divider } from 'antd';
 import CFForm from './form';
-import RichText from '@/components/RichText';
 import {
   CFFormItemProps,
   CFFormProps,
@@ -62,10 +61,4 @@ export default mapProps(({ columns = 1, ...others }: PropTypes) => {
   };
 })(CFForm);
 
-export {
-  CFFormProps,
-  CFFormItemProps,
-  CFFormCustomComProps,
-  PropTypes,
-  RichText,
-};
+export { CFFormProps, CFFormItemProps, CFFormCustomComProps, PropTypes };
